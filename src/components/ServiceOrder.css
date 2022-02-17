@@ -1,0 +1,167 @@
+font{
+    font-family: "Gotham-Bold", sans-serif;
+}
+
+.horizontal-menu{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;   
+    text-align: center;
+    height: 45px;    
+    display: block;
+  }
+  /* .horizontal-menu ul li a{
+    color: white;
+  } */
+  .horizontal-menu ul li a:hover{
+    background-color: white;
+    border: 1px black solid;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 450px;
+    height: 42px;   
+    display:table-cell;
+    vertical-align: middle; 
+  } 
+  .horizontal-menu li{    
+    padding: 1px 0;    
+    display: block; 
+  }
+  .horizontal-menu  ul li a{    
+    color: white;
+    background-color: #58595b;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 450px;
+    height: 40px;   
+    display:table-cell;
+    vertical-align: middle; 
+  }
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 80% !important;
+}
+input[type="text"],textarea{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 95% !important;
+    height: 40px;
+}
+textarea{   
+    height: 70px !important;
+}
+#tbOther{
+    width: 40% !important;
+    height: 20px;    
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+input[type="checkbox"] { 
+    width: 5% !important;
+    text-align: left;
+}
+.form-check{
+    padding-left: 0px;
+}
+.form-check-input{
+    padding-right: 5px;
+    margin-top: 3px;
+}
+.spancheckbox-inline{   
+    vertical-align:top;
+    padding-left: 8px;
+    padding-top: 1px;
+    margin-top: 1px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.text-lowercase{
+    text-transform: lowercase;
+}
+#Service_Order{
+    text-align: right;
+    padding-top: 5px;
+}
+#Service_Order .MenuTitle{
+    float: right;
+}
+.ColItem{
+    padding: 15px; 
+}
+.ColItemright{
+    padding-left: 1px;
+    text-align: left;
+    margin-left: 1px;
+}
+.ColItemleft{
+    padding-right: 1px;
+    text-align: right;
+    margin-right: 1px;
+}
+.MenuTitle{
+    width: 130px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;        
+    padding-right: 5px;
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    vertical-align: middle;
+    justify-items: center;
+    text-align: right;
+    justify-content: center;
+}
+.gfh-logo{
+    height: 20px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+}
+.gfh-logo a img{
+    height: 20px;
+}
+.Menu{
+    width: 150px;
+}
+.Menu ul li{
+    display: block;
+    padding: 10px 0;   
+}
+.Menu ul li a{ 
+    text-transform: uppercase;
+    text-decoration: none;
+    
+    font-size: 14px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    font-weight: bold;
+}
+.Menu.left{
+    float: left;
+    margin-right: 17px;
+}
+.right{
+    float: right;
+}
+.RowMenu{
+    padding-top: 50px;
+}

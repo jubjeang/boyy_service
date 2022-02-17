@@ -1,0 +1,30 @@
+
+@font-face {
+  font-family: 'GothamBook';
+  src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+}
+div{
+  padding: 0px;
+  margin: 0px;
+}
+.TextRun 
+{
+    height: 20px;
+    padding-top: 0px;
+    padding-bottom: 8px;
+    background-color:dimgray;
+    font-size: 10px;
+    color: white;
+    margin: 0 !important;
+    text-transform: uppercase;
+    font-family: GothamBook;    
+}
+.TextLogo 
+{
+    font-family: GothamBook;
+    font-size: 40px;
+    text-align: center;
+    color:black;
+    margin: 0 !important;
+    /* font-weight: bold; */
+}

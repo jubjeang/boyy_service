@@ -1,0 +1,141 @@
+@font-face {
+  font-family: 'GothamBold';
+  src: local('GothamBold'), url(GothamBold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'GothamBook';
+  src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+}
+font{
+  font-family: "GothamBold", sans-serif;
+}
+.colMenu
+{
+  width: 800 !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+/* .col-sm-2
+{
+  width: 10px;
+  padding-left: 0;
+  padding-right: 0;
+} */
+.container{
+    margin: 30px auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 150px;
+    padding-top: 0px;
+  }
+  .container-fluid{
+    width: 100%;
+    font-family: "GothamBook", sans-serif;
+  }
+
+  /* .container div{
+    display: inline-block;
+    padding: 16px;
+    vertical-align: top;
+    margin-top: 5px;
+  } */
+  .footer-title{
+    /* text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center; */
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 19px;
+    font-family: "GothamBold", serif;
+    /* font-family: "GothamBook", serif; */
+    padding: 0px;
+    margin-bottom: 33px;
+    letter-spacing: 2px;    
+    text-transform: uppercase;
+  }
+  .vertical-menu{
+    list-style-type: none;
+    margin: 0;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    text-transform: uppercase;
+  }
+    .vertical-menu li, a{
+    font-size: 10px;
+    font-size: 0.625rem;
+    color: black;
+    line-height: 20px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: left;
+    padding: 5px 0;
+    text-decoration: none;
+  }
+  /* ==========================================================================
+#Icons
+========================================================================== */
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle; }
+  .no-svg .icon {
+    display: none; }
+
+.icon--wide {
+  width: 40px; }
+
+/* ==========================================================================
+#Icon Fallback
+========================================================================== */
+/*============================================================================
+  A generic way to visually hide content while
+  remaining accessible to screen readers (h5bp.com)
+==============================================================================*/
+.icon-fallback-text {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0; }
+  .no-svg .icon-fallback-text {
+    position: static !important;
+    overflow: auto;
+    clip: auto;
+    width: auto;
+    height: auto;
+    margin: 0; }
+
+.placeholder-svg {
+  display: block;
+  fill: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.placeholder-svg--small {
+  width: 480px; }
+
+.placeholder-noblocks {
+  padding: 40px;
+  text-align: center; }
+
+.placeholder-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+  .placeholder-background .icon {
+    border: 0; }
