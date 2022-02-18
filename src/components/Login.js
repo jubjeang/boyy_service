@@ -9,17 +9,17 @@ class Login extends React.Component {
             <div className="form-group SignIn">
                 <label className="uppercase">Sign In</label>
             </div>
-            <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
-                <input type="hidden" name="form_type" value="customer_login" />
-                <input type="hidden" name="utf8" value="✓" />
+            <form method="post" action="/account/login" id="customer_login" acceptCharset="UTF-8">
+                <input type="hidden" name="form_type" defaultValue="customer_login" />
+                <input type="hidden" name="utf8" defaultValue="✓" />
                     <div className="form-group">
                         <label htmlFor="CustomerEmail" className="uppercase bold">
                             Email
                         </label>
                         <br />
                         <input type="email" className="textbox_login" name="customer[email]" id="CustomerEmail" 
-                        spellcheck="false" autocomplete="off" autocapitalize="off" placeholde="careers@geeksforgeeks.org" 
-                        autofocus="" />
+                        spellCheck="false" autoComplete="off" autoCapitalize="off" placeholde="careers@geeksforgeeks.org" 
+                        autoFocus="" />
                     </div>			
                 <div className="form-group">
                     <label htmlFor="CustomerPassword" className="uppercase bold">
@@ -34,7 +34,7 @@ class Login extends React.Component {
                 <div className="row align-items-center">				
                     <div className="col-12 text-center">
                         <Router>
-                            <ul className='horizontal-menu'>
+                            <ul className="horizontal-menu-login">
                                 <li>
                                     <Link to="/Main">Sign In</Link>                                    
                                 </li>

@@ -3,7 +3,7 @@ import { Container } from "reactstrap";
 import { Col, Row, Form } from "react-bootstrap";
 import './Main.css';
 import ServiceOrder from './ServiceOrder';
-import { BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
+import { Switch,Route,Link} from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 const Main = ()=>{
     return (
@@ -23,13 +23,13 @@ const Main = ()=>{
                     <Col sm={2} className="Menu">
                         <ul id="mainlist">
                             <li>                                
-                                <Link to="/Main">Check Product</Link>
+                                <Link to="/Main/ServiceOrder">Check Product</Link>
                             </li>
                             <li>                                
-                                <Link to="/ServiceOrder">Service Order</Link>  
+                                <Link to="/Main/ServiceOrder">Service Order</Link>  
                             </li>
                             <li>
-                                <Link to="/CreateServiceOrder">Create Service Order</Link>
+                                <Link to="/Main/CreateServiceOrder">Create Service Order</Link>
                             </li>
                             <li>
                                 <Link to="/Main">Check Stock Avaliable</Link>
@@ -37,22 +37,16 @@ const Main = ()=>{
                         </ul>
                     </Col>
                     <Col sm={10}>
-                        <Router>
+                        {/* <Router> */}
                             <Switch>
-                                <Route path="/Main">                
+                                <Route path="/" exact>               
                                     {/* <Main />  */}
                                 </Route>
-                                <Route path="/ServiceOrder">                
-                                    <ServiceOrder />
-                                </Route>
-                                <Route path="/CreateServiceOrder">                
-                                    <CreateServiceOrder />
-                                </Route>                                
-                                <Route path="/" exact>
-                                    <ServiceOrder />
-                                </Route>              
+                                <Route path="/Main/ServiceOrder" component={ServiceOrder} /> 
+                                <Route path="/Main/CreateServiceOrder" component={CreateServiceOrder} />                               
+                                <Route exact path="/" component={ServiceOrder} />
                             </Switch> 
-                        </Router>
+                        {/* </Router> */}
                     </Col>
                 </Row>
                 <Row style={{paddingTop:'90px'}}>

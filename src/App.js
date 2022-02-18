@@ -2,9 +2,11 @@ import React from 'react';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import { BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
-import './components/Menu.css';
 import Main from './components/Main';
 import './components/Login.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container } from "reactstrap";
+import { Col, Row, Form } from "react-bootstrap";
 
 function App() {
   return (    
@@ -17,47 +19,59 @@ function App() {
               </Route>
               <Route path="/" exact>                
                 <Menu />
-                <div id="divFormLogin">
-                    <div className="form-group SignIn">
-                        <label className="uppercase">Sign In</label>
-                    </div>
-                    <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
-                        <input type="hidden" name="form_type" value="customer_login" />
-                        <input type="hidden" name="utf8" value="✓" />
+                 <Container fluid id="divFormLogin">
+                    <Row>
+                        <Col sm={12}>
+                            <label className="uppercase">Sign In</label>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
                             <div className="form-group">
                                 <label htmlFor="CustomerEmail" className="uppercase bold">
                                     Email
                                 </label>
                                 <br />
                                 <input type="email" className="textbox_login" name="customer[email]" id="CustomerEmail" 
-                                spellcheck="false" autocomplete="off" autocapitalize="off" placeholde="careers@geeksforgeeks.org" 
-                                autofocus="" />
-                            </div>			
-                        <div className="form-group">
-                            <label htmlFor="CustomerPassword" className="uppercase bold">
-                                Password
-                            </label>
-                            <br />
-                            <input type="password" className="textbox_login" 
-                            name="customer[password]" 
-                            id="CustomerPassword" 
-                            placeholder="Password"  />
-                        </div>
-                        <div className="row align-items-center">				
-                            <div className="col-12 text-center">
-                                  <ul className='horizontal-menu'>
+                                spellCheck="false" autoComplete="off" autoCapitalize="off" placeholde="careers@geeksforgeeks.org" 
+                                autoFocus="" />
+                            </div>		
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                            <div className="form-group">
+                                <label htmlFor="CustomerPassword" className="uppercase bold">
+                                    Password
+                                </label>
+                                <br />
+                                <input type="password" className="textbox_login" 
+                                name="customer[password]" 
+                                id="CustomerPassword" 
+                                placeholder="Password"  />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                            <div className='form-group'>
+                                <div className='horizontal-menu-login'>
+                                    <ul className='horizontal-menu-login'>
                                         <li>
                                             <Link to="/Main">Sign In</Link>                                    
                                         </li>
-                                    </ul>
-                                                            
-                            </div>                
-                            <div className="col-12 text-center">
-                                <a href="#recover" id="RecoverPassword">Forgot your password?</a>
+                                    </ul>   
+                                </div>
+                                
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12}>
+                            <a href="#recover" id="RecoverPassword">Forgot your password?</a>
+                        </Col>
+                    </Row>
+                </Container>
                 <Footer />
               </Route>              
           </Switch> 
