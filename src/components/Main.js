@@ -5,10 +5,30 @@ import './Main.css';
 import ServiceOrder from './ServiceOrder';
 import { Switch,Route,Link} from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
-const Main = ()=>{
-    return (
-        <div style={{ margin : 0, padding : 0 }} >
+import CheckStockAvaliable from './CheckStockAvaliable';
+import CheckProduct from './CheckProduct';
+const MainComponent = ()=>{
+    return(
+        <div>
             <Container fluid>
+                <Row style={{paddingTop: "3%"}}>
+                    <Col sm={5} className="ColTwiceTitleLeft">
+                        <Link className="twiceTitle" to="/Main/CheckProduct" 
+                         >Check Product</Link>
+                    </Col>
+                    <Col sm={6} className="ColTwiceTitleRight">
+                        <Link className="twiceTitle" to="/Main/CheckStockAvaliable">Check Stock Avaliable</Link>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
+    );
+}
+
+const Main = ()=>{
+    return ( 
+        <div style={{ margin : 0, padding : 0 }} >
+            <Container fluid id="divTitle">
                 <Row>
                     <Col sm={12} className="gfh-logo">
                         <a href="https://boyy.com/">
@@ -23,7 +43,7 @@ const Main = ()=>{
                     <Col sm={2} className="Menu">
                         <ul id="mainlist">
                             <li>                                
-                                <Link to="/Main/ServiceOrder">Check Product</Link>
+                                <Link to="/Main/CheckProduct">Check Product</Link>
                             </li>
                             <li>                                
                                 <Link to="/Main/ServiceOrder">Service Order</Link>  
@@ -32,29 +52,25 @@ const Main = ()=>{
                                 <Link to="/Main/CreateServiceOrder">Create Service Order</Link>
                             </li>
                             <li>
-                                <Link to="/Main">Check Stock Avaliable</Link>
+                                <Link to="/Main/CheckStockAvaliable">Check Stock Avaliable</Link>
                             </li>
                         </ul>
                     </Col>
                     <Col sm={10}>
                         {/* <Router> */}
                             <Switch>
-                                <Route path="/" exact>               
-                                    {/* <Main />  */}
-                                </Route>
+                                <Route path="/Main" component={MainComponent}  exact />
                                 <Route path="/Main/ServiceOrder" component={ServiceOrder} /> 
-                                <Route path="/Main/CreateServiceOrder" component={CreateServiceOrder} />                               
-                                <Route exact path="/" component={ServiceOrder} />
+                                <Route path="/Main/CheckProduct" component={CheckProduct} /> 
+                                <Route path="/Main/CreateServiceOrder" component={CreateServiceOrder} />   
+                                <Route path="/Main/CheckStockAvaliable" component={CheckStockAvaliable} />                             
+                                {/* <Route exact path="/Main/" /> */}
                             </Switch> 
                         {/* </Router> */}
                     </Col>
                 </Row>
-                <Row style={{paddingTop:'90px'}}>
-                    <Col sm={12}  style={{ textAlign: "center",fontSize:"12px" }}>
-                        <p className="copy-text-footer">BOYY &copy; 2021</p>
-                    </Col>
-                </Row>
-            </Container> 
+            </Container>
+
         </div>       
     );
 }

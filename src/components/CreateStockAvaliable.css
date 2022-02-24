@@ -5,9 +5,22 @@
 font{
     font-family: "Gotham-Bold", sans-serif;
 }
+table tr th{
+    text-align: center;
+    font-size: 0.8875rem;
+}
+table tr td{
+    font-family: 'GothamBook';
+    text-align: left;
+    font-size: 0.8875rem;
+}
 .rowForm{
     padding-bottom: 0px;
     height: 50px;
+}
+.ColContent
+{
+    padding-top: 0px;
 }
 .ColArea{
     padding-bottom: 90px;
@@ -67,19 +80,18 @@ input[type="text"], textarea{
     line-height: 16px;
     font-weight: 300;
     text-transform: uppercase;
-    width: 95% !important;
+    width: 55% !important;
     height: 40px;
-    border-radius: 2px;
 }
 textarea{   
     height: 70px !important;
-    border-radius: 2px;
 }
 #tbOther{
     width: 40% !important;
     height: 20px;    
     border: 0px;
     border-bottom: 1px solid black;
+    border-radius: 2px;
 }
 input[type="checkbox"] { 
     width: 5% !important;
@@ -95,7 +107,6 @@ input[type="checkbox"] {
     margin-top: 3px;
     width: 15px;
     height: 15px;
-    border-radius: 2px;
 }
 .spancheckbox-inline{   
     vertical-align:top;
@@ -108,11 +119,11 @@ input[type="checkbox"] {
 .text-lowercase{
     text-transform: lowercase;
 }
-#CreateServiceOrder{
+#CheckStockAvaliable{
     text-align: right;
     padding-top: 5px;
 }
-#CreateServiceOrder .MenuTitle{
+#CheckStockAvaliable .MenuTitle{
     float: right;
 }
 .ColItem{
@@ -129,11 +140,11 @@ input[type="checkbox"] {
     margin-right: 1px;
 }
 .MenuTitle{
-    width: 130px;
+    width: 150px;
     border-right: 1px solid black;
     border-bottom: 1px solid black;        
     padding-right: 5px;
-    font-size: 11px;
+
     font-size: 0.6875rem;
     line-height: 16px;
     font-weight: 300;

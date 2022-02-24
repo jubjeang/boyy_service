@@ -3,7 +3,7 @@
   font-family: 'GothamBook';
   src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
 }
-div{
+div #divTitle{
   padding: 0px;
   margin: 0px;
 }

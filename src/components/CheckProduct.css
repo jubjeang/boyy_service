@@ -80,6 +80,7 @@ textarea{
     height: 20px;    
     border: 0px;
     border-bottom: 1px solid black;
+    border-radius: 2px;
 }
 input[type="checkbox"] { 
     width: 5% !important;

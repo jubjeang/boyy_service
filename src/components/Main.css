@@ -9,6 +9,47 @@
 font{
     font-family: "GothamBold", sans-serif;
 }
+.ColTwiceTitleLeft{
+    height: 220px;
+    display: flex;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 15%;
+    padding-Right: 1%;
+    justify-Content: center;
+    align-Items: center;
+    text-Align: center;
+    border-right: 1px solid black;
+
+}
+.ColTwiceTitleRight{
+    height: 10px;
+    display: flex;
+    padding-top: 10%;
+    padding-bottom: 0%;
+    padding-left: 10%;
+    padding-Right: 10%;
+    justify-Content: center;
+    align-Items: center;
+    text-Align: center;
+    width: 150px;
+}
+.ColTwiceTitleRight a {
+    text-decoration: none;
+    color: black;
+}
+.ColTwiceTitleLeft a {
+    text-decoration: none;
+    color: black;
+}
+.twiceTitle a {
+    text-decoration: none;
+}
+.twiceTitle {
+    font-Size:100%;
+    text-transform: uppercase;
+    text-decoration: none;
+}
 .rowForm{
     padding-bottom: 0px;
     margin-bottom: 0px;
@@ -76,19 +117,23 @@ input[type="text"],textarea{
     text-transform: uppercase;
     width: 95% !important;
     height: 40px;
+    border-radius: 2px;
 }
 textarea{   
     height: 70px !important;
+    border-radius: 2px;
 }
 #tbOther{
     width: 40% !important;
     height: 20px;    
     border: 0px;
     border-bottom: 1px solid black;
+    border-radius: 2px;
 }
 input[type="checkbox"] { 
     width: 5% !important;
     text-align: left;
+    border-radius: 2px;
 }
 .form-check{
     padding-left: 0px;

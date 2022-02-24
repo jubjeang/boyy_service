@@ -59,19 +59,23 @@ input[type="text"],textarea{
     text-transform: uppercase;
     width: 95% !important;
     height: 40px;
+    border-radius: 2px;
 }
 textarea{   
     height: 70px !important;
+    border-radius: 2px;
 }
 #tbOther{
     width: 40% !important;
     height: 20px;    
     border: 0px;
     border-bottom: 1px solid black;
+    border-radius: 2px;
 }
 input[type="checkbox"] { 
     width: 5% !important;
     text-align: left;
+    border-radius: 2px;
 }
 .form-check{
     padding-left: 0px;

@@ -20,7 +20,7 @@ function App() {
               <Route path="/" exact>                
                 <Menu />
                  <Container fluid id="divFormLogin">
-                    <Row>
+                    <Row   style={{width:"200px", textAlign:"center"}} >
                         <Col sm={12}>
                             <label className="uppercase">Sign In</label>
                         </Col>
@@ -67,7 +67,7 @@ function App() {
                         </Col>
                     </Row>
                     <Row>
-                        <Col sm={12}>
+                        <Col sm={12}>                            
                             <a href="#recover" id="RecoverPassword">Forgot your password?</a>
                         </Col>
                     </Row>
