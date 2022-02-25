@@ -4,6 +4,10 @@ import { Container } from "reactstrap";
 import { Col, Row, Form } from "react-bootstrap";
 import './CreateStockAvaliable.css';
 import Table from 'react-bootstrap/Table'
+import ServiceOrder from './ServiceOrder';
+import { Switch,Route,Link} from 'react-router-dom';
+import CreateServiceOrder from './CreateServiceOrder';
+import CheckProduct from './CheckProduct';
 
 const data =[
     {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
@@ -16,14 +20,9 @@ const data =[
     {code:"MATERIAL",name:"Material",inventory:0},
     {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
 ]
-const CheckStockAvaliable = ()=>{
+const MainComponent = ()=>{
     return (<div id="CheckStockAvaliable" style={{ margin : 0, padding : 0 }} >
             <Container fluid>                
-                <Row className="rowForm">
-                        <Col sm={12}>
-                            <div className="MenuTitle" style={{width: "170px"}}>CHECK STOCK AVALIABLE</div>
-                        </Col>
-                </Row>
                 <Row style={{display: "flex", alignItems: "center"}}>
                     <Col sm={1} className="ColItem ColItemleft">                                        
                         <label htmlFor="name" className="required">Item No</label>                                            
@@ -61,12 +60,55 @@ const CheckStockAvaliable = ()=>{
                     </Col>
                 </Row>
             </Container>
-            <div class="navbar navbar-inverse navbar-fixed-bottom">
-              <div class="container">
-                <p class="navbar-text">© Random</p>
-              </div>
-            </div>
     </div>
+    );
+}
+const CheckStockAvaliable = ()=>{
+    return (
+            <div style={{ margin : 0, padding : 0 }} >
+                <Container fluid id="divTitle">
+                    <Row>
+                        <Col sm={12} className="gfh-logo">
+                            <a href="https://boyy.com/">
+                                <img 
+                                src="https://boyy-b2b-ss22.herokuapp.com/assets/logo-d96f23139d13c0c38b5b1d7d5f873cca65f5c22b030921fc64b27cdeac09955e.svg" 
+                                alt="Boyy Logo"  
+                                />
+                            </a>
+                        </Col>
+                    </Row>
+                    <Row className="RowMenu">
+                        <Col sm={2} className="Menu">
+                            <ul id="mainlist">
+                                <li>                                
+                                    <Link to="/MainServices/CheckProduct">Check Product</Link>
+                                </li>
+                                <li>                                
+                                    <Link to="/MainServices/ServiceOrder">Service Order</Link>  
+                                </li>
+                                <li>
+                                    <Link to="/MainServices/CreateServiceOrder">Create Service Order</Link>
+                                </li>
+                                <li>
+                                    <Link to="/MainServices/CheckStockAvaliable">Check Stock Avaliable</Link>
+                                </li>
+                            </ul>
+                        </Col>
+                        <Col sm={10}>
+                            {/* <Router> */}
+                                <Switch>
+                                    <Route path="/MainServices/CheckStockAvaliable" component={MainComponent}  exact />
+                                    <Route path="/MainServices/ServiceOrder" component={ServiceOrder} /> 
+                                    <Route path="/MainServices/CheckProduct" component={CheckProduct} /> 
+                                    <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
+                                    <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />                             
+                                    {/* <Route exact path="/Main/" /> */}
+                                </Switch> 
+                            {/* </Router> */}
+                        </Col>
+                    </Row>
+                </Container>
+            </div>         
     );
 }
 export default CheckStockAvaliable;

@@ -2,7 +2,7 @@ import React from 'react';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import { BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
-import Main from './components/Main';
+import MainServices from './components/MainServices';
 import './components/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "reactstrap";
@@ -14,8 +14,8 @@ function App() {
       {/* <Main />  */}
       <Router>
           <Switch>
-              <Route path="/Main">                
-                  <Main /> 
+              <Route path="/MainServices">                
+                  <MainServices /> 
               </Route>
               <Route path="/" exact>                
                 <Menu />
@@ -58,7 +58,7 @@ function App() {
                                 <div className='horizontal-menu-login'>
                                     <ul className='horizontal-menu-login'>
                                         <li>
-                                            <Link to="/Main">Sign In</Link>                                    
+                                            <Link to="/MainServices">Sign In</Link>                                    
                                         </li>
                                     </ul>   
                                 </div>

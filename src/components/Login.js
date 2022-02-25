@@ -1,7 +1,7 @@
 import React from 'react'
 import './Login.css';
 import { BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
-import Main from './Main';
+import MainSevices from './MainSevices';
 class Login extends React.Component {
     render() {
       return (
@@ -36,12 +36,12 @@ class Login extends React.Component {
                         <Router>
                             <ul className="horizontal-menu-login">
                                 <li>
-                                    <Link to="/Main">Sign In</Link>                                    
+                                    <Link to="/MainSevices">Sign In</Link>                                    
                                 </li>
                             </ul>
                             <Switch>
-                                <Route path="/Main" exact>
-                                    <Main /> 
+                                <Route path="/MainSevices" exact>
+                                    <MainSevices /> 
                                 </Route>
                             </Switch>
                         </Router>

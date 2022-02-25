@@ -24,7 +24,6 @@ const MainComponent = ()=>{
         </div>
     );
 }
-
 const Main = ()=>{
     return ( 
         <div style={{ margin : 0, padding : 0 }} >

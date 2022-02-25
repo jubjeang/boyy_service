@@ -1,0 +1,211 @@
+@font-face {
+    font-family: 'GothamBold';
+    src: local('GothamBold'), url(GothamBold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'GothamBook';
+    src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+  }
+font{
+    font-family: "GothamBold", sans-serif;
+}
+html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
+.Card{
+    padding-top: 15%;
+    width: 70%;
+    height: 15rem;
+    border-top: 0px;
+    border-right: 1px solid black;
+    border-top-right-radius: 0px;   
+    border-bottom:  1px solid black;
+    border-bottom-left-radius:  0;
+    border-left: 0px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.ColTwiceTitle{
+    height: 100%;
+    display: flex;
+    padding-top: 10%;
+    padding-bottom: 0%;
+    padding-left: 5%;
+    padding-Right: 1%;
+    justify-Content: center;
+    align-Items: center;
+    text-Align: center;
+    /* border-right: 1px solid black; */
+}
+
+.ColTwiceTitle a {
+    text-decoration: none;
+    color: black;
+}
+.ColTwiceTitle a {
+    text-decoration: none;
+    color: black;
+}
+.twiceTitle a {
+    text-decoration: none;
+}
+.twiceTitle {
+    font-Size:100%;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.rowForm{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    height: 30px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 80% !important;
+}
+input[type="text"],textarea{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 95% !important;
+    height: 40px;
+    border-radius: 2px;
+}
+textarea{   
+    height: 70px !important;
+    border-radius: 2px;
+}
+#tbOther{
+    width: 40% !important;
+    height: 20px;    
+    border: 0px;
+    border-bottom: 1px solid black;
+    border-radius: 2px;
+}
+input[type="checkbox"] { 
+    width: 5% !important;
+    text-align: left;
+    border-radius: 2px;
+}
+.form-check{
+    padding-left: 0px;
+}
+.form-check-input{
+    padding-right: 5px;
+    margin-top: 3px;
+}
+.spancheckbox-inline{   
+    vertical-align:top;
+    padding-left: 8px;
+    padding-top: 1px;
+    margin-top: 1px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.text-lowercase{
+    text-transform: lowercase;
+}
+#Service_Order{
+    text-align: right;
+    padding-top: 5px;
+}
+#Service_Order .MenuTitle{
+    float: right;
+}
+.ColItem{
+    padding: 15px; 
+}
+.ColItemright{
+    padding-left: 1px;
+    text-align: left;
+    margin-left: 1px;
+}
+.ColItemleft{
+    padding-right: 1px;
+    text-align: right;
+    margin-right: 1px;
+}
+.MenuTitle{
+    width: 130px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;        
+    padding-right: 5px;
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    vertical-align: middle;
+    justify-items: center;
+    text-align: right;
+    justify-content: center;
+}
+.TextLogo 
+{
+    font-family: GothamBook;
+    font-size: 40px;
+    text-align: center;
+    color:black;
+    margin: 0 !important;
+    /* font-weight: bold; */
+}
+.gfh-logo{
+    height: 20px;
+    padding-top: 20px;
+    display: flex;   
+    justify-content: center;
+    position: sticky;
+    text-align: center;
+    font-size: 40px;
+}
+.gfh-logo a img{
+    height: 20px;
+    text-align: center;
+    align-items: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+/* .imgLogo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} */
+.Menu{
+    width: 150px;
+}
+.Menu ul li{
+    display: block;
+    padding: 10px 0;   
+}
+.Menu ul li a{ 
+    text-transform: uppercase;
+    text-decoration: none;    
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+    font-weight: bold;
+}
+.Menu.left{
+    float: left;
+    margin-right: 17px;
+}
+.right{
+    float: right;
+}
+.RowMenu{
+    padding-top: 8%;
+}
