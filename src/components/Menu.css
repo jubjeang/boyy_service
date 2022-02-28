@@ -19,12 +19,3 @@ div #divTitle{
     text-transform: uppercase;
     font-family: GothamBook;    
 }
-.TextLogo 
-{
-    font-family: GothamBook;
-    font-size: 40px;
-    text-align: center;
-    color:black;
-    margin: 0 !important;
-    /* font-weight: bold; */
-}

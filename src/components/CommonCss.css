@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'GothamBold';
+    src: local('GothamBold'), url(GothamBold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'GothamBook';
+    src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+  }
+  html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
+  .RowMenu{
+    padding-top: 50px;
+    margin-top: 60px;
+}
+.TextLogo 
+{
+    font-family: GothamBook;
+    font-size: 40px !important;
+    text-align: center;
+    color:black;
+    margin: 0 !important;
+    /* font-weight: bold; */
+}
+.TextLogo a :hover{
+  text-decoration: none;
+  color: black;
+}
+.TextLogo a{
+  text-decoration: none;
+  color: black;
+}

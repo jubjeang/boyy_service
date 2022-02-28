@@ -2,12 +2,14 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "reactstrap";
 import { Col, Row, Form } from "react-bootstrap";
+import './CommonCss.css';
 import './CreateStockAvaliable.css';
 import Table from 'react-bootstrap/Table'
 import ServiceOrder from './ServiceOrder';
 import { Switch,Route,Link} from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckProduct from './CheckProduct';
+
 
 const data =[
     {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
@@ -68,19 +70,31 @@ const CheckStockAvaliable = ()=>{
             <div style={{ margin : 0, padding : 0 }} >
                 <Container fluid id="divTitle">
                     <Row>
-                        <Col sm={12} className="gfh-logo">
-                            <a href="https://boyy.com/">
-                                <img 
-                                src="https://boyy-b2b-ss22.herokuapp.com/assets/logo-d96f23139d13c0c38b5b1d7d5f873cca65f5c22b030921fc64b27cdeac09955e.svg" 
-                                alt="Boyy Logo"  
-                                />
-                            </a>
+                        {/* <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
+                            <div className='TextLogo' style={{ marginTop : 0, paddingTop : "5%"}}>
+
+                                <p>
+                                    <Link to="/MainServices">B O Y Y</Link>
+                                    <p>B O Y Y</p>
+                                </p>
+                            </div>
+                        </Col> */}
+                        <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
+                                                {/* <a href="https://boyy.com/">
+                                                    <img 
+                                                    src="https://boyy-b2b-ss22.herokuapp.com/assets/logo-d96f23139d13c0c38b5b1d7d5f873cca65f5c22b030921fc64b27cdeac09955e.svg" 
+                                                    alt="Boyy Logo"  
+                                                    />
+                                                </a> */}
+                                                <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
+                                                    <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
+                                                </div>
                         </Col>
                     </Row>
                     <Row className="RowMenu">
                         <Col sm={2} className="Menu">
                             <ul id="mainlist">
-                                <li>                                
+                                {/* <li>                                
                                     <Link to="/MainServices/CheckProduct">Check Product</Link>
                                 </li>
                                 <li>                                
@@ -88,7 +102,7 @@ const CheckStockAvaliable = ()=>{
                                 </li>
                                 <li>
                                     <Link to="/MainServices/CreateServiceOrder">Create Service Order</Link>
-                                </li>
+                                </li> */}
                                 <li>
                                     <Link to="/MainServices/CheckStockAvaliable">Check Stock Avaliable</Link>
                                 </li>
@@ -102,6 +116,7 @@ const CheckStockAvaliable = ()=>{
                                     <Route path="/MainServices/CheckProduct" component={CheckProduct} /> 
                                     <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
                                     <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />                             
+                                    <Route path="/MainServices" component={CheckStockAvaliable} />
                                     {/* <Route exact path="/Main/" /> */}
                                 </Switch> 
                             {/* </Router> */}

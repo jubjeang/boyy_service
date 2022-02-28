@@ -3,9 +3,10 @@ import { Container } from "reactstrap";
 import { Col, Row, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import './MainServices.css';
-import ServiceOrder from './ServiceOrder';
+import './CommonCss.css';
 import { Switch,Route,Link} from 'react-router-dom';
 import CheckStockAvaliable from './CheckStockAvaliable';
+import CheckProduct from './CheckProduct';
 // const MainComponent = ()=>{
 //     return(
 //         <div>
@@ -45,14 +46,14 @@ const MainServices = ()=>{
                                             <Col xs={6} lg={6} xl={6} md={6} sm={6} xxl={6} className="ColTwiceTitle">
                                                 <Card className="Card">
                                                     <Card.Body>
-                                                        <Link className="twiceTitle" to="/MainServices/ServiceOrder">Service Order</Link>
+                                                        <Link className="twiceTitle" to="/MainServices/CheckProduct">Service Order</Link>
                                                     </Card.Body>
                                                 </Card> 
                                             </Col>
                                         </Row> 
                                     </Container>
                                 </Route>
-                                <Route path="/MainServices/ServiceOrder" component={ServiceOrder} />                                 
+                                <Route path="/MainServices/CheckProduct" component={CheckProduct} />                                 
                                 <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />                             
                                 {/* <Route exact path="/Main/" /> */}
                         </Switch>                      

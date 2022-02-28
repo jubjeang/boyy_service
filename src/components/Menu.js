@@ -1,4 +1,5 @@
 import React from 'react'
+import './CommonCss.css';
 import './Menu.css';
 class Menu extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class Menu extends React.Component {
               </a>
               <em> </em>collection.   
           </marquee>
-          <div className='TextLogo' style={{ marginTop : 0, paddingTop : 0 }}>
+          <div className="TextLogo" style={{ marginTop : 0, paddingTop : 0 }}>
             <p>B O Y Y</p>
           </div>
         </div>
