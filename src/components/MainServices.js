@@ -7,6 +7,7 @@ import './CommonCss.css';
 import { Switch,Route,Link} from 'react-router-dom';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import CheckProduct from './CheckProduct';
+import ServiceOrder from './ServiceOrder';
 // const MainComponent = ()=>{
 //     return(
 //         <div>
@@ -53,8 +54,9 @@ const MainServices = ()=>{
                                         </Row> 
                                     </Container>
                                 </Route>
-                                <Route path="/MainServices/CheckProduct" component={CheckProduct} />                                 
-                                <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />                             
+                                <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />
+                                <Route path="/MainServices/CheckProduct" component={CheckProduct} />
+                                <Route path="/MainServices/ServiceOrder" component={ServiceOrder} />                                
                                 {/* <Route exact path="/Main/" /> */}
                         </Switch>                      
 

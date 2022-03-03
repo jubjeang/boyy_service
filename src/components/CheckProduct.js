@@ -2,399 +2,405 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "reactstrap";
 import { Col, Row} from "react-bootstrap";
-import './CheckProduct.css';
 import { Switch,Route,Link} from 'react-router-dom';
-import ServiceOrder from './ServiceOrder';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import './CommonCss.css';
+import './CheckProduct.css';
 
 
-const MainComponent = ()=>{
-    return (<div id="CheckStockAvaliable" style={{ margin : 0, padding : 0 }} >
-                    <Container fluid>                
-                        <Row className="rowForm">
-                                <Col sm={12}>
-                                    <div className="MenuTitle">CHECK PRODUCT</div>
-                                </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">                                        
-                                <label htmlFor="name" className="required">General</label>                                            
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">                       
-                            </Col>                                    
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">                                        
-                                <label htmlFor="No" className="required">No</label>                                            
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="No" id="No" className="required" placeholder="Full name"
-                                        defaultValue="" />
-                                </div>
-                            </Col>                                    
-                        </Row>
-                        <Row  className="rowForm" >
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="Description" className="required">Description</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright ">
-                                    <div className="form-group">                                            
-                                        <input type="text" name="Description" id="Description" className="required" placeholder="DESCRIPTION"
-                                        defaultValue="" />
-                                    </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="ItemNo" className="required">Item No</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                    <div className="form-group">
-                                        <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="Item No"
-                                        defaultValue=""
-                                        />
-                                    </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="WarrantyStartingDateParts" className="required">Warranty Starting Date(Part<span className="text-lowercase">s</span>)</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="WarrantyStartingDateParts" id="WarrantyStartingDateParts" className="required" placeholder="Warranty Starting Date Parts"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row  className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="WarrantyEndingDateParts" className="required">Warranty Ending Date(Part<span className="text-lowercase">s</span>)</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="WarrantyEndingDateParts" id="WarrantyEndingDateParts" className="required" placeholder="Warranty Ending Date Parts"
-                                        defaultValue="" />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="Warranty" className="required">Warranty % (Part<span className="text-lowercase">s</span>)</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="Warranty" id="Warranty" className="required" placeholder="Warranty"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row> 
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="WarrantyStartingDateLabor" className="required">Warranty Starting Date (Labor)</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">  
-                                    <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" className="required" placeholder="Warranty Starting Date(Labor)"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>                                
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="WarrantyEndingDateLabor" className="required">Quantity</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="Quantity" id="WarrantyEndingDateLabor" className="required" placeholder="Warranty Ending Date (Labor)"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="" className="required">Customer</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="CustomerNo" className="required">Customer No</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="CustomerNo" id="CustomerNo" className="required" placeholder="Customer No"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>                                
-                        <Row className="rowForm" >
-                            <Col sm={4} className="ColItem ColItemleft">
-                                <label htmlFor="" className="required">Sell-to</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                            
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="Name" className="required">Name</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">
-                                    <input type="text" name="Name" id="Name" className="required" placeholder="Name"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="Address" className="required">Address</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">
-                                    <input type="text" name="Address" id="Address" className="required" placeholder="Address"
-                                        defaultValue="" />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="PhoneNo" className="required">Phone No</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="PhoneNo" id="PhoneNo" className="required" placeholder="Phone No"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="LocationServiceItem" className="required">Location of Service Item</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="LocationServiceItem" id="LocationServiceItem" className="required" placeholder="Location of Service Item"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="" className="required">End Customer</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerNo" className="required">End Customer No</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerNo" id="EndCustomerNo" className="required" placeholder="End Customer No"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerName" className="required">End Customer Name</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerName" id="EndCustomerName" className="required" placeholder="End Customer Name"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerName" className="required">End Customer Name</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerName" id="EndCustomerName" className="required" placeholder="End Custome rName"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerAddress" className="required">End Customer Address</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerAddress" id="EndCustomerAddress" className="required" placeholder="End Customer Address"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerAddress2" className="required">EndCustomerNo</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerAddress2" id="EndCustomerAddress2" className="required" placeholder="End Custome rAddress2"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerCountry" className="required">End Customer Country/Region Code</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerCountry" id="EndCustomerCountry" className="required" placeholder="End Customer Country/Region Code"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerCity" className="required">End Customer City</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerCity" id="EndCustomerCity" className="required" placeholder="End Customer City"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerPostCode" className="required">End Customer Post Code</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerPostCode" id="EndCustomerPostCode" className="required" placeholder="End Customer Post Code"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerContact" className="required">End Customer Contact</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerContact" id="EndCustomerContact" className="required" placeholder="End Customer Contact"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={4} className="ColItem ColItemleft">
-                            <label htmlFor="EndCustomerPhoneNo" className="required">End Customer Phone No</label>
-                            </Col>
-                            <Col sm={4} className="ColItem ColItemright">
-                                <div className="form-group">                                            
-                                    <input type="text" name="EndCustomerPhoneNo" id="EndCustomerPhoneNo" className="required" placeholder="End Customer Phone No"
-                                        defaultValue=""
-                                        />
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row className="rowForm">
-                            <Col sm={2} className="ColItem ColItemleft">
-                                
-                            </Col>
-                            <Col sm={8} className="ColItem ColItemright">
-                                <div className="col-12 text-center horizontal-menu-serviceorder">                                            
-                                    <ul>
-                                        <li>                                                    
-                                            <a href="#">Submit</a>                                   
-                                        </li>
-                                    </ul>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>            
-                </div>
-    );
+const data =[
+    {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
+    {code:"CK",name:"คลังเช่าพื้นที่เก็บข้างนอก เก็บหนังที่ไม่ใช้แล้ว",inventory:0},
+    {code:"DAMAGE",name:"Damage",inventory:0},
+    {code:"DEFECTED",name:"Defected",inventory:0},
+    {code:"ECOM",name:"ECOM",inventory:0},
+    {code:"ECOM-PEN",name:"ECOM Pending",inventory:0},
+    {code:"IN-TRANSIT",name:"In-Transit",inventory:0},
+    {code:"MATERIAL",name:"Material",inventory:0},
+    {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
+]
+const ResultSearch = ()=>{
+    return (   
+                <Container fluid>
+                    <Row className="rowForm">
+                        <Col sm={12} className="ColItem ColItemleft">
+                            <div   className="MainTitle">
+                                SERVICE ITEM CARD
+                            </div>                           
+                        </Col>
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={12} className="ColItem ColItemleft">
+                            <label className="required">General</label>
+                            <hr />
+                        </Col>
+                    </Row>                                                        
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="No" className="required">No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="No" id="No" className="required" placeholder="No"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="WarrantyStartingDate" className="required">Warranty Starting Date(Parts)</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="WarrantyStartingDate" id="WarrantyStartingDate" className="required" placeholder="Warranty Starting Date"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="Description" className="required">Description</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="Description" id="Description" className="required" placeholder="Description"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="WarrantyEndingDate" className="required">Warranty Ending Date(Parts)</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="WarrantyEndingDate" id="WarrantyEndingDate" className="required" placeholder="Warranty Endting Date"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="ItemNo" className="required">Item No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="Item No"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="WarrantyStartingDateLabor" className="required">Warranty Starting Date(Labor)</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" className="required" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="ItemDescription" className="required">Item Description</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="ItemDescription" id="ItemDescription" className="required" placeholder="Item Description"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="WarrantyEndingDateLabor" className="required">Warranty Ending Date(Labor)</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor" className="required" placeholder="Warranty Ending Date(Labor)" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="SerialNo" className="required">Serial No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="SerialNo" id="SerialNo" className="required" placeholder="Serial No"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                        </Col>                                                               
+                    </Row>                        
+
+                    <Row className="rowForm">
+                        <Col sm={12} className="ColItem ColItemleft">
+                            <label className="required">Customer</label>
+                            <hr />
+                        </Col>
+                    </Row>                                                        
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="CustomerNo" className="required">Customer No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="CustomerNo" id="CustomerNo" className="required" placeholder="Customer No"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="City" className="required">City</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="City" id="City" className="required" placeholder="City"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="CustomerName" className="required">Customer Name</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="CustomerName" id="CustomerName" className="required" placeholder="Customer Name" 
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="County" className="required">County</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="County" id="County" className="required" placeholder="County"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="Address" className="required">Address</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="Address" id="Address" className="required" placeholder="Address"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="PostCode" className="required">Post Code</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="PostCode" id="PostCode" className="required" placeholder="Post Code" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="Address2" className="required">Address 2</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="Address2" id="Address2" className="required" placeholder="Address 2"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="Contact" className="required">Contact</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="Contact" id="Contact" className="required" placeholder="Contact" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft"></Col>
+                        <Col sm={3} className="ColItem ColItemright">                           
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="PhoneNo" className="required">Phone No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="PhoneNo" id="PhoneNo" className="required" placeholder="Phone No" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+
+                    <Row className="rowForm">
+                        <Col sm={12} className="ColItem ColItemleft">
+                            <label className="required">End Customer</label>
+                            <hr />
+                        </Col>
+                    </Row>                                                        
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusCustomerNo" className="required">End-Cus. Customer No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" className="required" placeholder="End-Cus Customer No"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusCity" className="required">End-Cus. City</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusCity" id="EndCusCity" className="required" placeholder="End-Cus. City"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusCustomerName" className="required">End-Cus. Customer Name</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" className="required" placeholder="End-Cus. Customer Name" 
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusCounty" className="required">End-Cus. County</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusCounty" id="EndCusCounty" className="required" placeholder="End-Cus. County"
+                                    defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusAddress" className="required">End-Cus. Address</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusAddress" id="EndCusAddress" className="required" placeholder="End-Cus. Address"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusPostCode" className="required">End-Cus. Post Code</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" className="required" placeholder="End-Cus. Post Code" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusAddress2" className="required">End-Cus. Address 2</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" className="required" placeholder="End-Cus. Address 2"
+                                    defaultValue="" />
+                            </div>
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusContact" className="required">End-Cus. Contact</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusContact" id="EndCusContact" className="required" placeholder="End-Cus. Contact" defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>
+                    <Row className="rowForm">
+                        <Col sm={2} className="ColItem ColItemleft"></Col>
+                        <Col sm={3} className="ColItem ColItemright">                           
+                        </Col>
+                        <Col sm={2} className="ColItem ColItemleft">                                        
+                            <label htmlFor="EndCusPhoneNo" className="required">End-Cus. Phone No.</label>                                            
+                        </Col>
+                        <Col sm={3} className="ColItem ColItemright">
+                            <div className="form-group">                                            
+                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" className="required" placeholder="End-Cus. Phone No." defaultValue="" />
+                            </div>
+                        </Col>                                                               
+                    </Row>                    
+                </Container>
+        );
 }
-
+const MainComponent = ()=>{
+    return (
+            <Container fluid>                
+                        <Row style={{display: "flex", alignItems: "center"}}>
+                            <Col sm={2} className="ColItem ColItemleft">                                        
+                                <label htmlFor="name" className="required">SERIAL NO.</label>                                            
+                            </Col>
+                            <Col sm={5} className="ColItem ColItemright">
+                                <div className="form-group">                                            
+                                    <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="SERIAL NO"
+                                        defaultValue="" />
+                                </div>
+                            </Col>
+                            <Col sm={2} className="align-left ColSubmitSearch">                                        
+                                    <div className="text-center" 
+                                    style={{height: "45px"}} >                                             
+                                            <ul>
+                                                <li>   
+                                                    <Link to="/MainServices/CheckProduct/ResultSearch">
+                                                        Submit
+                                                    </Link>                                   
+                                                </li>
+                                            </ul>
+                                    </div>                                           
+                            </Col>           
+                        </Row>
+            </Container>
+            );
+}
 const CheckProduct = ()=>{
         return (
             <div style={{ margin : 0, padding : 0 }} >
-                <Container fluid id="divTitle">
+                <Container fluid>
                     <Row>
-                        {/* <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
-                            <div className='TextLogo' style={{ marginTop : 0, paddingTop : "5%"}}>
-
-                                <p>
-                                    <Link to="/MainServices">B O Y Y</Link>
-                                    <p>B O Y Y</p>
-                                </p>
-                            </div>
-                        </Col> */}
                         <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
-                                                {/* <a href="https://boyy.com/">
-                                                    <img 
-                                                    src="https://boyy-b2b-ss22.herokuapp.com/assets/logo-d96f23139d13c0c38b5b1d7d5f873cca65f5c22b030921fc64b27cdeac09955e.svg" 
-                                                    alt="Boyy Logo"  
-                                                    />
-                                                </a> */}
-                                                <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
-                                                    <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
-                                                </div>
+                                <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
+                                    <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
+                                </div>
                         </Col>
                     </Row>
                     <Row className="RowMenu">
                         <Col sm={2} className="Menu">
                             <ul id="mainlist">
-                                {/* <li>                                
+                                <li>                                
                                     <Link to="/MainServices/CheckProduct">Check Product</Link>
                                 </li>
                                 <li>                                
                                     <Link to="/MainServices/ServiceOrder">Service Order</Link>  
                                 </li>
+                                
                                 <li>
                                     <Link to="/MainServices/CreateServiceOrder">Create Service Order</Link>
-                                </li> */}
+                                </li>
+                                {/* 
                                 <li>
                                     <Link to="/MainServices/CheckStockAvaliable">Check Stock Avaliable</Link>
-                                </li>
+                                </li> 
+                                */}
                             </ul>
                         </Col>
                         <Col sm={10}>
                             {/* <Router> */}
                                 <Switch>
-                                    <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable}   />
-                                    <Route path="/MainServices/ServiceOrder" component={ServiceOrder} /> 
-                                    <Route path="/MainServices/CheckProduct" component={MainComponent} exact /> 
+                                    <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable}   />                                    
+                                    <Route path="/MainServices/CheckProduct" exact> 
+                                    <div className="MainTitle">
+                                        CHECK PRODUCT
+                                    </div>
+                                    <hr />
+                                    <MainComponent />
+                                    </Route>
                                     <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
-                                    <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />                             
-                                    <Route path="/MainServices" component={CheckStockAvaliable} />
+                                    <Route path="/MainServices/CheckProduct/ResultSearch" component={ResultSearch} />
                                     {/* <Route exact path="/Main/" /> */}
                                 </Switch> 
                             {/* </Router> */}

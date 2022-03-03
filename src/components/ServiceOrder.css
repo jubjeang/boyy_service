@@ -1,46 +1,122 @@
+@font-face {
+    font-family: 'GothamBook';
+    src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+}
 font{
-    font-family: "Gotham-Bold", sans-serif;
+    font-family: "Gotham-Bold", sans-serif;    
+}
+table{
+    width: 100%;
+}
+table tr th{
+    text-align: center;
+    font-size: 0.5rem;
+}
+table tr td{
+    font-family: 'GothamBook';
+    text-align: left;
+    font-size: 0.5rem;
+}
+.ColContent
+{
+    padding-top: 0px;
+}
+.ServiceOrderColItem{
+    height: 10%;
+    width: 100%;
+    padding: 1px; 
+}
+.ServiceOrderColItem .ServiceOrderColSubmitSearch{
+    text-align: right;
+    border-radius: 2px;
 }
 
-.horizontal-menu{
+.ServiceOrderColSubmitSearch ul li a:hover{
+    background-color: white;
+    border: 0px black solid;
+    color: black;
+    text-decoration: none;
+    font-size: 11px;    
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.ServiceOrderColSubmitSearch li{    
+    padding: 1px 0;    
+    height: 5%;
+    border-radius: 2px;
+}
+.ServiceOrderColSubmitSearch  ul li a{    
+    color: white;
+    background-color: #58595b;
+    text-decoration: none;
+    text-transform: uppercase; 
+    display:table-cell;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.ServiceOrderColSubmitSearch{
+    padding-right: 1px;
+    margin-right: 1px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;      
+    color: white;
+    font-size: 11px;
+    vertical-align: top;
+    border-radius: 2px;
+}
+.SubMainTitle{
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+}
+.MainTitle{
+    padding-top: 2%;
+    padding-bottom: 0px;
+    font-size: 12px;
+}
+.rowForm{
+    padding-bottom: 0px;
+    height: 50px;
+}
+.ColArea{
+    padding-bottom: 90px;
+    height: 90px;  
+}
+.horizontal-menu-serviceorder{
     list-style: none;
     margin: 0;
     padding: 0;
     overflow: hidden;   
     text-align: center;
-    height: 45px;    
-    display: block;
-  }
-  /* .horizontal-menu ul li a{
+    height: 45px;
     color: white;
-  } */
-  .horizontal-menu ul li a:hover{
+    font-size: 11px;
+  }
+.horizontal-menu-serviceorder ul li a:hover{
     background-color: white;
     border: 1px black solid;
     color: black;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 14px;
-    width: 450px;
-    height: 42px;   
+    font-size: 11px;
     display:table-cell;
     vertical-align: middle; 
-  } 
-  .horizontal-menu li{    
+}
+.horizontal-menu-serviceorder li{    
     padding: 1px 0;    
     display: block; 
-  }
-  .horizontal-menu  ul li a{    
+}
+.horizontal-menu-serviceorder  ul li a{    
     color: white;
     background-color: #58595b;
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 14px;
-    width: 450px;
-    height: 40px;   
+    text-transform: uppercase;     
     display:table-cell;
     vertical-align: middle; 
-  }
+    text-align: center;
+}
 label {
     display: block;
     margin-bottom: 5px;
@@ -51,13 +127,13 @@ label {
     text-transform: uppercase;
     width: 80% !important;
 }
-input[type="text"],textarea{
+input[type="text"], textarea{
     font-size: 11px;
     font-size: 0.6875rem;
     line-height: 16px;
     font-weight: 300;
     text-transform: uppercase;
-    width: 95% !important;
+    width: 10% !important;
     height: 40px;
     border-radius: 2px;
 }
@@ -73,8 +149,10 @@ textarea{
     border-radius: 2px;
 }
 input[type="checkbox"] { 
-    width: 5% !important;
+    width: 100% !important; 
+    height: 100% !important;
     text-align: left;
+    padding: 3px;
     border-radius: 2px;
 }
 .form-check{
@@ -83,6 +161,9 @@ input[type="checkbox"] {
 .form-check-input{
     padding-right: 5px;
     margin-top: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
 }
 .spancheckbox-inline{   
     vertical-align:top;
@@ -95,24 +176,21 @@ input[type="checkbox"] {
 .text-lowercase{
     text-transform: lowercase;
 }
-#Service_Order{
+#CreateServiceOrder{
     text-align: right;
     padding-top: 5px;
 }
-#Service_Order .MenuTitle{
+#CreateServiceOrder .MenuTitle{
     float: right;
 }
-.ColItem{
-    padding: 15px; 
-}
-.ColItemright{
+.ServiceOrderColItemright{
     padding-left: 1px;
     text-align: left;
     margin-left: 1px;
 }
-.ColItemleft{
+.ServiceOrderColItemleft{
     padding-right: 1px;
-    text-align: right;
+    text-align: left;
     margin-right: 1px;
 }
 .MenuTitle{
@@ -145,7 +223,8 @@ input[type="checkbox"] {
 }
 .Menu ul li{
     display: block;
-    padding: 10px 0;   
+    padding: 0px 0;
+    height: 5%;
 }
 .Menu ul li a{ 
     text-transform: uppercase;
