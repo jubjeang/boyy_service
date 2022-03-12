@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "reactstrap";
 import { Col, Row} from "react-bootstrap";
@@ -68,6 +68,9 @@ const data =[
     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
 ]
 const ServiceOrderCard = ()=>{
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (<>
         <Container fluid>
             <Row className="rowForm">
@@ -77,7 +80,7 @@ const ServiceOrderCard = ()=>{
                     </div>                           
                 </Col>
                 <Col sm={6} className="ColItem ColItemleft">
-                    <Button variant="primary" className='servic_eorder_buttun' onClick={ActionModalAttachFiles(true,false)}>Attach files</Button>&nbsp; 
+                    <Button variant="primary" className='servic_eorder_buttun' onClick={handleShow}>Attach files</Button>&nbsp; 
                     <Button variant="primary" className='servic_eorder_buttun'>Print Tax Invoice/Receipt</Button>&nbsp; 
                     <Button variant="primary" className='servic_eorder_buttun'>Print Repair Form</Button>&nbsp; 
                     <Button variant="outline-secondary" className='servic_eorder_buttun'>Send to 365BC</Button>&nbsp;
@@ -466,6 +469,20 @@ const ServiceOrderCard = ()=>{
                     </Col>                                                               
                 </Row>                                                                                                                             
         </Container>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>AttachFiles</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>        
     );
 }
