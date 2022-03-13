@@ -42,7 +42,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="No" id="No" className="required" placeholder="No"
+                                <input type="text" name="No" id="No"
+                                 className="required CheckProductTBandTextArea" placeholder="No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -51,7 +52,9 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyStartingDate" id="WarrantyStartingDate" className="required" placeholder="Warranty Starting Date"
+                                <input type="text" name="WarrantyStartingDate" 
+                                id="WarrantyStartingDate"
+                                 className="required CheckProductTBandTextArea" placeholder="Warranty Starting Date"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -62,7 +65,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Description" id="Description" className="required" placeholder="Description"
+                                <input type="text" name="Description" id="Description" className="required CheckProductTBandTextArea" placeholder="Description"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -71,7 +74,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyEndingDate" id="WarrantyEndingDate" className="required" placeholder="Warranty Endting Date"
+                                <input type="text" name="WarrantyEndingDate" id="WarrantyEndingDate" className="required CheckProductTBandTextArea" placeholder="Warranty Endting Date"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -82,7 +85,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="Item No"
+                                <input type="text" name="ItemNo" id="ItemNo" className="required CheckProductTBandTextArea" placeholder="Item No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -91,7 +94,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" className="required" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
+                                <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" 
+                                className="required CheckProductTBandTextArea" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -101,7 +105,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="ItemDescription" id="ItemDescription" className="required" placeholder="Item Description"
+                                <input type="text" name="ItemDescription" id="ItemDescription" 
+                                className="required CheckProductTBandTextArea" placeholder="Item Description"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -110,7 +115,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor" className="required" placeholder="Warranty Ending Date(Labor)" defaultValue="" />
+                                <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor"
+                                 className="required CheckProductTBandTextArea" placeholder="Warranty Ending Date(Labor)" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -120,7 +126,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="SerialNo" id="SerialNo" className="required" placeholder="Serial No"
+                                <input type="text" name="SerialNo" id="SerialNo" className="required CheckProductTBandTextArea" placeholder="Serial No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -142,7 +148,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerNo" id="CustomerNo" className="required" placeholder="Customer No"
+                                <input type="text" name="CustomerNo" id="CustomerNo" className="required CheckProductTBandTextArea" placeholder="Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -151,7 +157,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="City" id="City" className="required" placeholder="City"
+                                <input type="text" name="City" id="City" className="required CheckProductTBandTextArea" placeholder="City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -162,7 +168,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerName" id="CustomerName" className="required" placeholder="Customer Name" 
+                                <input type="text" name="CustomerName" id="CustomerName" className="required CheckProductTBandTextArea" placeholder="Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -171,7 +177,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="County" id="County" className="required" placeholder="County"
+                                <input type="text" name="County" id="County" className="required CheckProductTBandTextArea" placeholder="County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -182,7 +188,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address" id="Address" className="required" placeholder="Address"
+                                <input type="text" name="Address" id="Address" className="required CheckProductTBandTextArea" placeholder="Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -191,7 +197,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PostCode" id="PostCode" className="required" placeholder="Post Code" defaultValue="" />
+                                <input type="text" name="PostCode" id="PostCode" className="required CheckProductTBandTextArea" placeholder="Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -201,7 +207,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address2" id="Address2" className="required" placeholder="Address 2"
+                                <input type="text" name="Address2" id="Address2" className="required CheckProductTBandTextArea" placeholder="Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -210,7 +216,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Contact" id="Contact" className="required" placeholder="Contact" defaultValue="" />
+                                <input type="text" name="Contact" id="Contact" className="required CheckProductTBandTextArea" placeholder="Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -223,7 +229,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PhoneNo" id="PhoneNo" className="required" placeholder="Phone No" defaultValue="" />
+                                <input type="text" name="PhoneNo" id="PhoneNo" className="required CheckProductTBandTextArea" placeholder="Phone No" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -240,7 +246,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" className="required" placeholder="End-Cus Customer No"
+                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" className="required CheckProductTBandTextArea" placeholder="End-Cus Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -249,7 +255,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCity" id="EndCusCity" className="required" placeholder="End-Cus. City"
+                                <input type="text" name="EndCusCity" id="EndCusCity" className="required CheckProductTBandTextArea" placeholder="End-Cus. City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -260,7 +266,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" className="required" placeholder="End-Cus. Customer Name" 
+                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" className="required CheckProductTBandTextArea" placeholder="End-Cus. Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -269,7 +275,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCounty" id="EndCusCounty" className="required" placeholder="End-Cus. County"
+                                <input type="text" name="EndCusCounty" id="EndCusCounty" className="required CheckProductTBandTextArea" placeholder="End-Cus. County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -280,7 +286,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress" id="EndCusAddress" className="required" placeholder="End-Cus. Address"
+                                <input type="text" name="EndCusAddress" id="EndCusAddress" className="required CheckProductTBandTextArea" placeholder="End-Cus. Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -289,7 +295,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" className="required" placeholder="End-Cus. Post Code" defaultValue="" />
+                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" className="required CheckProductTBandTextArea" placeholder="End-Cus. Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -299,7 +305,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" className="required" placeholder="End-Cus. Address 2"
+                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" className="required CheckProductTBandTextArea" placeholder="End-Cus. Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -308,7 +314,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusContact" id="EndCusContact" className="required" placeholder="End-Cus. Contact" defaultValue="" />
+                                <input type="text" name="EndCusContact" id="EndCusContact" className="required CheckProductTBandTextArea" placeholder="End-Cus. Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -321,7 +327,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ColItem ColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" className="required" placeholder="End-Cus. Phone No." defaultValue="" />
+                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" className="required CheckProductTBandTextArea" placeholder="End-Cus. Phone No." defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>                    
@@ -332,22 +338,25 @@ const MainComponent = ()=>{
     return (
             <Container fluid>                
                         <Row style={{display: "flex", alignItems: "center"}}>
-                            <Col sm={2} className="ColItem ColItemleft">                                        
+                            <Col sm={1} className="ColItem ColItemleft">                                        
                                 <label htmlFor="name" className="required">SERIAL NO.</label>                                            
                             </Col>
                             <Col sm={5} className="ColItem ColItemright">
                                 <div className="form-group">                                            
-                                    <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="SERIAL NO"
+                                    <input type="text" name="ItemNo" id="ItemNo" 
+                                    className="required CheckProductTBandTextArea" 
+                                    style={{width:"150%"}} 
+                                     placeholder="SERIAL NO"
                                         defaultValue="" />
                                 </div>
                             </Col>
                             <Col sm={2} className="align-left ColSubmitSearch">                                        
                                     <div className="text-center" 
-                                    style={{height: "45px"}} >                                             
+                                    style={{height: "45px", padding:"0px", marginLeft:'0px', paddingLeft:'0px'}} >                                             
                                             <ul>
                                                 <li>   
                                                     <Link to="/MainServices/CheckProduct/ResultSearch">
-                                                        Submit
+                                                        Search
                                                     </Link>                                   
                                                 </li>
                                             </ul>

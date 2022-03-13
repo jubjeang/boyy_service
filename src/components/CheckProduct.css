@@ -79,10 +79,12 @@ font{
     height: 42px;   
     display:table-cell;
     vertical-align: middle; 
+    border-radius: 2px;
 }
 .horizontal-menu-serviceorder li{    
     padding: 1px 0;    
-    display: block; 
+    display: block;
+    border-radius: 2px; 
 }
 .horizontal-menu-serviceorder  ul li a{    
     color: white;
@@ -94,6 +96,7 @@ font{
     display:table-cell;
     vertical-align: middle; 
     text-align: center;
+    border-radius: 2px;
 }
 label {
     display: block;
@@ -105,7 +108,7 @@ label {
     text-transform: uppercase;
     width: 80% !important;
 }
-input[type="text"], textarea{
+/* input[type="text"], textarea{
     font-size: 11px;
     font-size: 0.6875rem;
     line-height: 16px;
@@ -114,6 +117,14 @@ input[type="text"], textarea{
     width: 95% !important;
     height: 40px;
     border-radius: 2px;
+} */
+.CheckProductTBandTextArea{
+    font-size: 11px;
+    text-transform: uppercase;
+    width: 85% !important;
+    height: 2.0rem !important;
+    border-radius: 2px;
+
 }
 textarea{   
     height: 70px !important;

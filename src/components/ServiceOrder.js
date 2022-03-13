@@ -72,7 +72,7 @@ const ServiceOrderCard = ()=>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (<>
-        <Container fluid>
+        <Container fluid style={{width:"120%"}}>
             <Row className="rowForm">
                 <Col sm={4} className="ColItem ColItemleft">
                     <div className="MainTitle">
@@ -93,7 +93,7 @@ const ServiceOrderCard = ()=>{
                     <hr />
                 </Col>
             </Row>                                                        
-            <Row className="rowForm"  style={{paddingTop: "2%"}}>
+            <Row className="rowForm"  style={{marginTop: "2%"}}>
                 <Col sm={2} className="ColItem ColItemleft">                                        
                     <label htmlFor="No" className="required">No.</label>                                            
                 </Col>
@@ -139,8 +139,14 @@ const ServiceOrderCard = ()=>{
                 </Col>
                 <Col sm={3} className="ColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="CustomerNo" id="CustomerNo" className="required" placeholder="Customer No"
-                            defaultValue="" />
+                        <input type="text" name="CustomerNo" id="CustomerNo" 
+                        className="required ServiceOrderCustSearchButton"
+                         placeholder="Customer No"
+                            defaultValue=""
+                             style={{width:'4% !important'}} 
+                             />
+                            <Button variant="primary"  className='servic_eorder_buttun' onClick={handleShow}>Search
+                            </Button>
                     </div>
                 </Col>
                 <Col sm={2} className="ColItem ColItemleft">                                        
@@ -797,13 +803,14 @@ const ResultSearch = ()=>{
 }
 const MainComponent = ()=>{
     return (
-                <div className="ServiceOrderColItem ServiceOrderColSubmitSearch" style={{width:"100%",display: "flex" ,verticalAlign:"middle"}}>     
-                    <input type="text" 
+                <div className="ServiceOrderColItem ServiceOrderColSubmitSearch" 
+                style={{width:"70%",display: "flex" ,verticalAlign:"middle"}}>     
+                   &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" 
                     name="ItemNo" 
                     id="ItemNo" 
                     className="required" 
-                    placeholder="SEARCH" style={{height: "50%"}}></input>
-                    <ul  style={{width:"50%"}}>
+                    placeholder="SEARCH"></input>
+                    <ul>
                         <li>   
                             <Link to="/MainServices/CheckProduct/ResultSearch">
                                 Search
