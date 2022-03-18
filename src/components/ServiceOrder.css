@@ -17,6 +17,40 @@ table tr td{
     text-align: left;
     font-size: 0.5rem;
 }
+.ServiceOrderbtn-secondary {
+    color: #fff;
+    background-color: grey;    
+    border-color: grey;    
+}
+.ServiceOrderbtn-secondary:visited{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.ServiceOrderbtn-secondary:focus{
+    color: #fff;
+    background-color: grey;    
+    border-color: grey;
+}
+.ServiceOrderbtn-secondary:hover 
+{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.ServiceOrderbtn-secondary:active{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.ServiceOrderColItem {
+    padding: 0px;
+}
+.ServiceOrderColItemleft{
+    padding-left: 15px;
+    text-align: left;
+    margin-right: 1px;
+}
 .servic_eorder_buttun{
     font-size: 0.5rem  !important;
     padding-left: 1%;
@@ -26,57 +60,28 @@ table tr td{
 {
     padding-top: 0px;
 }
-.ServiceOrderCustSearchButton{
-    width: 10px  !important;
+.ServiceOrderCustNoSearchTB{
+    width: 80%  !important;
 }
-/* .ServiceOrderColItem{
-    height: 10%;
-    width: 100%;
-    padding: 1px; 
+.ModalSearchCustName{
+    width: 200%   !important;
+    max-width: 200%  !important;
 }
-.ServiceOrderColItem .ServiceOrderColSubmitSearch{
-    text-align: right;
-    border-radius: 2px;
+.ServiceOrderCustNameSearchTB{
+    width: 75%  !important;
+    height: 1.5rem !important;
+    text-transform: none;
 }
-
-.ServiceOrderColSubmitSearch ul li a:hover{
-    background-color: white;
-    border: 0px black solid;
-    color: black;
-    text-decoration: none;
-    font-size: 11px;    
-    vertical-align: middle;
-    border-radius: 2px;
-}
-.ServiceOrderColSubmitSearch li{    
-    padding: 1px 0;    
-    height: 5%;
-    border-radius: 2px;
-}
-.ServiceOrderColSubmitSearch  ul li a{    
-    color: white;
-    background-color: #58595b;
-    text-decoration: none;
-    text-transform: uppercase; 
-    display:table-cell;
-    vertical-align: middle;
-    border-radius: 2px;
-}
-.ServiceOrderColSubmitSearch{
-    padding-right: 1px;
-    margin-right: 1px;
-    padding-top: 0;
-    margin-top: 0;
-    list-style: none;
-    overflow: hidden;      
-    color: white;
+.ServiceOrderTB{
     font-size: 11px;
-    vertical-align: top;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 100% !important;
+    height: 2.0rem !important;
     border-radius: 2px;
-} */
-
-
-
+}
 .ServiceOrderColSubmitSearch ul li a:hover{
     background-color: white;
     border: 1px black solid;
@@ -223,13 +228,7 @@ textarea{
     border-bottom: 1px solid black;
     border-radius: 2px;
 }
-input[type="checkbox"] { 
-    width: 100% !important; 
-    height: 100% !important;
-    text-align: left;
-    padding: 3px;
-    border-radius: 2px;
-}
+
 .form-check{
     padding-left: 0px;
 }
@@ -262,11 +261,6 @@ input[type="checkbox"] {
     padding-left: 1px;
     text-align: left;
     margin-left: 1px;
-}
-.ServiceOrderColItemleft{
-    padding-right: 1px;
-    text-align: left;
-    margin-right: 1px;
 }
 .MenuTitle{
     width: 130px;

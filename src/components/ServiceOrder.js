@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from "reactstrap";
 import { Col, Row} from "react-bootstrap";
-import { Switch,Route,Link} from 'react-router-dom';
+import { Switch,Route,Link } from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import './CommonCss.css';
@@ -10,51 +10,22 @@ import './ServiceOrder.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
-import PropTypes from 'prop-types';
+import axios from 'axios';
 
-// const ActionModalAttachFiles = (isOpen,hideModal)=> {
-//     return( console.log(isOpen,hideModal)        
-//     );
-// }
-
-const ActionModalAttachFiles = (props)=> {
-   const isOpen = props.isOpen
-   const hideModal = props.hideModal
-    return(
-        <ModalAttachFiles isOpen={isOpen} hideModal={hideModal} />
-    );
-}
-const isOpen = true
-const hideModal = false
-const ModalAttachFiles = (props)=>{
-   const isOpen = props.isOpen
-   const hideModal = props.hideModal
-    return (
-        <>
-        <Modal show={isOpen} onHide={hideModal}>
-        <Modal.Header>
-          <Modal.Title>Hi</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>The body</Modal.Body>
-        <Modal.Footer>
-          <button onClick={hideModal}>Cancel</button>
-          <button>Save</button>
-        </Modal.Footer>
-      </Modal>
-        </>
-    );
-    ModalAttachFiles.prototype={
-        isOpen:PropTypes.bool,
-        hideModal:PropTypes.bool
-    }
-}
 const dataItemLine =[
     {Type:"Item",No:"SV005",Description:"เปลี่ยนซิมในกระเป๋า Slash+Pocket",Quantity:"1",UnitofMeasureCode:"PSC",UnitPriceExclVAT:"2,200.00",LineDiscount:"10",LineDiscountAmount:"220",LineAmountExclVAT:"1,980.00",AmountIncludingVAT:"2,118.60"},
     {Type:"Item",No:"SV006",Description:"กรณี Handle ล้มซ่อมได้เฉพาะ Bobby",Quantity:"1",UnitofMeasureCode:"PSC",UnitPriceExclVAT:"0",LineDiscount:"0",LineDiscountAmount:"0",LineAmountExclVAT:"4000",AmountIncludingVAT:""}   
 ]
+const dataAttachFiles =[
+    {No:"1",FileName:"Pic_Repair_1.JPG",AttachDate:"9-28-21 17:45"},
+    {No:"2",FileName:"Pic_Repair_2.JPG",AttachDate:"9-29-21 17:46"},
+    {No:"3",FileName:"Pic_Repair_3.JPG",AttachDate:"9-30-21 17:47"},
+    {No:"4",FileName:"Pic_Repair_4.JPG",AttachDate:"10-1-21 17:48"},
+    {No:"5",FileName:"Pic_Repair_5.JPG",AttachDate:"10-2-21 17:49"}
+]
 const dataServiceItemLine =[
     {ServiceItemNo:"SND05155",ItemNo:"1BKBB23EPO1SB",Code:"HANDBAG",SerialNo:"SN05155",Description:"BOBBY 23 EP SOME"
-    ,RepairStatusCode:"COMPLETED",Warranty:"1",FaultAreaCode:"STRAP",SymptomCode:"ENDGE PAINT",FaultCode:"S001"
+    ,RepairStatusCode:"COMPLETED",Warranty:<input type='checkbox' />,FaultAreaCode:"STRAP",SymptomCode:"ENDGE PAINT",FaultCode:"S001"
     ,WarrantyStartingDateParts:"27-09-21",WarrantyEndingDateParts:"27-09-21",WarrantyParts:"100",StartingDateLabor:"27-09-21"
     ,EndingDateLabor:"27-09-26",WarrantyLabor:10 }    
 ]
@@ -67,225 +38,283 @@ const data =[
     {No:"BTH-SVO21090006",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00028",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
 ]
+
 const ServiceOrderCard = ()=>{
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    const [showCustSearch, setshowCustSearch] = useState(false)
+    const handleCloseshowCustSearch = () => setshowCustSearch(false)
+    const handleShowshowCustSearch = () => {
+        setshowCustSearch(true)
+        setCustsInfo([])
+    }
+    const [CustsInfo, setCustsInfo] = useState([])
+    let textCustName = React.createRef()
+    const GetCustInfo = () => {
+        //setCustsInfo([])
+        const CustName=textCustName.current.value
+        console.log(CustName);       
+        const url_ = "http://office.triplepcloud.com:21012/Boyy_Dev/ODataV4/Company('CRONUS - LS Central')/API_Customer?$filter=Name eq '"+CustName+"*'"
+        console.log(url_)
+        axios({
+            headers: {
+                "Content-Type": "application/json",
+                "If-Match": "*"
+            },
+            method: "get",
+            url: url_,
+            auth: {
+                username: 'TPPADMIN',
+                password: 'P@ssw0rd@1'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                setCustsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
+                console.log(CustsInfo)                
+            } else {
+                
+            }
+        }).catch(err => {            
+            console.log('err', err)
+        });
+    }    
+
     return (<>
         <Container fluid style={{width:"120%"}}>
-            <Row className="rowForm">
-                <Col sm={4} className="ColItem ColItemleft">
+            <Row className="rowForm" style={{width:"110%", paddingLeft:"0px"}}>
+                <Col sm={4} className="ServiceOrderColItem ServiceOrderColItemleft">
                     <div className="MainTitle">
                         SERVICE ORDERS
                     </div>                           
                 </Col>
-                <Col sm={6} className="ColItem ColItemleft">
+                <Col sm={6} className="ServiceOrderColItem ColItemright" style={{textAlign:"right !important"}}>
+                    <Link to="/MainServices/CreateServiceOrder" 
+                    style={{width: "8rem"}}
+                    className="btn btn-primary servic_eorder_buttun">Create Service Order</Link>&nbsp;                   
                     <Button variant="primary" className='servic_eorder_buttun' onClick={handleShow}>Attach files</Button>&nbsp; 
                     <Button variant="primary" className='servic_eorder_buttun'>Print Tax Invoice/Receipt</Button>&nbsp; 
                     <Button variant="primary" className='servic_eorder_buttun'>Print Repair Form</Button>&nbsp; 
-                    <Button variant="outline-secondary" className='servic_eorder_buttun'>Send to 365BC</Button>&nbsp;
-                    <Button variant="outline-secondary" className='servic_eorder_buttun'>Save</Button>
+                    <Button className='servic_eorder_buttun ServiceOrderbtn-secondary'>Send to 365BC</Button>&nbsp;
+                    <Button className='servic_eorder_buttun ServiceOrderbtn-secondary'>Save</Button>
                 </Col>                
             </Row>
             <Row className="rowForm">
-                <Col sm={12} className="ColItem ColItemleft" style={{paddingTop: "2%"}}>
+                <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft" style={{paddingTop: "2%"}}>
                     <label className="required SubMainTitle">General</label>
                     <hr />
                 </Col>
             </Row>                                                        
             <Row className="rowForm"  style={{marginTop: "2%"}}>
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="No" className="required">No.</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="No" id="No" className="required" placeholder="No"
+                        <input type="text" name="No" id="No" 
+                        className="required ServiceOrderTB" 
+                        placeholder="No"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="ContactName" className="required">Contact Name</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="ContactName" id="ContactName" className="required" placeholder="Contact Name"
+                        <input type="text" name="ContactName" id="ContactName" 
+                        className="required ServiceOrderTB" placeholder="Contact Name"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Description" className="required">Description</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="Description" id="Description" className="required" placeholder="Description"
+                        <input type="text" name="Description" id="Description" 
+                        className="required ServiceOrderTB" placeholder="Description"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="PhoneNo" className="required">Phone No.</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="PhoneNo" id="PhoneNo" className="required" placeholder="Phone No"
+                        <input type="text" name="PhoneNo" id="PhoneNo" 
+                        className="required ServiceOrderTB" placeholder="Phone No"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="CustomerNo" className="required">Customer No.</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
                         <input type="text" name="CustomerNo" id="CustomerNo" 
-                        className="required ServiceOrderCustSearchButton"
+                        className="required ServiceOrderCustNoSearchTB"
                          placeholder="Customer No"
                             defaultValue=""
-                             style={{width:'4% !important'}} 
-                             />
-                            <Button variant="primary"  className='servic_eorder_buttun' onClick={handleShow}>Search
+                             />&nbsp;
+                            <Button variant="primary"  className='servic_eorder_buttun' onClick={handleShowshowCustSearch}>Search
                             </Button>
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="ServiceOrderType" className="required">Service Order Type</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="ServiceOrderType" id="ServiceOrderType" className="required" placeholder="Service Order Type" defaultValue="" />
+                        <input type="text" name="ServiceOrderType" 
+                        id="ServiceOrderType"
+                         className="required ServiceOrderTB" 
+                         placeholder="Service Order Type" defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="CustomerName" className="required">CustomerName</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="CustomerName" id="CustomerName" className="required" placeholder="Customer Name"
+                        <input type="text" name="CustomerName" id="CustomerName" 
+                        className="required ServiceOrderTB" placeholder="Customer Name"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Status" className="required">Status</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="Status" id="Status" className="required" placeholder="Status" defaultValue="" />
+                        <input type="text" name="Status" id="Status" 
+                        className="required ServiceOrderTB" placeholder="Status" defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Address" className="required">Address</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="Address" id="Address" className="required" placeholder="Address"
+                        <input type="text" name="Address" id="Address" 
+                        className="required ServiceOrderTB" placeholder="Address"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">  
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
                     <label htmlFor="ReleaseStatus" className="required">Release Status</label>                                       
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
-                    <input type="text" name="ReleaseStatus" id="ReleaseStatus" className="required" placeholder="Release Status"
+                    <input type="text" name="ReleaseStatus" id="ReleaseStatus" 
+                    className="required ServiceOrderTB" placeholder="Release Status"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Address2" className="required">Address2</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="Address2" id="Address2" className="required" placeholder="Address2"
+                        <input type="text" name="Address2" id="Address2" 
+                        className="required ServiceOrderTB" placeholder="Address2"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">  
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
                     <label htmlFor="OrderDate" className="required">Order Date</label>                                       
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
-                    <input type="text" name="OrderDate" id="OrderDate" className="required" placeholder="OrderDate"
+                    <input type="text" name="OrderDate" id="OrderDate" 
+                    className="required ServiceOrderTB" placeholder="OrderDate"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>   
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="City" className="required">City</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="City" id="City" className="required" placeholder="City"
+                        <input type="text" name="City" id="City" 
+                        className="required ServiceOrderTB" placeholder="City"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">  
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
                     <label htmlFor="OrderTime" className="required">OrderTime</label>                                       
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
-                    <input type="text" name="OrderTime" id="OrderTime" className="required" placeholder="Order Time"
+                    <input type="text" name="OrderTime" id="OrderTime" 
+                    className="required ServiceOrderTB" placeholder="Order Time"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>   
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="PostCode" className="required">Post Code</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="PostCode" id="PostCode" className="required" placeholder="Post Code"
+                        <input type="text" name="PostCode" id="PostCode" 
+                        className="required ServiceOrderTB" placeholder="Post Code"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">  
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
                     <label htmlFor="SalesInvoice<" className="required">Sales Invoice</label>                                       
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
-                    <input type="text" name="SalesInvoice" id="SalesInvoice" className="required" placeholder="Sales Invoice"
+                    <input type="text" name="SalesInvoice" id="SalesInvoice"
+                     className="required ServiceOrderTB" placeholder="Sales Invoice"
                             defaultValue="" />
                     </div>
                 </Col>                                                               
             </Row>       
             <Row className="rowForm">
-                <Col sm={2} className="ColItem ColItemleft">                                        
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Email" className="required">Email</label>                                            
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
-                        <input type="text" name="Email" id="Email" className="required" placeholder="Email"
+                        <input type="text" name="Email" id="Email"
+                         className="required ServiceOrderTB" placeholder="Email"
                             defaultValue="" />
                     </div>
                 </Col>
-                <Col sm={2} className="ColItem ColItemleft">  
+                <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
                     <label htmlFor="Sendto365BC" className="required">Send to 365BC</label>                                       
                 </Col>
-                <Col sm={3} className="ColItem ColItemright">
+                <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
-                    <input type="text" name="Sales Invoice" id="Sales Invoice" className="required" placeholder="Sales Invoice"
-                            defaultValue="" />
+                    <input type="checkbox" id="Sendto365BC" />
                     </div>
                 </Col>                                                               
             </Row>                                                   
 
             <Row className="rowForm">
-                <Col sm={12} className="ColItem ColItemleft">
+                <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                     <label className="required SubMainTitle">Service Item Line</label>
                     <hr />
                 </Col>
             </Row>                                                        
             <Row className="rowForm">
-                <Col sm={12} className="ColItem ColItemleft"> 
+                <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
                     <Table striped bordered hover>
                                         <thead>
                                             <tr>
@@ -338,15 +367,20 @@ const ServiceOrderCard = ()=>{
                 </Col>                                                               
             </Row>
             </Container>
-            <Container fluid style={{paddingTop:"13%"}}>
+            <Container fluid style={{paddingTop:"10%"}}>
                 <Row className="rowForm" style={{paddingTop:"0%", marringTop:"0%"}}>
-                        <Col sm={12} className="ColItem ColItemleft" style={{paddingTop:"0%", marringTop:"0%"}}>
+                        <Col sm={10} className="ServiceOrderColItem ServiceOrderColItemleft" style={{paddingTop:"0%", marringTop:"0%"}}>
                             <label className="required SubMainTitle">Invoice Line</label>
                             <hr />
                         </Col>
+                        <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft" style={{paddingTop:"0%", marringTop:"0%"}}>
+                        <Button className='servic_eorder_buttun ServiceOrderbtn-secondary'
+                         style={{width:"3rem", height:"1.5rem", padding:"0", paddingBottom:"0rem"}}
+                         >Add</Button>                           
+                        </Col>                        
                     </Row>                                                        
                 <Row className="rowForm">
-                    <Col sm={12} className="ColItem ColItemleft">  
+                    <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">  
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -387,110 +421,310 @@ const ServiceOrderCard = ()=>{
                     </Col>                                                               
                 </Row>  
             </Container>
-            <Container fluid style={{paddingTop:"15%"}}> 
+            <Container fluid style={{paddingTop:"10%"}}> 
                 <Row className="rowForm">
-                    <Col sm={12} className="ColItem ColItemleft">
+                    <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                         <label className="required SubMainTitle">Invoicing</label>
                         <hr />
                     </Col>
                 </Row>                                                        
                 <Row className="rowForm">
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoCustomerNo" className="required">Bill-to Customer No.</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoCustomerNo" id="BilltoCustomerNo" className="required" placeholder="Bill-to Customer No"
+                            <input type="text" name="BilltoCustomerNo"
+                            
+                            id="BilltoCustomerNo"
+                             className="required ServiceOrderTB" placeholder="Bill-to Customer No"
                                 defaultValue="" />
                         </div>
                     </Col>
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoCity" className="required">Bill-to City</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoCity" id="BilltoCity" className="required" placeholder="Bill-to City"
+                            <input type="text" name="BilltoCity" id="BilltoCity"
+                             className="required ServiceOrderTB" placeholder="Bill-to City"
                                 defaultValue="" />
                         </div>
                     </Col>                                                               
                 </Row>
                 <Row className="rowForm">
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoName" className="required">Bill-to Name</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoName" id="BilltoName" className="required" placeholder="Bill-to Name"
+                            <input type="text" name="BilltoName" id="BilltoName" 
+                            className="required ServiceOrderTB" placeholder="Bill-to Name"
                                 defaultValue="" />
                         </div>
                     </Col> 
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoPostCode" className="required">Bill-to Post Code</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoPostCode" id="BilltoPostCode" className="required" placeholder="Bill-to Post Code"
+                            <input type="text" name="BilltoPostCode" 
+                            id="BilltoPostCode" className="required ServiceOrderTB" placeholder="Bill-to Post Code"
                                 defaultValue="" />
                         </div>
                     </Col>                                                               
                 </Row>
                 <Row className="rowForm">
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoAddress" className="required">Bill-to Address</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoAddress" id="BilltoAddress" className="required" placeholder="Bill-to Address"
+                            <input type="text" name="BilltoAddress" 
+                            id="BilltoAddress" 
+                            className="required ServiceOrderTB" placeholder="Bill-to Address"
                                 defaultValue="" />
                         </div>
                     </Col>
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoPhoneNo" className="required">Bill-to Phone No.</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoPhoneNo" id="BilltoPhoneNo" className="required" placeholder="Bill-to Phone No"
+                            <input type="text" name="BilltoPhoneNo"
+                             id="BilltoPhoneNo" className="required ServiceOrderTB" placeholder="Bill-to Phone No"
                                 defaultValue="" />
                         </div>
                     </Col>                                                               
                 </Row>
                 <Row className="rowForm">
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoAddress2" className="required">Bill-to Address 2</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
-                            <input type="text" name="BilltoAddress2" id="BilltoAddress2" className="required" placeholder="Bill-to Address 2"
+                            <input type="text" name="BilltoAddress2" 
+                            id="BilltoAddress2" className="required ServiceOrderTB" placeholder="Bill-to Address 2"
                                 defaultValue="" />
                         </div>
                     </Col>
-                    <Col sm={2} className="ColItem ColItemleft">                                        
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoEmail" className="required">Bill-to Email</label>                                            
                     </Col>
-                    <Col sm={3} className="ColItem ColItemright">
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
                             <input type="text" name="BilltoEmail" id="BilltoEmail" className="required" placeholder="Bill-to Email"
                                 defaultValue="" />
                         </div>
                     </Col>                                                               
                 </Row>                                                                                                                             
-        </Container>
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>AttachFiles</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            </Container>
+            <Container fluid style={{paddingTop:"3%"}}> 
+                <Row className="rowForm">
+                    <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
+                        <label className="required SubMainTitle">Ship to</label>
+                        <hr />
+                    </Col>
+                </Row>                                                        
+                <Row className="rowForm">
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoCustomerNo" className="required">Ship-to Customer No.</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoCustomerNo"                             
+                            id="ShiptoCustomerNo"
+                             className="required ServiceOrderTB" placeholder="Ship-to Customer No"
+                                defaultValue="" />
+                        </div>
+                    </Col>
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoCity" className="required">Ship-to City</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoCity" id="ShiptoCity"
+                             className="required ServiceOrderTB" placeholder="Ship-to City"
+                                defaultValue="" />
+                        </div>
+                    </Col>                                                               
+                </Row>
+                <Row className="rowForm">
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoName" className="required">Ship-to Name</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoName" id="ShiptoName" 
+                            className="required ServiceOrderTB" placeholder="Ship-to Name"
+                                defaultValue="" />
+                        </div>
+                    </Col> 
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoPostCode" className="required">Ship-to Post Code</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoPostCode" 
+                            id="ShiptoPostCode" className="required ServiceOrderTB" placeholder="Ship-to Post Code"
+                                defaultValue="" />
+                        </div>
+                    </Col>                                                               
+                </Row>
+                <Row className="rowForm">
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoAddress" className="required">Ship-to Address</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoAddress" 
+                            id="ShiptoAddress" 
+                            className="required ServiceOrderTB" placeholder="Ship-to Address"
+                                defaultValue="" />
+                        </div>
+                    </Col>
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoPhoneNo" className="required">Ship-to Phone No.</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoPhoneNo"
+                             id="ShiptoPhoneNo" className="required ServiceOrderTB" placeholder="Ship-to Phone No"
+                                defaultValue="" />
+                        </div>
+                    </Col>                                                               
+                </Row>
+                <Row className="rowForm">
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                        <label htmlFor="ShiptoAddress2" className="required">Ship-to Address 2</label>                                            
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        <div className="form-group">                                            
+                            <input type="text" name="ShiptoAddress2" 
+                            id="ShiptoAddress2" className="required ServiceOrderTB" placeholder="Ship-to Address 2"
+                                defaultValue="" />
+                        </div>
+                    </Col>
+                    <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
+                                                                    
+                    </Col>
+                    <Col sm={3} className="ServiceOrderColItem ColItemright">
+                        
+                    </Col>                                                               
+                </Row>                                                                                                                             
+            </Container>            
+            {/*  */}
+            <Modal show={showCustSearch} onHide={handleCloseshowCustSearch} 
+            centered size="lg">
+                <Modal.Header>
+                <Modal.Title>Customer</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{height:"23rem"}}>
+                    <Container fluid style={{width:"100%"}}>
+                        <Row className="rowForm"  style={{marginTop: "2%"}}>
+                            
+                            <Col sm={6} className="ServiceOrderColItem ColItemright">
+                                <div className="form-group">                                            
+                                    <input type="text" name="CustomerNameSearch" id="CustomerNameSearch" 
+                                    className="required ServiceOrderCustNameSearchTB"
+                                    placeholder="Customer Name" ref={textCustName} />&nbsp;
+                                    <Button variant="primary"  className='servic_eorder_buttun' onClick={GetCustInfo}>Search
+                                    </Button>
+                                </div>
+                            </Col>                                                              
+                        </Row>
+                        <Row className="rowForm">
+                            <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                        CustsInfo.map((element)=>{
+                                            return(
+                                                <tr key="{element.ServiceItemNo}">                                
+                                                    <td>{element.No}</td>
+                                                    <td>{element.Name}</td>
+                                                </tr>
+                                                ) 
+                                            }
+                                        )
+                                    } 
+                                    </tbody>
+                                </Table>
+                            </Col>                                                               
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseshowCustSearch}>
+                    Close
+                </Button>         
+                </Modal.Footer>
+            </Modal>
+            {/*  */}
+            <Modal show={show} onHide={handleClose} centered size="md">
+                <Modal.Body style={{height:"20rem"}}>
+                    <Container fluid style={{width:"100%"}}>
+                        <Row className="rowForm"  style={{marginTop: "2%"}}>
+                            <Col sm={8}>
+                                <div className="form-group">                                                                            
+                                    <input type="file" name="file" placeholder="Attachments" />&nbsp;                                    
+                                </div>
+                            </Col>
+                            <Col sm={2}>
+                                        <Button variant="primary" style={{width:'3rem'}} className='servic_eorder_buttun'
+                                        onClick={GetCustInfo}>Delete
+                                        </Button>
+                            </Col>
+                            <Col sm={2}>
+                                <Button variant="primary" style={{width:'3rem'}} className='servic_eorder_buttun'
+                                onClick={GetCustInfo}>Add
+                                </Button>
+                            </Col>                                                             
+                        </Row>
+                        <Row className="rowForm">
+                            <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
+                                <Table responsive>
+                                    <thead>
+                                        <tr>
+                                            <th style={{width:'5%'}}></th>
+                                            <th style={{width:'50%'}}>Attach File Name</th>
+                                            <th style={{width:'45%'}}>Attach Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                        dataAttachFiles.map((element)=>{
+                                            return(
+                                                <tr key={element.No}>                                
+                                                    <td></td>
+                                                    <td>{element.FileName}</td>
+                                                    <td>{element.AttachDate}</td>                                                
+                                                </tr>
+                                                ) 
+                                            }
+                                        )
+                                    } 
+                                    </tbody>
+                                </Table>
+                            </Col>                                                               
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>            
+                </Modal.Footer>
+            </Modal>
     </>        
-    );
+    )
+
 }
 const ResultSearch = ()=>{
     return (   
@@ -515,7 +749,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="No" id="No" className="required" placeholder="No"
+                                <input type="text" name="No" id="No" 
+                                className="required ServiceOrderTB" placeholder="No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -535,7 +770,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Description" id="Description" className="required" placeholder="Description"
+                                <input type="text" name="Description" 
+                                id="Description" className="required ServiceOrderTB" placeholder="Description"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -544,7 +780,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyEndingDate" id="WarrantyEndingDate" className="required" placeholder="Warranty Endting Date"
+                                <input type="text" name="WarrantyEndingDate" 
+                                id="WarrantyEndingDate" className="required ServiceOrderTB" placeholder="Warranty Endting Date"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -555,7 +792,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="Item No"
+                                <input type="text" name="ItemNo" id="ItemNo" 
+                                className="required ServiceOrderTB" placeholder="Item No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -564,7 +802,9 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" className="required" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
+                                <input type="text" name="WarrantyStartingDateLabor" 
+                                id="WarrantyStartingDateLabor"
+                                 className="required ServiceOrderTB" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -574,7 +814,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="ItemDescription" id="ItemDescription" className="required" placeholder="Item Description"
+                                <input type="text" name="ItemDescription"
+                                 id="ItemDescription" className="required ServiceOrderTB" placeholder="Item Description"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -593,7 +834,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="SerialNo" id="SerialNo" className="required" placeholder="Serial No"
+                                <input type="text" name="SerialNo" id="SerialNo"
+                                 className="required ServiceOrderTB" placeholder="Serial No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -615,7 +857,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerNo" id="CustomerNo" className="required" placeholder="Customer No"
+                                <input type="text" name="CustomerNo" id="CustomerNo"
+                                 className="required ServiceOrderTB" placeholder="Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -624,7 +867,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="City" id="City" className="required" placeholder="City"
+                                <input type="text" name="City" id="City"
+                                 className="required ServiceOrderTB" placeholder="City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -635,7 +879,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerName" id="CustomerName" className="required" placeholder="Customer Name" 
+                                <input type="text" name="CustomerName" id="CustomerName" 
+                                className="required ServiceOrderTB" placeholder="Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -644,7 +889,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="County" id="County" className="required" placeholder="County"
+                                <input type="text" name="County" id="County" 
+                                className="required ServiceOrderTB" placeholder="County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -655,7 +901,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address" id="Address" className="required" placeholder="Address"
+                                <input type="text" name="Address" id="Address"
+                                 className="required ServiceOrderTB" placeholder="Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -664,7 +911,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PostCode" id="PostCode" className="required" placeholder="Post Code" defaultValue="" />
+                                <input type="text" name="PostCode" id="PostCode" 
+                                className="required ServiceOrderTB" placeholder="Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -674,7 +922,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address2" id="Address2" className="required" placeholder="Address 2"
+                                <input type="text" name="Address2" id="Address2"
+                                 className="required ServiceOrderTB" placeholder="Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -683,7 +932,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Contact" id="Contact" className="required" placeholder="Contact" defaultValue="" />
+                                <input type="text" name="Contact" id="Contact"
+                                 className="required ServiceOrderTB" placeholder="Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -696,7 +946,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PhoneNo" id="PhoneNo" className="required" placeholder="Phone No" defaultValue="" />
+                                <input type="text" name="PhoneNo" id="PhoneNo"
+                                 className="required ServiceOrderTB" placeholder="Phone No" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -713,7 +964,9 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" className="required" placeholder="End-Cus Customer No"
+                                <input type="text" name="EndCusCustomerNo"
+                                 id="EndCusCustomerNo"
+                                  className="required ServiceOrderTB" placeholder="End-Cus Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -722,7 +975,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCity" id="EndCusCity" className="required" placeholder="End-Cus. City"
+                                <input type="text" name="EndCusCity" id="EndCusCity"
+                                 className="required ServiceOrderTB" placeholder="End-Cus. City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -733,7 +987,9 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" className="required" placeholder="End-Cus. Customer Name" 
+                                <input type="text" name="EndCusCustomerName"
+                                 id="EndCusCustomerName" className="required ServiceOrderTB" 
+                                 placeholder="End-Cus. Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -742,7 +998,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCounty" id="EndCusCounty" className="required" placeholder="End-Cus. County"
+                                <input type="text" name="EndCusCounty" id="EndCusCounty"
+                                 className="required ServiceOrderTB" placeholder="End-Cus. County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -753,7 +1010,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress" id="EndCusAddress" className="required" placeholder="End-Cus. Address"
+                                <input type="text" name="EndCusAddress" id="EndCusAddress" 
+                                className="required ServiceOrderTB" placeholder="End-Cus. Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -762,7 +1020,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" className="required" placeholder="End-Cus. Post Code" defaultValue="" />
+                                <input type="text" name="EndCusPostCode" id="EndCusPostCode"
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -772,7 +1031,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" className="required" placeholder="End-Cus. Address 2"
+                                <input type="text" name="EndCusAddress2"
+                                 id="EndCusAddress2" className="required ServiceOrderTB" placeholder="End-Cus. Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -781,7 +1041,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusContact" id="EndCusContact" className="required" placeholder="End-Cus. Contact" defaultValue="" />
+                                <input type="text" name="EndCusContact" id="EndCusContact"
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -794,7 +1055,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" className="required" placeholder="End-Cus. Phone No." defaultValue="" />
+                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo"
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Phone No." defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>                    
@@ -808,7 +1070,7 @@ const MainComponent = ()=>{
                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" 
                     name="ItemNo" 
                     id="ItemNo" 
-                    className="required" 
+                    className="required  ServiceOrderTB" 
                     placeholder="SEARCH"></input>
                     <ul>
                         <li>   
@@ -840,7 +1102,7 @@ const MainList = () =>{
                                             <th>Name</th>
                                             <th>Send to 365 BC</th>
                                             <th>Service Order Type</th>
-                                            <th>Release Status<input type="checkbox" checked="checked" />  </th>
+                                            <th>Release Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -856,9 +1118,8 @@ const MainList = () =>{
                                                     <td>{element.Branch}</td>
                                                     <td>{element.CustomerNo}</td>
                                                     <td>{element.Name}</td>
-                                                    <td>
-                                                        <input type="checkbox" />
-                                                        <span>Red</span>                                 
+                                                    <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}>
+                                                        <input type='checkbox' />                                 
                                                     </td>
                                                     <td>{element.ServiceOrderType}</td>
                                                     <td>{element.ReleaseStatus}</td>
@@ -895,9 +1156,9 @@ const ServiceOrder = ()=>{
                                 <Link to="/MainServices/ServiceOrder">Service Order</Link>  
                             </li>
                             
-                            <li>
+                            {/* <li>
                                 <Link to="/MainServices/CreateServiceOrder">Create Service Order</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </Col>
                     <Col sm={10}>

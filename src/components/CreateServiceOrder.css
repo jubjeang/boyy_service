@@ -81,12 +81,12 @@ textarea{
     border: 0px;
     border-bottom: 1px solid black;
 }
-input[type="checkbox"] { 
+/* input[type="checkbox"] { 
     width: 5% !important;
     text-align: left;
     padding: 3px;
     border-radius: 2px;
-}
+} */
 .form-check{
     padding-left: 0px;
 }

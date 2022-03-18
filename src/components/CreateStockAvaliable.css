@@ -94,12 +94,12 @@ textarea{
     border-bottom: 1px solid black;
     border-radius: 2px;
 }
-input[type="checkbox"] { 
+/* input[type="checkbox"] { 
     width: 5% !important;
     text-align: left;
     padding: 3px;
     border-radius: 2px;
-}
+} */
 .form-check{
     padding-left: 0px;
 }
