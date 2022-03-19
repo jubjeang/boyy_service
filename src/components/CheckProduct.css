@@ -5,7 +5,7 @@
 font{
     font-family: "Gotham-Bold", sans-serif;    
 }
-.ColSubmitSearch ul li a:hover{
+.ColSubmitSearch ul li label a:hover{
     background-color: white;
     border: 1px black solid;
     color: black;
@@ -18,7 +18,7 @@ font{
     vertical-align: middle;
     border-radius: 2px;
 }
-.ColSubmitSearch li{    
+.ColSubmitSearch li label{    
     padding: 1px 0;    
     display: block;
     border-radius: 2px;
