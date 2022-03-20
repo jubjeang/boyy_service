@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "reactstrap"
 import { Col, Row} from "react-bootstrap"
-import { Switch,Route,Link} from 'react-router-dom'
+import { Switch,Route,Link,useParams} from 'react-router-dom'
 import CreateServiceOrder from './CreateServiceOrder'
 import CheckStockAvaliable from './CheckStockAvaliable'
 import './CommonCss.css'
 import './CheckProduct.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
+
 
 const data =[
     {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
@@ -22,6 +23,57 @@ const data =[
     {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
 ]
 const ResultSearch = ()=>{
+    const { serialno } = useParams()
+    const [ProductsInfo, setProductsInfo] = useState([])
+    //const ProductsInfo=[]
+    //console.log('serialno: '+serialno);
+    const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+serialno+"'"        
+    console.log('first ProductsInfo.length: '+ProductsInfo.length)
+    React.useEffect(async () => {       
+        await axios({
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8",
+                "If-Match": "*"
+            },
+            method: "get",
+            url: url_,
+            auth: {
+                username: 'TPPADMIN',
+                password: 'P@ssw0rd@1'
+            }
+        })
+        .then(res =>  {
+            //if (res.status === 200) {
+                console.log('status 200')
+                // console.log('res.data')
+                // console.log(res.data.value[0]["No"])
+                // console.log('end res.data')
+                // setProductsInfo(   res.data   )
+                // console.log('ProductsInfo lenght after 200: '+JSON.stringify( ProductsInfo ).length)
+                setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )
+                //ProductsInfo.push( JSON.parse( JSON.stringify( res.data.value ) ) )
+                console.log(ProductsInfo[0].No)
+                console.log(ProductsInfo.length)
+                //console.log(ProductsInfo[0].No)
+                    
+                // ResultSearch()
+            // } else {
+                
+            // }
+        }).catch(err => {            
+            console.log('err', err)
+        })
+
+   },[])
+   console.log(ProductsInfo.length)
+    // if(ProductsInfo.length==0)
+    // {
+
+        
+    //     //setProductsInfo([])
+
+    // }
+
     return (   
                 <Container fluid>
                     <Row className="rowForm">
@@ -42,10 +94,13 @@ const ResultSearch = ()=>{
                             <label htmlFor="No" className="required">No.</label>                                            
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
-                            <div className="form-group">                                            
+                            <div className="form-group">    
+                            {() => console.log(ProductsInfo.length) }                                        
                                 <input type="text" name="No" id="No"
-                                 className="required CheckProductTBandTextArea" placeholder="No"
-                                    defaultValue=""  />
+                                 className="required CheckProductTBandTextArea" placeholder="No" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].No : ''}
+                                                                
+                                     />
                             </div>
                         </Col>
                         <Col sm={2} className="CheckProductColItem CheckProductColItemleft">                                        
@@ -336,39 +391,40 @@ const ResultSearch = ()=>{
         );
 }
 
-const MainComponent = ()=>{
-
-    const [ProductsInfo, setProductsInfo] = useState([])
-    const textSerialNo = React.createRef()    
-    const GetProductInfo = () => {
-        const SerialNo_=textSerialNo.current.value
-        console.log(SerialNo_);       
-         const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+SerialNo_+"'"
-        //const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '54263207'"
-        console.log(url_)
-        axios({
-            headers: {
-                "Content-Type": "application/json",
-                "If-Match": "*"
-            },
-            method: "get",
-            url: url_,
-            auth: {
-                username: 'TPPADMIN',
-                password: 'P@ssw0rd@1'
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                setProductsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
-                console.log(ProductsInfo)     
-                // ResultSearch()
-            } else {
+const MainComponent = ()=>{    
+    const [Serial_No, setSerial_No] = useState('')    
+    const textSerialNo = React.createRef()
+    const GetSerial_No= (e) => {
+        //console.log(e.target.value)
+        setSerial_No(e.target.value)
+    }    
+    // const GetProductInfo = () => {
+    //     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+textSerialNo.current.value+"'"
+    //     //const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '54263207'"
+    //     console.log(url_)
+    //     axios({
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "If-Match": "*"
+    //         },
+    //         method: "get",
+    //         url: url_,
+    //         auth: {
+    //             username: 'TPPADMIN',
+    //             password: 'P@ssw0rd@1'
+    //         }
+    //     }).then(res => {
+    //         if (res.status === 200) {
+    //             setProductsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
+    //             console.log(ProductsInfo)     
+    //             // ResultSearch()
+    //         } else {
                 
-            }
-        }).catch(err => {            
-            console.log('err', err)
-        });
-    }
+    //         }
+    //     }).catch(err => {            
+    //         console.log('err', err)
+    //     });
+    // }//GetProductInfo
     return (
             <Container fluid>                
                         <Row style={{display: "flex", alignItems: "center"}}>
@@ -380,7 +436,8 @@ const MainComponent = ()=>{
                                     <input type="text" name="SerialNo" id="SerialNo" 
                                     className="required CheckProductTBandTextArea" 
                                     style={{width:"150%"}} 
-                                     placeholder="SERIAL NO"
+                                     placeholder="SERIAL NO" 
+                                     onChange={GetSerial_No}
                                         defaultValue="" ref={textSerialNo} />
                                 </div>
                             </Col>
@@ -390,8 +447,9 @@ const MainComponent = ()=>{
                                             <ul>
                                                 <li>
                                                 <FontAwesomeIcon icon={['fab', 'google']} />
-                                                <Link to="/MainServices/CheckProduct/ResultSearch" 
-                                                onClick={GetProductInfo}>                                                        
+                                                <Link 
+                                                to={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`} 
+                                                >                                                        
                                                         Search
                                                     </Link>                                   
                                                 </li>
@@ -445,7 +503,7 @@ const CheckProduct = ()=>{
                                     <MainComponent />
                                     </Route>
                                     <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
-                                    <Route path="/MainServices/CheckProduct/ResultSearch" component={ResultSearch} />
+                                    <Route path="/MainServices/CheckProduct/ResultSearch/:serialno" component={ResultSearch} />
                                     {/* <Route exact path="/Main/" /> */}
                                 </Switch> 
                             {/* </Router> */}

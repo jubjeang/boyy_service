@@ -1071,10 +1071,11 @@ const MainComponent = ()=>{
                     name="ItemNo" 
                     id="ItemNo" 
                     className="required  ServiceOrderTB" 
+                    
                     placeholder="SEARCH"></input>
                     <ul>
                         <li>   
-                            <Link to="/MainServices/CheckProduct/ResultSearch">
+                            <Link to="/MainServices/CheckProduct/ResultSearch/">
                                 Search
                             </Link>                                   
                         </li>
@@ -1174,7 +1175,7 @@ const ServiceOrder = ()=>{
                                     <MainList />
                                 </Route>
                                 <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
-                                <Route path="/MainServices/CheckProduct/ResultSearch" component={ResultSearch} />
+                                <Route path="/MainServices/CheckProduct/ResultSearch/" component={ResultSearch} />
                                 <Route path="/MainServices/ServiceOrder/ServiceOrderCard" component={ServiceOrderCard} /> 
                                 {/* <Route exact path="/Main/" /> */}
                             </Switch> 
