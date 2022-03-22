@@ -207,14 +207,14 @@ textarea{
 .gfh-logo a img{
     height: 20px;
 }
-.Menu{
+.CheckProduct_Menu{
     width: 150px;
 }
-.Menu ul li{
+.CheckProduct_Menu ul li{
     display: block;
     padding: 10px 0;   
 }
-.Menu ul li a{ 
+.CheckProduct_Menu ul li a{ 
     text-transform: uppercase;
     text-decoration: none;
     
@@ -225,10 +225,6 @@ textarea{
     letter-spacing: normal;
     color: #000000;
     font-weight: bold;
-}
-.Menu.left{
-    float: left;
-    margin-right: 17px;
 }
 .right{
     float: right;

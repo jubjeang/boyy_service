@@ -61,7 +61,7 @@ table tr td{
     padding-top: 0px;
 }
 .ServiceOrderCustNoSearchTB{
-    width: 80%  !important;
+    width: 90%  !important;
 }
 .ModalSearchCustName{
     width: 200%   !important;
@@ -71,6 +71,13 @@ table tr td{
     width: 75%  !important;
     height: 1.5rem !important;
     text-transform: none;
+}
+.ServiceOrderTB_Small{
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    width: 65% !important;
+    height: 1.5rem !important;
+    border-radius: 2px;
 }
 .ServiceOrderTB{
     font-size: 11px;
@@ -287,18 +294,22 @@ textarea{
 .gfh-logo a img{
     height: 20px;
 }
-.Menu{
+.ServiceOrder_Menu{
     width: 150px;
-}
-.Menu ul li{
-    display: block;
-    padding: 0px 0;
-    height: 5%;
-}
-.Menu ul li a{ 
-    text-transform: uppercase;
     text-decoration: none;
-    
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
+}
+.ServiceOrder_Menu ul li{
+    display: block;
+    padding: 10px 0;   
+}
+.ServiceOrder_Menu ul li a{ 
+    text-transform: uppercase;
+    text-decoration: none;    
     font-size: 14px;
     font-stretch: normal;
     font-style: normal;
@@ -307,10 +318,7 @@ textarea{
     color: #000000;
     font-weight: bold;
 }
-.Menu.left{
-    float: left;
-    margin-right: 17px;
-}
+
 .right{
     float: right;
 }

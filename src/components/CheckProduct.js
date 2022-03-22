@@ -98,7 +98,8 @@ const ResultSearch = ()=>{
                             {() => console.log(ProductsInfo.length) }                                        
                                 <input type="text" name="No" id="No"
                                  className="required CheckProductTBandTextArea" placeholder="No" 
-                                 value={ProductsInfo.length>0 ? ProductsInfo[0].No : ''}
+                                 defaultValue="" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].No : ""}
                                                                 
                                      />
                             </div>
@@ -111,7 +112,8 @@ const ResultSearch = ()=>{
                                 <input type="text" name="WarrantyStartingDate" 
                                 id="WarrantyStartingDate"
                                  className="required CheckProductTBandTextArea" placeholder="Warranty Starting Date"
-                                    defaultValue="" />
+                                    defaultValue="" 
+                                    value={ProductsInfo.length>0 ? ProductsInfo[0].Warranty_Starting_Date_Parts : ""} />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -122,7 +124,9 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="Description" id="Description" className="required CheckProductTBandTextArea" placeholder="Description"
-                                    defaultValue="" />
+                                    defaultValue="" 
+                                    value={ProductsInfo.length>0 ? ProductsInfo[0].Description : ""}
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="CheckProductColItem CheckProductColItemleft">                                        
@@ -131,7 +135,8 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyEndingDate" id="WarrantyEndingDate" className="required CheckProductTBandTextArea" placeholder="Warranty Endting Date"
-                                    defaultValue="" />
+                                    defaultValue="" 
+                                    value={ProductsInfo.length>0 ? ProductsInfo[0].Warranty_Ending_Date_Parts : ""} />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -142,7 +147,9 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="ItemNo" id="ItemNo" className="required CheckProductTBandTextArea" placeholder="Item No"
-                                    defaultValue="" />
+                                    defaultValue="" 
+                                    value={ProductsInfo.length>0 ? ProductsInfo[0].Item_No : ""}
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="CheckProductColItem CheckProductColItemleft">                                        
@@ -151,7 +158,9 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyStartingDateLabor" id="WarrantyStartingDateLabor" 
-                                className="required CheckProductTBandTextArea" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
+                                className="required CheckProductTBandTextArea" placeholder="Warranty Starting Date(Labor)"
+                                value={ProductsInfo.length>0 ? ProductsInfo[0].Warranty_Starting_Date_Labor : ""}
+                                defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -162,7 +171,8 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="ItemDescription" id="ItemDescription" 
-                                className="required CheckProductTBandTextArea" placeholder="Item Description"
+                                className="required CheckProductTBandTextArea" placeholder="Item Description" 
+                                value={ProductsInfo.length>0 ? ProductsInfo[0].Item_Description : ""}
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -172,7 +182,8 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor"
-                                 className="required CheckProductTBandTextArea" placeholder="Warranty Ending Date(Labor)" defaultValue="" />
+                                 className="required CheckProductTBandTextArea" placeholder="Warranty Ending Date(Labor)" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Warranty_Ending_Date_Labor : ""} defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -182,7 +193,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="SerialNo" id="SerialNo" className="required CheckProductTBandTextArea" placeholder="Serial No"
+                                <input type="text" name="SerialNo" id="SerialNo" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Serial_No : ""} placeholder="Serial No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -204,7 +216,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerNo" id="CustomerNo" className="required CheckProductTBandTextArea" placeholder="Customer No"
+                                <input type="text" name="CustomerNo" id="CustomerNo" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Customer_No : ""} placeholder="Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -213,7 +226,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="City" id="City" className="required CheckProductTBandTextArea" placeholder="City"
+                                <input type="text" name="City" id="City" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].City : ""} placeholder="City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -224,7 +238,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="CustomerName" id="CustomerName" className="required CheckProductTBandTextArea" placeholder="Customer Name" 
+                                <input type="text" name="CustomerName" id="CustomerName" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Customer_Name : ""} placeholder="Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -233,7 +248,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="County" id="County" className="required CheckProductTBandTextArea" placeholder="County"
+                                <input type="text" name="County" id="County" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].County : ""} placeholder="County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -244,7 +260,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address" id="Address" className="required CheckProductTBandTextArea" placeholder="Address"
+                                <input type="text" name="Address" id="Address" className="required CheckProductTBandTextArea" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Address : ""} placeholder="Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -253,7 +270,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PostCode" id="PostCode" className="required CheckProductTBandTextArea" placeholder="Post Code" defaultValue="" />
+                                <input type="text" name="PostCode" id="PostCode" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].PostCode : ""} className="required CheckProductTBandTextArea" placeholder="Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -263,7 +281,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Address2" id="Address2" className="required CheckProductTBandTextArea" placeholder="Address 2"
+                                <input type="text" name="Address2" id="Address2" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Address_2 : ""} className="required CheckProductTBandTextArea" placeholder="Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -272,7 +291,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="Contact" id="Contact" className="required CheckProductTBandTextArea" placeholder="Contact" defaultValue="" />
+                                <input type="text" name="Contact" id="Contact" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Contact : ""} className="required CheckProductTBandTextArea" placeholder="Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -285,7 +305,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="PhoneNo" id="PhoneNo" className="required CheckProductTBandTextArea" placeholder="Phone No" defaultValue="" />
+                                <input type="text" name="PhoneNo" id="PhoneNo" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Phone_No : ""} className="required CheckProductTBandTextArea" placeholder="Phone No" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -302,7 +323,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" className="required CheckProductTBandTextArea" placeholder="End-Cus Customer No"
+                                <input type="text" name="EndCusCustomerNo" id="EndCusCustomerNo" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_No : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus Customer No"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -311,7 +333,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCity" id="EndCusCity" className="required CheckProductTBandTextArea" placeholder="End-Cus. City"
+                                <input type="text" name="EndCusCity" id="EndCusCity" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].EndCusCity : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. City"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -322,7 +345,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" className="required CheckProductTBandTextArea" placeholder="End-Cus. Customer Name" 
+                                <input type="text" name="EndCusCustomerName" id="EndCusCustomerName" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Name : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Customer Name" 
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -331,7 +355,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusCounty" id="EndCusCounty" className="required CheckProductTBandTextArea" placeholder="End-Cus. County"
+                                <input type="text" name="EndCusCounty" id="EndCusCounty" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_County : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -342,7 +367,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress" id="EndCusAddress" className="required CheckProductTBandTextArea" placeholder="End-Cus. Address"
+                                <input type="text" name="EndCusAddress" id="EndCusAddress" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Address : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Address"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -351,7 +377,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" className="required CheckProductTBandTextArea" placeholder="End-Cus. Post Code" defaultValue="" />
+                                <input type="text" name="EndCusPostCode" id="EndCusPostCode" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Post_Code : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -361,7 +388,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" className="required CheckProductTBandTextArea" placeholder="End-Cus. Address 2"
+                                <input type="text" name="EndCusAddress2" id="EndCusAddress2" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Address : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Address 2"
                                     defaultValue="" />
                             </div>
                         </Col>
@@ -370,7 +398,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusContact" id="EndCusContact" className="required CheckProductTBandTextArea" placeholder="End-Cus. Contact" defaultValue="" />
+                                <input type="text" name="EndCusContact" id="EndCusContact" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Contact : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Contact" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -383,7 +412,8 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" className="required CheckProductTBandTextArea" placeholder="End-Cus. Phone No." defaultValue="" />
+                                <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo" 
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].End_Cus_Phone_No : ""} className="required CheckProductTBandTextArea" placeholder="End-Cus. Phone No." defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>                    
@@ -446,7 +476,7 @@ const MainComponent = ()=>{
                                     style={{height: "45px", padding:"0px", marginLeft:'0px', paddingLeft:'0px'}} >                                             
                                             <ul>
                                                 <li>
-                                                <FontAwesomeIcon icon={['fab', 'google']} />
+                                                {/* <FontAwesomeIcon icon={['fab', 'google']} /> */}
                                                 <Link 
                                                 to={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`} 
                                                 >                                                        
@@ -472,7 +502,7 @@ const CheckProduct = ()=>{
                         </Col>
                     </Row>
                     <Row className="RowMenu">
-                        <Col sm={2} className="Menu">
+                        <Col sm={2} className="CheckProduct_Menu">
                             <ul id="mainlist">
                                 <li>                                
                                     <Link to="/MainServices/CheckProduct">Check Product</Link>
