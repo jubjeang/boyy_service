@@ -42,7 +42,9 @@ const data =[
     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
 ]
 
-const ServiceOrderCard = ()=>{
+const ServiceOrderCard = ()=>{ 
+    const [CustsInfo, setCustsInfo] = useState([])
+    
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
@@ -56,10 +58,9 @@ const ServiceOrderCard = ()=>{
     const handleShowshowCustSearch = () => {
         setshowCustSearch(true)
         setCustsInfo([])
-        setCustsInfoFromSearch([])       
+        //setCustsInfoFromSearch([])       
     }
 
-    const [CustsInfo, setCustsInfo] = useState([])
     const [CustsInfoFromSearch, setCustsInfoFromSearch] = useState([])
     let textCustName = React.createRef()
     const GetCustInfo = () => {
@@ -92,7 +93,12 @@ const ServiceOrderCard = ()=>{
     }
     const GetCustInfo_ = (no_) => { 
         //console.log( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )               
+        setCustsInfoFromSearch( [] )
         setCustsInfoFromSearch( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )
+        //setCustsInfoFromSearch( CustsInfo.filter( [ CustsInfo => CustsInfo.No.includes( no_ ) ),...prevItem ] )
+        // setCustsInfoFromSearch((prevItem)=>{
+        //     return [CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ),...prevItem]
+        // })
         console.log( CustsInfoFromSearch )
         console.log( CustsInfoFromSearch[0].No )
         handleCloseshowCustSearch()
@@ -100,7 +106,7 @@ const ServiceOrderCard = ()=>{
     }
     return (<>
         <Container fluid style={{width:"120%"}}>
-            <Row className="rowForm" style={{width:"110%", paddingLeft:"0px"}}>
+            <Row className="service_order_rowForm" style={{width:"110%", paddingLeft:"0px"}}>
                 <Col sm={4} className="ServiceOrderColItem ServiceOrderColItemleft">
                     <div className="MainTitle">
                         SERVICE ORDERS
@@ -115,13 +121,13 @@ const ServiceOrderCard = ()=>{
                     <Button className='servic_eorder_buttun ServiceOrderbtn-secondary'>Save</Button>
                 </Col>                
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft" style={{paddingTop: "2%"}}>
                     <label className="required SubMainTitle">General</label>
                     <hr />
                 </Col>
             </Row>                                                        
-            <Row className="rowForm"  style={{marginTop: "2%"}}>
+            <Row className="service_order_rowForm"  style={{marginTop: "2%"}}>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="No" className="required">No.</label>                                            
                 </Col>
@@ -146,7 +152,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Description" className="required">Description</label>                                            
                 </Col>
@@ -169,7 +175,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="CustomerNo" className="required">Customer No.</label>                                            
                 </Col>
@@ -181,10 +187,8 @@ const ServiceOrderCard = ()=>{
                          placeholder="Customer No"
                             defaultValue=""
                              />&nbsp;
-                             
-                            
-                            <Button variant="primary" style={{width: "1.5rem" }}  className='servic_eorder_buttun'
-                             onClick={handleShowshowCustSearch}> <FaSistrix  size={'1x'}/>
+                            <Button variant="primary" style={{width: "2.5rem" }}  className='servic_eorder_buttun'
+                             onClick={handleShowshowCustSearch}>Search
                             </Button>
                     </div>
                 </Col>
@@ -200,7 +204,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="CustomerName" className="required">CustomerName</label>                                            
                 </Col>
@@ -222,7 +226,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Address" className="required">Address</label>                                            
                 </Col>
@@ -245,7 +249,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Address2" className="required">Address2</label>                                            
                 </Col>
@@ -268,7 +272,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>   
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="City" className="required">City</label>                                            
                 </Col>
@@ -291,7 +295,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>   
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="PostCode" className="required">Post Code</label>                                            
                 </Col>
@@ -314,7 +318,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>                                                               
             </Row>       
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                     <label htmlFor="Email" className="required">Email</label>                                            
                 </Col>
@@ -336,13 +340,13 @@ const ServiceOrderCard = ()=>{
                 </Col>                                                               
             </Row>                                                   
 
-            <Row className="rowForm">
+            <Row className="service_order_rowForm" style={{paddingTop:"1%"}}>
                 <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                     <label className="required SubMainTitle">Service Item Line</label>
                     <hr />
                 </Col>
             </Row>                                                        
-            <Row className="rowForm">
+            <Row className="service_order_rowForm">
                 <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
                     <Table striped bordered hover>
                                         <thead>
@@ -396,8 +400,8 @@ const ServiceOrderCard = ()=>{
                 </Col>                                                               
             </Row>
             </Container>
-            <Container fluid style={{paddingTop:"10%"}}>
-                <Row className="rowForm" style={{paddingTop:"0%", marringTop:"0%"}}>
+            <Container fluid style={{paddingTop:"2%"}}>
+                <Row className="service_order_rowForm" style={{paddingTop:"0%", marringTop:"0%"}}>
                         <Col sm={10} className="ServiceOrderColItem ServiceOrderColItemleft" style={{paddingTop:"0%", marringTop:"0%"}}>
                             <label className="required SubMainTitle">Invoice Line</label>
                             <hr />
@@ -408,7 +412,7 @@ const ServiceOrderCard = ()=>{
                          >Add</Button>                           
                         </Col>                        
                     </Row>                                                        
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">  
                         <Table striped bordered hover>
                             <thead>
@@ -450,14 +454,14 @@ const ServiceOrderCard = ()=>{
                     </Col>                                                               
                 </Row>  
             </Container>
-            <Container fluid style={{paddingTop:"10%"}}> 
-                <Row className="rowForm">
+            <Container fluid style={{paddingTop:"3%"}}> 
+                <Row className="service_order_rowForm">
                     <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                         <label className="required SubMainTitle">Invoicing</label>
                         <hr />
                     </Col>
                 </Row>                                                        
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoCustomerNo" className="required">Bill-to Customer No.</label>                                            
                     </Col>
@@ -481,7 +485,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoName" className="required">Bill-to Name</label>                                            
                     </Col>
@@ -503,7 +507,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoAddress" className="required">Bill-to Address</label>                                            
                     </Col>
@@ -526,7 +530,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="BilltoAddress2" className="required">Bill-to Address 2</label>                                            
                     </Col>
@@ -548,14 +552,14 @@ const ServiceOrderCard = ()=>{
                     </Col>                                                               
                 </Row>                                                                                                                             
             </Container>
-            <Container fluid style={{paddingTop:"3%"}}> 
-                <Row className="rowForm">
+            <Container fluid style={{paddingTop:"1%"}}> 
+                <Row className="service_order_rowForm">
                     <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                         <label className="required SubMainTitle">Ship to</label>
                         <hr />
                     </Col>
                 </Row>                                                        
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="ShiptoCustomerNo" className="required">Ship-to Customer No.</label>                                            
                     </Col>
@@ -578,7 +582,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="ShiptoName" className="required">Ship-to Name</label>                                            
                     </Col>
@@ -600,7 +604,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="ShiptoAddress" className="required">Ship-to Address</label>                                            
                     </Col>
@@ -623,7 +627,7 @@ const ServiceOrderCard = ()=>{
                         </div>
                     </Col>                                                               
                 </Row>
-                <Row className="rowForm">
+                <Row className="service_order_rowForm">
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                         <label htmlFor="ShiptoAddress2" className="required">Ship-to Address 2</label>                                            
                     </Col>
@@ -642,7 +646,7 @@ const ServiceOrderCard = ()=>{
                     </Col>                                                               
                 </Row>                                                                                                                             
             </Container>            
-            {/*  */}
+            {/* search customer */}
             <Modal show={showCustSearch} onHide={handleCloseshowCustSearch} 
             centered size="ms" scrollable={true}>
                 <Modal.Header>
@@ -650,18 +654,18 @@ const ServiceOrderCard = ()=>{
                 </Modal.Header>
                 <Modal.Body style={{height:"23rem"}}>
                     <Container fluid style={{width:"100%"}}>
-                        <Row className="rowForm"  style={{marginTop: "2%"}}>                            
+                        <Row className="service_order_rowForm"  style={{marginTop: "2%"}}>                            
                             <Col sm={6} className="ServiceOrderColItem ColItemright">
                                 <div className="form-group">                                            
                                     <input type="text" name="CustomerNameSearch" id="CustomerNameSearch" 
                                     className="required ServiceOrderCustNameSearchTB"
-                                    placeholder="Customer Name" ref={textCustName} ><FaSistrix  size={'1x'}/></input>
+                                    placeholder="Customer Name" ref={textCustName} />&nbsp;
                                     <Button variant="primary"  className='servic_eorder_buttun' onClick={GetCustInfo}>Search
                                     </Button>
                                 </div>
                             </Col>                                                              
                         </Row>
-                        <Row className="rowForm">
+                        <Row className="service_order_rowForm">
                             <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
                                 <Table striped bordered hover style={{display: CustsInfo.length>0 ? 'block' : 'none', width:'100%' }}>
                                     <thead>
@@ -700,11 +704,11 @@ const ServiceOrderCard = ()=>{
                 </Button>         
                 </Modal.Footer>
             </Modal>
-            {/*  */}
+            {/* Attach File */}
             <Modal show={show} onHide={handleClose} centered size="lg">
                 <Modal.Body style={{height:"20rem"}}>
                     <Container fluid style={{width:"100%"}}>
-                        <Row className="rowForm"  style={{marginTop: "2%"}}>
+                        <Row className="service_order_rowForm"  style={{marginTop: "2%"}}>
                             <Col sm={8}>
                                 <div className="form-group">                                                                            
                                     <input type="file" name="file" placeholder="Attachments" />&nbsp;                                    
@@ -721,7 +725,7 @@ const ServiceOrderCard = ()=>{
                                 </Button>
                             </Col>                                                             
                         </Row>
-                        <Row className="rowForm">
+                        <Row className="service_order_rowForm">
                             <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft"> 
                                 <Table responsive>
                                     <thead>
@@ -756,11 +760,11 @@ const ServiceOrderCard = ()=>{
                     </Button>            
                 </Modal.Footer>
             </Modal>
-            {/*  */}
+            {/* Create Customer */}
             <Modal show={ShoweCreateCust} onHide={handleCreateCustClose} centered size="xl">
                 <Modal.Body style={{height:"20rem"}}>                    
                     <Container fluid style={{width:"100%"}}>
-                        <Row className="rowForm" style={{height:"2rem"}}>
+                        <Row className="service_order_rowForm" style={{height:"2rem"}}>
                             <Col sm={10} className="ServiceOrderColItem ServiceOrderColItemleft"
                              style={{paddingTop:"0.2rem", backgroundColor:"#e9ecef"}}>                                        
                                 <h5>Create Customer</h5>
@@ -770,7 +774,7 @@ const ServiceOrderCard = ()=>{
                                 <Button className='servic_eorder_buttun ServiceOrderbtn-secondary' style={{width:"3.5rem"}}>Save</Button>
                             </Col>                            
                         </Row>
-                        <Row className="rowForm" style={{paddingTop:"1.2rem"}}>
+                        <Row className="service_order_rowForm" style={{paddingTop:"1.2rem"}}>
                             <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                                 <label htmlFor="CreateCustCustomerName" className="required">Customer Name</label>                                            
                             </Col>
@@ -792,7 +796,7 @@ const ServiceOrderCard = ()=>{
                                 </div>
                             </Col>                                                               
                         </Row>
-                        <Row className="rowForm" style={{paddingTop:"1.2rem"}}>
+                        <Row className="service_order_rowForm" style={{paddingTop:"1.2rem"}}>
                             <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                                 <label htmlFor="CreateCustAddress" className="required">Address</label>                                            
                             </Col>
@@ -814,7 +818,7 @@ const ServiceOrderCard = ()=>{
                                 </div>
                             </Col>                                                               
                         </Row>
-                        <Row className="rowForm" style={{paddingTop:"1.2rem"}}>
+                        <Row className="service_order_rowForm" style={{paddingTop:"1.2rem"}}>
                             <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                                 <label htmlFor="CreateCustAddress2" className="required">Address</label>                                            
                             </Col>
@@ -836,7 +840,7 @@ const ServiceOrderCard = ()=>{
                                 </div>
                             </Col>                                                               
                         </Row>
-                        <Row className="rowForm" style={{paddingTop:"1.2rem"}}>
+                        <Row className="service_order_rowForm" style={{paddingTop:"1.2rem"}}>
                             <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                                 <label htmlFor="CreateCustCity" className="required">City</label>                                            
                             </Col>
@@ -858,7 +862,7 @@ const ServiceOrderCard = ()=>{
                                 </div>
                             </Col>                                                               
                         </Row>
-                        <Row className="rowForm" style={{paddingTop:"1.2rem"}}>
+                        <Row className="service_order_rowForm" style={{paddingTop:"1.2rem"}}>
                             <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                                 <label htmlFor="CreateCustPostCode" className="required">Post Code</label>                                            
                             </Col>
@@ -890,20 +894,20 @@ const ResultSearch = ()=>{
     return (   
 
                 <Container fluid>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                             <div   className="MainTitle">
                                 SERVICE ITEM CARD
                             </div>                           
                         </Col>
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                             <label className="required">General</label>
                             <hr />
                         </Col>
                     </Row>                                                        
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="No" className="required">No.</label>                                            
                         </Col>
@@ -924,7 +928,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="Description" className="required">Description</label>                                            
                         </Col>
@@ -946,7 +950,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="ItemNo" className="required">Item No.</label>                                            
                         </Col>
@@ -968,7 +972,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="ItemDescription" className="required">Item Description</label>                                            
                         </Col>
@@ -988,7 +992,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="SerialNo" className="required">Serial No.</label>                                            
                         </Col>
@@ -1005,13 +1009,13 @@ const ResultSearch = ()=>{
                         </Col>                                                               
                     </Row>                        
 
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                             <label className="required">Customer</label>
                             <hr />
                         </Col>
                     </Row>                                                        
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="CustomerNo" className="required">Customer No.</label>                                            
                         </Col>
@@ -1033,7 +1037,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="CustomerName" className="required">Customer Name</label>                                            
                         </Col>
@@ -1055,7 +1059,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="Address" className="required">Address</label>                                            
                         </Col>
@@ -1076,7 +1080,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="Address2" className="required">Address 2</label>                                            
                         </Col>
@@ -1097,7 +1101,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft"></Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">                           
                         </Col>
@@ -1112,13 +1116,13 @@ const ResultSearch = ()=>{
                         </Col>                                                               
                     </Row>
 
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">
                             <label className="required">End Customer</label>
                             <hr />
                         </Col>
                     </Row>                                                        
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="EndCusCustomerNo" className="required">End-Cus. Customer No.</label>                                            
                         </Col>
@@ -1141,7 +1145,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="EndCusCustomerName" className="required">End-Cus. Customer Name</label>                                            
                         </Col>
@@ -1164,7 +1168,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="EndCusAddress" className="required">End-Cus. Address</label>                                            
                         </Col>
@@ -1185,7 +1189,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
                             <label htmlFor="EndCusAddress2" className="required">End-Cus. Address 2</label>                                            
                         </Col>
@@ -1206,7 +1210,7 @@ const ResultSearch = ()=>{
                             </div>
                         </Col>                                                               
                     </Row>
-                    <Row className="rowForm">
+                    <Row className="service_order_rowForm">
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft"></Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">                           
                         </Col>

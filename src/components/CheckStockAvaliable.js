@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from "reactstrap";
 import { Col, Row, Form } from "react-bootstrap";
@@ -9,6 +9,8 @@ import ServiceOrder from './ServiceOrder';
 import { Switch,Route,Link} from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckProduct from './CheckProduct';
+import axios from 'axios';
+import uuid from 'react-uuid'
 
 
 const data =[
@@ -22,41 +24,93 @@ const data =[
     {code:"MATERIAL",name:"Material",inventory:0},
     {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
 ]
-const MainComponent = ()=>{
+const MainComponent = ()=>{ 
+    const [StockInfo, setStockInfo] = useState([]) 
+    let ItemNo = React.createRef()
+    const GetStockInfo = () => {
+        const ItemNo_=ItemNo.current.value
+        console.log(ItemNo_);       
+        const url_ = "http://office.triplepcloud.com:21012/Boyy_Dev/api/TPP/API/v1.0/companies(b9f4932b-b493-ec11-a5c8-00155d040808)/stock?$filter=ItemNo eq '"+ItemNo_+"'"
+        console.log(url_)
+        axios({
+            headers: {
+                "Content-Type": "application/json",
+                "If-Match": "*"
+            },
+            method: "get",
+            url: url_,
+            auth: {
+                username: 'TPPADMIN',
+                password: 'P@ssw0rd@1'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                setStockInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
+                console.log(StockInfo)
+                console.log(StockInfo[2].LocationCode) 
+                console.log(StockInfo.length) 
+            } else {
+                
+            }
+        }).catch(err => {            
+            console.log('err', err)
+        });
+        }
     return (<div id="CheckStockAvaliable" style={{ margin : 0, padding : 0 }} >
             <Container fluid>                
-                <Row style={{display: "flex", alignItems: "center"}}>
-                    <Col sm={1} className="ColItem ColItemleft">                                        
+                <Row style={{display: "flex", alignItems: "center", verticalAlign:'middle'}}>
+                    <Col sm={1} className=" CheckStockAvailColItem  CheckStockAvailColItemleft">                                        
                         <label htmlFor="name" className="required">Item No</label>                                            
                     </Col>
-                    <Col sm={8} className="ColItem ColItemright">
+                    <Col sm={5} className=" CheckStockAvailColItem CheckStockAvailColSubmitSearch">
                         <div className="form-group">                                            
-                            <input type="text" name="ItemNo" id="ItemNo" className="required" placeholder="Item No"
+                            <input type="text" 
+                            style={{fontFamily: 'FontAwesome',width:"25rem",height:'2rem'}} 
+                            name="ItemNo" id="ItemNo" 
+                            className="required" 
+                            placeholder="&#xf002;" 
+                            ref={ItemNo}
                                 defaultValue="" />
                         </div>
-                    </Col>           
+                    </Col>
+                    <Col sm={2} className=" CheckStockAvailColItem CheckStockAvailColSubmitSearch"
+                    style={{marginLeft:'0',paddingLeft:'0'}}
+                    >
+                        <ul>
+                            <li>   
+                                <Link to="/MainServices/CheckStockAvaliable" 
+                                onClick={GetStockInfo} 
+                                style={{fontFamily:'GothamBook'}}>
+                                    Search
+                                </Link>                                   
+                            </li>
+                        </ul>
+                    </Col>  
+       
                 </Row>
-                <Row className="rowForm">
-                    <Col sm={12} className="ColContent">
-                       <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Inventory</th>
+                <Row className="CheckStockAvailrowForm">
+                    <Col sm={12} className="CheckStockAvailColContent">                   
+                        <Table striped bordered hover className='table_display_result' 
+                        style={{tableLayout: 'fixed', display: StockInfo.length>0 ? 'table' : 'none'
+                        , width:'100%' }}>
+                            <thead style={{width: '850px !important' }}>
+                                <tr style={{width: '100%' }}> 
+                                    <th style={{width: '20%' }}>Code</th>
+                                    <th style={{width:'60%' }}>Name</th>
+                                    <th  style={{width:'20%' }}>Inventory</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              {
-                                  data.map((element)=>{
-                                      return(
-                                        <tr key="{element.code}">                                
-                                            <td>{element.code}</td>
-                                            <td>{element.name}</td>
-                                            <td style={{textAlign: "right"}}>{element.inventory}</td>
-                                        </tr>
-                                   ) } )
-                              } 
+                                {
+                                StockInfo.map( (element)=>{
+                                    return(
+                                    <tr key={uuid()}>                                
+                                        <td>{element.ItemNo}</td>
+                                        <td>{element.LocationCode}</td>
+                                        <td style={{textAlign: "right"}}>{element.Inventory}</td>
+                                    </tr>
+                                ) } )
+                                } 
                             </tbody>
                         </Table>
                     </Col>

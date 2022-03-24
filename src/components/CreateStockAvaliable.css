@@ -6,20 +6,66 @@ font{
     font-family: "Gotham-Bold", sans-serif;
 }
 
-table tr th{
+.table_display_result table tr th{
     text-align: center;
     font-size: 0.8875rem;
+    margin-left:auto; 
+        			margin-right:auto;
 }
-table tr td{
+.table_display_result table tr td{
     font-family: 'GothamBook';
     text-align: left;
     font-size: 0.8875rem;
 }
-.rowForm{
+.CheckStockAvailColSubmitSearch ul li a:hover{
+    background-color: white;
+    border: 1px black solid;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 11px;
+    width: 5.5rem;
+    height: 1rem;   
+    vertical-align: middle; 
+    border-radius: 2px; 
+}
+.CheckStockAvailColSubmitSearch li{    
+    padding: 1px 0;    
+    display: block; 
+    border-radius: 2px; 
+}
+.CheckStockAvailColSubmitSearch  ul li a{    
+    color: white;
+    background-color: #58595b;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 5.5rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px; 
+}
+.CheckStockAvailColSubmitSearch{
+    padding-right: 1px;
+    margin-right: 1px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;   
+    text-align: center;
+    height: 4rem;
+    color: white;
+    font-size: 11px;
+    vertical-align: top;  
+    border-radius: 2px;
+    text-align: left;
+}
+.CheckStockAvailrowForm{
     padding-bottom: 0px;
     height: 50px;
 }
-.ColContent
+.CheckStockAvailColContent
 {
     padding-top: 0px;
 }
@@ -47,7 +93,7 @@ table tr td{
     font-size: 11px;
     width: 450px;
     height: 42px;   
-    display:table-cell;
+
     vertical-align: middle; 
 }
 .horizontal-menu-serviceorder li{    
@@ -127,15 +173,15 @@ textarea{
 #CheckStockAvaliable .MenuTitle{
     float: right;
 }
-.ColItem{
+.CheckStockAvailColItem{
     padding: 15px; 
 }
-.ColItemright{
+.CheckStockAvailColItemright{
     padding-left: 1px;
     text-align: left;
     margin-left: 1px;
 }
-.ColItemleft{
+.CheckStockAvailColItemleft{
     padding-right: 1px;
     text-align: right;
     margin-right: 1px;
