@@ -78,7 +78,7 @@ const MainComponent = ()=>{
                     >
                         <ul>
                             <li>   
-                                <Link to="/MainServices/CheckStockAvaliable" 
+                                <Link
                                 onClick={GetStockInfo} 
                                 style={{fontFamily:'GothamBook'}}>
                                     Search

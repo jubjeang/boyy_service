@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from "reactstrap";
+import { Container,Form } from "reactstrap";
 import { Col, Row} from "react-bootstrap";
-import { Switch,Route,Link } from 'react-router-dom';
+import { Switch,Route,Link,Redirect } from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import './CommonCss.css';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaSistrix } from 'react-icons/fa'
+
 
 const dataItemLine =[
     {Type:"Item",No:"SV005",Description:"เปลี่ยนซิมในกระเป๋า Slash+Pocket",Quantity:"1",UnitofMeasureCode:"PSC",UnitPriceExclVAT:"2,200.00",LineDiscount:"10",LineDiscountAmount:"220",LineAmountExclVAT:"1,980.00",AmountIncludingVAT:"2,118.60"},
@@ -41,7 +42,6 @@ const data =[
     {No:"BTH-SVO21090006",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00028",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
 ]
-
 const ServiceOrderCard = ()=>{ 
     const [CustsInfo, setCustsInfo] = useState([])
     
@@ -92,17 +92,11 @@ const ServiceOrderCard = ()=>{
     });
     }
     const GetCustInfo_ = (no_) => { 
-        //console.log( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )               
         setCustsInfoFromSearch( [] )
-        setCustsInfoFromSearch( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )
-        //setCustsInfoFromSearch( CustsInfo.filter( [ CustsInfo => CustsInfo.No.includes( no_ ) ),...prevItem ] )
-        // setCustsInfoFromSearch((prevItem)=>{
-        //     return [CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ),...prevItem]
-        // })
+        setCustsInfoFromSearch( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )        
         console.log( CustsInfoFromSearch )
         console.log( CustsInfoFromSearch[0].No )
         handleCloseshowCustSearch()
-
     }
     return (<>
         <Container fluid style={{width:"120%"}}>
@@ -137,7 +131,7 @@ const ServiceOrderCard = ()=>{
                         className="required ServiceOrderTB" 
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].No : ""}
                         placeholder="No"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -148,7 +142,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="ContactName" id="ContactName" 
                         className="required ServiceOrderTB" 
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Contact_Name : ""} placeholder="Contact Name"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>
@@ -160,7 +154,7 @@ const ServiceOrderCard = ()=>{
                     <div className="form-group">                                            
                         <input type="text" name="Description" id="Description" 
                         className="required ServiceOrderTB" placeholder="Description"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -171,7 +165,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="PhoneNo" id="PhoneNo" 
                         className="required ServiceOrderTB" placeholder="Phone No"                          
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Phone_No : ""}
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>
@@ -185,7 +179,7 @@ const ServiceOrderCard = ()=>{
                         className="required ServiceOrderCustNoSearchTB"                          
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].No : ""}
                          placeholder="Customer No"
-                            defaultValue=""
+                           
                              />&nbsp;
                             <Button variant="primary" style={{width: "2.5rem" }}  className='servic_eorder_buttun'
                              onClick={handleShowshowCustSearch}>Search
@@ -200,7 +194,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="ServiceOrderType" 
                         id="ServiceOrderType"
                          className="required ServiceOrderTB" 
-                         placeholder="Service Order Type" defaultValue="" />
+                         placeholder="Service Order Type" />
                     </div>
                 </Col>                                                               
             </Row>
@@ -213,7 +207,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text"                          
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Name : ""} name="CustomerName" id="CustomerName" 
                         className="required ServiceOrderTB" placeholder="Customer Name"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -222,7 +216,7 @@ const ServiceOrderCard = ()=>{
                 <Col sm={3} className="ServiceOrderColItem ColItemright">
                     <div className="form-group">                                            
                         <input type="text" name="Status" id="Status" 
-                        className="required ServiceOrderTB" placeholder="Status" defaultValue="" />
+                        className="required ServiceOrderTB" placeholder="Status" />
                     </div>
                 </Col>                                                               
             </Row>
@@ -235,7 +229,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="Address" id="Address"                           
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Address : ""}
                         className="required ServiceOrderTB" placeholder="Address"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
@@ -245,7 +239,7 @@ const ServiceOrderCard = ()=>{
                 <div className="form-group">                                            
                     <input type="text" name="ReleaseStatus" id="ReleaseStatus" 
                     className="required ServiceOrderTB" placeholder="Release Status"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>
@@ -258,7 +252,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="Address2" id="Address2"                           
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Address_2 : ""} 
                         className="required ServiceOrderTB" placeholder="Address2"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
@@ -268,7 +262,7 @@ const ServiceOrderCard = ()=>{
                 <div className="form-group">                                            
                     <input type="text" name="OrderDate" id="OrderDate" 
                     className="required ServiceOrderTB" placeholder="OrderDate"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>   
@@ -281,7 +275,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="City" id="City"                           
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].City : ""} 
                         className="required ServiceOrderTB" placeholder="City"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
@@ -291,7 +285,7 @@ const ServiceOrderCard = ()=>{
                 <div className="form-group">                                            
                     <input type="text" name="OrderTime" id="OrderTime" 
                     className="required ServiceOrderTB" placeholder="Order Time"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>   
@@ -304,7 +298,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="PostCode" id="PostCode"                           
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].Post_Code : ""} 
                         className="required ServiceOrderTB" placeholder="Post Code"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
@@ -314,7 +308,7 @@ const ServiceOrderCard = ()=>{
                 <div className="form-group">                                            
                     <input type="text" name="SalesInvoice" id="SalesInvoice"
                      className="required ServiceOrderTB" placeholder="Sales Invoice"
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>                                                               
             </Row>       
@@ -327,7 +321,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="Email" id="Email"
                          className="required ServiceOrderTB" placeholder="Email"                           
                          value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].E_Mail : ""}
-                            defaultValue="" />
+                            />
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
@@ -471,7 +465,7 @@ const ServiceOrderCard = ()=>{
                             
                             id="BilltoCustomerNo"
                              className="required ServiceOrderTB" placeholder="Bill-to Customer No"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -481,7 +475,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="BilltoCity" id="BilltoCity"
                              className="required ServiceOrderTB" placeholder="Bill-to City"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -493,7 +487,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="BilltoName" id="BilltoName" 
                             className="required ServiceOrderTB" placeholder="Bill-to Name"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col> 
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -503,7 +497,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="BilltoPostCode" 
                             id="BilltoPostCode" className="required ServiceOrderTB" placeholder="Bill-to Post Code"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -516,7 +510,7 @@ const ServiceOrderCard = ()=>{
                             <input type="text" name="BilltoAddress" 
                             id="BilltoAddress" 
                             className="required ServiceOrderTB" placeholder="Bill-to Address"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -526,7 +520,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="BilltoPhoneNo"
                              id="BilltoPhoneNo" className="required ServiceOrderTB" placeholder="Bill-to Phone No"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -538,7 +532,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="BilltoAddress2" 
                             id="BilltoAddress2" className="required ServiceOrderTB" placeholder="Bill-to Address 2"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -547,7 +541,7 @@ const ServiceOrderCard = ()=>{
                     <Col sm={3} className="ServiceOrderColItem ColItemright">
                         <div className="form-group">                                            
                             <input type="text" name="BilltoEmail" id="BilltoEmail" className="required" placeholder="Bill-to Email"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>                                                                                                                             
@@ -568,7 +562,7 @@ const ServiceOrderCard = ()=>{
                             <input type="text" name="ShiptoCustomerNo"                             
                             id="ShiptoCustomerNo"
                              className="required ServiceOrderTB" placeholder="Ship-to Customer No"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -578,7 +572,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="ShiptoCity" id="ShiptoCity"
                              className="required ServiceOrderTB" placeholder="Ship-to City"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -590,7 +584,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="ShiptoName" id="ShiptoName" 
                             className="required ServiceOrderTB" placeholder="Ship-to Name"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col> 
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -600,7 +594,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="ShiptoPostCode" 
                             id="ShiptoPostCode" className="required ServiceOrderTB" placeholder="Ship-to Post Code"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -613,7 +607,7 @@ const ServiceOrderCard = ()=>{
                             <input type="text" name="ShiptoAddress" 
                             id="ShiptoAddress" 
                             className="required ServiceOrderTB" placeholder="Ship-to Address"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -623,7 +617,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="ShiptoPhoneNo"
                              id="ShiptoPhoneNo" className="required ServiceOrderTB" placeholder="Ship-to Phone No"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>                                                               
                 </Row>
@@ -635,7 +629,7 @@ const ServiceOrderCard = ()=>{
                         <div className="form-group">                                            
                             <input type="text" name="ShiptoAddress2" 
                             id="ShiptoAddress2" className="required ServiceOrderTB" placeholder="Ship-to Address 2"
-                                defaultValue="" />
+                                />
                         </div>
                     </Col>
                     <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -782,7 +776,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustCustomerName" id="CreateCustCustomerName" 
                                     className="required ServiceOrderTB_Small" placeholder="Customer Name"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>
                             <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -792,7 +786,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustEmail" id="CreateCustEmail"
                                      className="required ServiceOrderTB_Small" placeholder="Email"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>                                                               
                         </Row>
@@ -804,7 +798,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustAddress" id="CreateCustAddress" 
                                     className="required ServiceOrderTB_Small" placeholder="Address"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>
                             <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -814,7 +808,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustContactName" id="CreateCustContactName"
                                      className="required ServiceOrderTB_Small" placeholder="Contact Name"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>                                                               
                         </Row>
@@ -826,7 +820,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustAddress2" id="CreateCustAddress2" 
                                     className="required ServiceOrderTB_Small" placeholder="Address"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>
                             <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -836,7 +830,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustPhoneNo" id="CreateCustPhoneNo"
                                      className="required ServiceOrderTB_Small" placeholder="Phone No"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>                                                               
                         </Row>
@@ -848,7 +842,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustCity" id="CreateCustCity" 
                                     className="required ServiceOrderTB_Small" placeholder="City"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>
                             <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -858,7 +852,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustVatRegis" id="CreateCustVatRegis"
                                      className="required ServiceOrderTB_Small" placeholder="Vat Registration No."
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>                                                               
                         </Row>
@@ -870,7 +864,7 @@ const ServiceOrderCard = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="CreateCustPostCode" id="CreateCustPostCode" 
                                     className="required ServiceOrderTB_Small" placeholder="Post Code"
-                                        defaultValue="" />
+                                        />
                                 </div>
                             </Col>
                             <Col sm={1} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -915,7 +909,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="No" id="No" 
                                 className="required ServiceOrderTB" placeholder="No"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -924,7 +918,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyStartingDate" id="WarrantyStartingDate" className="required" placeholder="Warranty Starting Date"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -936,7 +930,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="Description" 
                                 id="Description" className="required ServiceOrderTB" placeholder="Description"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -946,7 +940,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyEndingDate" 
                                 id="WarrantyEndingDate" className="required ServiceOrderTB" placeholder="Warranty Endting Date"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -958,7 +952,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="ItemNo" id="ItemNo" 
                                 className="required ServiceOrderTB" placeholder="Item No"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -968,7 +962,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="WarrantyStartingDateLabor" 
                                 id="WarrantyStartingDateLabor"
-                                 className="required ServiceOrderTB" placeholder="Warranty Starting Date(Labor)" defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="Warranty Starting Date(Labor)" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -980,7 +974,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="ItemDescription"
                                  id="ItemDescription" className="required ServiceOrderTB" placeholder="Item Description"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -988,7 +982,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
-                                <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor" className="required" placeholder="Warranty Ending Date(Labor)" defaultValue="" />
+                                <input type="text" name="WarrantyEndingDateLabor" id="WarrantyEndingDateLabor" className="required" placeholder="Warranty Ending Date(Labor)" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1000,7 +994,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="SerialNo" id="SerialNo"
                                  className="required ServiceOrderTB" placeholder="Serial No"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1023,7 +1017,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="CustomerNo" id="CustomerNo"
                                  className="required ServiceOrderTB" placeholder="Customer No"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1033,7 +1027,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="City" id="City"
                                  className="required ServiceOrderTB" placeholder="City"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1045,7 +1039,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="CustomerName" id="CustomerName" 
                                 className="required ServiceOrderTB" placeholder="Customer Name" 
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1055,7 +1049,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="County" id="County" 
                                 className="required ServiceOrderTB" placeholder="County"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1067,7 +1061,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="Address" id="Address"
                                  className="required ServiceOrderTB" placeholder="Address"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1076,7 +1070,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="PostCode" id="PostCode" 
-                                className="required ServiceOrderTB" placeholder="Post Code" defaultValue="" />
+                                className="required ServiceOrderTB" placeholder="Post Code" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1088,7 +1082,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="Address2" id="Address2"
                                  className="required ServiceOrderTB" placeholder="Address 2"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1097,7 +1091,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="Contact" id="Contact"
-                                 className="required ServiceOrderTB" placeholder="Contact" defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="Contact" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1111,7 +1105,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="PhoneNo" id="PhoneNo"
-                                 className="required ServiceOrderTB" placeholder="Phone No" defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="Phone No" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1131,7 +1125,7 @@ const ResultSearch = ()=>{
                                 <input type="text" name="EndCusCustomerNo"
                                  id="EndCusCustomerNo"
                                   className="required ServiceOrderTB" placeholder="End-Cus Customer No"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1141,7 +1135,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusCity" id="EndCusCity"
                                  className="required ServiceOrderTB" placeholder="End-Cus. City"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1154,7 +1148,7 @@ const ResultSearch = ()=>{
                                 <input type="text" name="EndCusCustomerName"
                                  id="EndCusCustomerName" className="required ServiceOrderTB" 
                                  placeholder="End-Cus. Customer Name" 
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1164,7 +1158,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusCounty" id="EndCusCounty"
                                  className="required ServiceOrderTB" placeholder="End-Cus. County"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1176,7 +1170,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusAddress" id="EndCusAddress" 
                                 className="required ServiceOrderTB" placeholder="End-Cus. Address"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1185,7 +1179,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusPostCode" id="EndCusPostCode"
-                                 className="required ServiceOrderTB" placeholder="End-Cus. Post Code" defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Post Code" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1197,7 +1191,7 @@ const ResultSearch = ()=>{
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusAddress2"
                                  id="EndCusAddress2" className="required ServiceOrderTB" placeholder="End-Cus. Address 2"
-                                    defaultValue="" />
+                                    />
                             </div>
                         </Col>
                         <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">                                        
@@ -1206,7 +1200,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusContact" id="EndCusContact"
-                                 className="required ServiceOrderTB" placeholder="End-Cus. Contact" defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Contact" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -1220,7 +1214,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="ServiceOrderColItem ServiceOrderColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="EndCusPhoneNo" id="EndCusPhoneNo"
-                                 className="required ServiceOrderTB" placeholder="End-Cus. Phone No." defaultValue="" />
+                                 className="required ServiceOrderTB" placeholder="End-Cus. Phone No." />
                             </div>
                         </Col>                                                               
                     </Row>                    
@@ -1228,77 +1222,209 @@ const ResultSearch = ()=>{
         );
 }
 const MainComponent = ()=>{
+    const refSearchValue = React.createRef()
+    const refSearchValueField = React.createRef()
+    const [SearchResult, setSearchResult] = useState('')     
+    const [SearchValueField_, setSearchValueField_] = useState('No')   
+    const SearchValueFieldChange = (e) => {
+        setSearchValueField_(e.target.value)
+        console.log(SearchValueField_)
+        //return SearchValueField_
+      }
+      console.log(SearchResult.length)
+    const GetServiceOrderInfo = () => {        
+        const SearchValue_=refSearchValue.current.value
+        // const SearchValueField_=refSearchValueField.current.value         
+        console.log('SearchValue: '+SearchValue_)      
+        console.log("SearchValueField_: "+SearchValueField_)
+        const SearchValueField__ = SearchValueField_
+        console.log(SearchResult.length)
+        let url_ = ""
+        if(SearchValueField__ == 'No')
+        {
+            url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=No eq '"+SearchValue_+"*'"
+            console.log('Search From No')
+        }
+        else if (SearchValueField_ == 'Name') {
+            url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=Name eq '"+SearchValue_+"*'"
+            console.log('Search From Name')
+        } else {
+            console.log('Search From Serial No')
+            url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=Serial_No eq '"+SearchValue_+"*'"
+        }
+        console.log(url_)
+            axios({
+                headers: {
+                    "Content-Type": "application/json",
+                    "If-Match": "*"
+                },
+                method: "get",
+                url: url_,
+                auth: {
+                    username: 'TPPADMIN',
+                    password: 'P@ssw0rd@1'
+                }
+            }).then(res => {
+                if (res.status === 200) {
+                    setSearchResult( JSON.parse(  JSON.stringify( res.data.value ) ) )                                        
+                    console.log(SearchResult)      
+                    //window.location.href = "/MainServices/CheckProduct/ResultSearch"    
+                } else {
+                    
+                }
+            }).catch(err => {            
+                console.log('err', err)
+            })
+        }
     return (
-                <div className="ServiceOrderColItem ServiceOrderColSubmitSearch" 
-                style={{width:"70%",display: "flex" ,verticalAlign:"middle",fontFamily: 'FontAwesome'}}>     
-                   &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" 
-                    name="ItemNo" 
-                    id="ItemNo" 
-                    className="required  ServiceOrderTB"                     
-                    placeholder="&#xf002;"></input>
-                    <ul>
-                        <li>   
-                            <Link to="/MainServices/CheckProduct/ResultSearch/" style={{fontFamily:'GothamBook'}}>
-                                Search
-                            </Link>                                   
-                        </li>
-                    </ul>
-                </div>     
-            );
-}
-const MainList = () =>{
-    return(
-        <div>
+        <div style={{display: "flex"}}>
             <Container fluid>
-                <Row>
-                    <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="ColContent">
-                        <form action="#">                   
-                            <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Description</th>
-                                            <th>Status</th>
-                                            <th>Order Date</th>
-                                            <th>Serial No.</th>
-                                            <th>Branch</th>
-                                            <th>Customer No.</th>
-                                            <th>Name</th>
-                                            <th>Send to 365 BC</th>
-                                            <th>Service Order Type</th>
-                                            <th>Release Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {
-                                        data.map((element)=>{
+                <Row className="ServiceOrderrowForm">
+                    <Col sm={5} className="ServiceOrderColItem ServiceOrderColSubmitSearch" 
+                    style={{marginTop:'0 !important',paddingTop:'0 !important', verticalAlign:'top'}}
+                    >       
+                        <input type="text" 
+                            name="SearchValue" 
+                            id="SearchValue" 
+                            className="required  ServiceOrderTB"                     
+                            placeholder="&#xf002;" 
+                            style={{width: '100%',fontFamily: 'FontAwesome'}}
+                            ref={refSearchValue} />
+                   </Col>
+                    <Col sm={2} className="ServiceOrderColContent" style={{marginRight:'0px !important',paddingRight:'0px !important'}}>  
+                        <select className="custom-select select_control"
+                        id="SearchValueField" 
+                        name="SearchValueField" 
+                        ref={refSearchValueField} onChange={SearchValueFieldChange}>
+                            <option value="No" selected='selected'>No</option>
+                            <option value="Name">Name</option>
+                            <option value="Serial_No">Serial No</option>
+                        </select>
+                        </Col>
+                    <Col sm={2} className="ServiceOrderColSubmitSearch" style={{marginLeft:'0px !important'
+                    ,paddingLeft:'0px !important'
+                    , width:'2rem'}}><ul style={{margin:'0 !important',padding:'0 !important', width:'7rem'}}>
+                            <li style={{margin:'0 !important',padding:'0 !important'}}>   
+                                <Link style={{margin:'0 !important',padding:'0 !important',fontFamily:'GothamBook'}} onClick={GetServiceOrderInfo}>
+                                    Search
+                                </Link>                                   
+                            </li>
+                        </ul>                            
+                    </Col>
+                </Row>
+                <Row className="ServiceOrderrowForm" 
+                 style={{margin:'0 !important',padding:'0 !important'}}>
+                        <Col  xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="ServiceOrderColContent"
+                         style={{margin:'0 !important',padding:'0 !important'}}
+                         ><Table striped bordered hover className='ServiceOrder_table_display_result' 
+                            style={{tableLayout: 'fixed', display: SearchResult.length>0 ? 'table' : 'none'
+                            , width:'100%' }}>
+                                <thead style={{width: '100% !important' }}>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Order Date</th>
+                                        <th>Serial No.</th>
+                                        <th>Branch</th>
+                                        <th>Customer No.</th>
+                                        <th>Name</th>
+                                        <th>Send to 365 BC</th>
+                                        <th>Service Order Type</th>
+                                        <th>Release Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                           {
+                                    SearchResult.length>0 ?
+                                         SearchResult.map((element)=>{
                                             return(
                                                 <tr key={uuid()}>                                
                                                     <td><Link to="/MainServices/ServiceOrder/ServiceOrderCard">{element.No}</Link></td>
                                                     <td>{element.Description}</td>
                                                     <td>{element.Status}</td>
-                                                    <td>{element.OrderDate}</td>
-                                                    <td>{element.SerialNo}</td>
-                                                    <td>{element.Branch}</td>
-                                                    <td>{element.CustomerNo}</td>
+                                                    <td>{element.Order_Date}</td>
+                                                    <td>{element.Serial_No}</td>
+                                                    <td>-</td>
+                                                    <td>{element.Customer_No}</td>
                                                     <td>{element.Name}</td>
                                                     <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}>
                                                         <input type='checkbox' />                                 
                                                     </td>
-                                                    <td>{element.ServiceOrderType}</td>
-                                                    <td>{element.ReleaseStatus}</td>
+                                                    <td>{element.Service_Order_Type}</td>
+                                                    <td>-</td>
                                                 </tr>
-                                        ) } )
-                                    } 
-                                    </tbody>
+                                    ) } )
+                                    :''
+
+
+                            }
+
+                     
+                                </tbody>
                             </Table>
-                        </form>
-                    </Col>
+                        </Col>
                 </Row>
             </Container>
+            
         </div>   
-    );
+            );
 }
+// const MainList = (props) =>{ 
+//     const {data_} = props
+// const MainList = () =>{     
+//     return(
+//         <div>
+//             <Container fluid>
+//                 <Row>
+//                     <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="ColContent">
+//                         <form action="#">                   
+//                             <Table striped bordered hover>
+//                                     <thead>
+//                                         <tr>
+//                                             <th>No.</th>
+//                                             <th>Description</th>
+//                                             <th>Status</th>
+//                                             <th>Order Date</th>
+//                                             <th>Serial No.</th>
+//                                             <th>Branch</th>
+//                                             <th>Customer No.</th>
+//                                             <th>Name</th>
+//                                             <th>Send to 365 BC</th>
+//                                             <th>Service Order Type</th>
+//                                             <th>Release Status</th>
+//                                         </tr>
+//                                     </thead>
+//                                     <tbody>
+//                                     {
+//                                         data.map((element)=>{
+//                                             return(
+//                                                 <tr key={uuid()}>                                
+//                                                     <td><Link to="/MainServices/ServiceOrder/ServiceOrderCard">{element.No}</Link></td>
+//                                                     <td>{element.Description}</td>
+//                                                     <td>{element.Status}</td>
+//                                                     <td>{element.Order_Date}</td>
+//                                                     <td>{element.Serial_No}</td>
+//                                                     <td>-</td>
+//                                                     <td>{element.Customer_No}</td>
+//                                                     <td>{element.Name}</td>
+//                                                     <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}>
+//                                                         <input type='checkbox' />                                 
+//                                                     </td>
+//                                                     <td>{element.Service_Order_Type}</td>
+//                                                     <td>-</td>
+//                                                 </tr>
+//                                         ) } )
+//                                     } 
+//                                     </tbody>
+//                             </Table>
+//                         </form>
+//                     </Col>
+//                 </Row>
+//             </Container>
+//         </div>   
+//     );
+// }
 const ServiceOrder = ()=>{
     return (
         <div style={{ margin : 0, padding : 0 }} >
@@ -1335,7 +1461,6 @@ const ServiceOrder = ()=>{
                                     </div>
                                     <hr />
                                     <MainComponent />
-                                    <MainList />
                                 </Route>
                                 <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
                                 <Route path="/MainServices/CheckProduct/ResultSearch/" component={ResultSearch} />

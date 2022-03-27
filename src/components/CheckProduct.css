@@ -5,6 +5,58 @@
 font{
     font-family: "Gotham-Bold", sans-serif;    
 }
+.CheckProductColSubmitSearch ul li a:hover{
+
+    color: black;
+    border: 1px black solid;
+    background-color: white;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 10rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px;
+}
+.CheckProductColSubmitSearch li{    
+    padding: 1px 0;    
+    display: block; 
+    border-radius: 2px; 
+}
+.CheckProductColSubmitSearch  ul li a{    
+    color: white;
+    background-color: #58595b;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 10rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px; 
+}
+.CheckProductColSubmitSearch{
+    padding-right: 1px;
+    margin-right: 1px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;   
+    text-align: center;
+    height: 4rem;
+    color: white;
+    font-size: 11px;
+    vertical-align: top;  
+    border-radius: 2px;
+    text-align: left;
+}
+
+
+
+
+
+
 .ColSubmitSearch ul li label a:hover{
     background-color: white;
     border: 1px black solid;

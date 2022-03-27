@@ -66,21 +66,24 @@ const ResultSearch = ()=>{
 
    },[])
    console.log(ProductsInfo.length)
-    // if(ProductsInfo.length==0)
-    // {
-
-        
-    //     //setProductsInfo([])
-
-    // }
-
-    return (   
+   return (   
                 <Container fluid>
                     <Row className="rowForm">
-                        <Col sm={12} className="CheckProductColItem CheckProductColItemleft">
+                        <Col sm={8} className="CheckProductColItem CheckProductColItemleft">
                             <div   className="MainTitle">
                                 SERVICE ITEM CARD
                             </div>                           
+                        </Col>
+                        <Col sm={3} className="CheckProductColItem CheckProductColSubmitSearch">
+                                <ul>
+                                    <li>   
+                                        <Link to="/MainServices/CheckStockAvaliable" 
+                                        
+                                        style={{fontFamily:'GothamBook'}}>
+                                            Create Service Order
+                                        </Link>                                   
+                                    </li>
+                                </ul>
                         </Col>
                     </Row>
                     <Row className="rowForm">
@@ -428,33 +431,7 @@ const MainComponent = ()=>{
         //console.log(e.target.value)
         setSerial_No(e.target.value)
     }    
-    // const GetProductInfo = () => {
-    //     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+textSerialNo.current.value+"'"
-    //     //const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '54263207'"
-    //     console.log(url_)
-    //     axios({
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "If-Match": "*"
-    //         },
-    //         method: "get",
-    //         url: url_,
-    //         auth: {
-    //             username: 'TPPADMIN',
-    //             password: 'P@ssw0rd@1'
-    //         }
-    //     }).then(res => {
-    //         if (res.status === 200) {
-    //             setProductsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
-    //             console.log(ProductsInfo)     
-    //             // ResultSearch()
-    //         } else {
-                
-    //         }
-    //     }).catch(err => {            
-    //         console.log('err', err)
-    //     });
-    // }//GetProductInfo
+    
     return (
             <Container fluid>                
                         <Row style={{display: "flex", alignItems: "center"}}>
@@ -465,8 +442,8 @@ const MainComponent = ()=>{
                                 <div className="form-group">                                            
                                     <input type="text" name="SerialNo" id="SerialNo" 
                                     className="required CheckProductTBandTextArea" 
-                                    style={{width:"150%"}} 
-                                     placeholder="SERIAL NO" 
+                                    style={{width:"150%",fontFamily: 'FontAwesome'}} 
+                                     placeholder="&#xf002;" 
                                      onChange={GetSerial_No}
                                         defaultValue="" ref={textSerialNo} />
                                 </div>
