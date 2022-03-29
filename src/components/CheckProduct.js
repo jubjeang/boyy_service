@@ -11,17 +11,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
 
 
-const data =[
-    {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
-    {code:"CK",name:"คลังเช่าพื้นที่เก็บข้างนอก เก็บหนังที่ไม่ใช้แล้ว",inventory:0},
-    {code:"DAMAGE",name:"Damage",inventory:0},
-    {code:"DEFECTED",name:"Defected",inventory:0},
-    {code:"ECOM",name:"ECOM",inventory:0},
-    {code:"ECOM-PEN",name:"ECOM Pending",inventory:0},
-    {code:"IN-TRANSIT",name:"In-Transit",inventory:0},
-    {code:"MATERIAL",name:"Material",inventory:0},
-    {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
-]
+// const data =[
+//     {code:"BOYYSRL",name:"BOYYSRL",inventory:0},
+//     {code:"CK",name:"คลังเช่าพื้นที่เก็บข้างนอก เก็บหนังที่ไม่ใช้แล้ว",inventory:0},
+//     {code:"DAMAGE",name:"Damage",inventory:0},
+//     {code:"DEFECTED",name:"Defected",inventory:0},
+//     {code:"ECOM",name:"ECOM",inventory:0},
+//     {code:"ECOM-PEN",name:"ECOM Pending",inventory:0},
+//     {code:"IN-TRANSIT",name:"In-Transit",inventory:0},
+//     {code:"MATERIAL",name:"Material",inventory:0},
+//     {code:"MATERIAL-D",name:"MATERIAL-Design",inventory:0}
+// ]
 const ResultSearch = ()=>{
     const { serialno } = useParams()
     const [ProductsInfo, setProductsInfo] = useState([])
@@ -30,7 +30,7 @@ const ResultSearch = ()=>{
     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+serialno+"'"        
     console.log('first ProductsInfo.length: '+ProductsInfo.length)
     React.useEffect(async () => {       
-        await axios({
+       const res = await axios({
             headers: {
                 "Content-Type": "application/json;charset=UTF-8",
                 "If-Match": "*"
@@ -43,23 +43,10 @@ const ResultSearch = ()=>{
             }
         })
         .then(res =>  {
-            //if (res.status === 200) {
-                console.log('status 200')
-                // console.log('res.data')
-                // console.log(res.data.value[0]["No"])
-                // console.log('end res.data')
-                // setProductsInfo(   res.data   )
-                // console.log('ProductsInfo lenght after 200: '+JSON.stringify( ProductsInfo ).length)
-                setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )
-                //ProductsInfo.push( JSON.parse( JSON.stringify( res.data.value ) ) )
-                console.log(ProductsInfo[0].No)
-                console.log(ProductsInfo.length)
-                //console.log(ProductsInfo[0].No)
-                    
-                // ResultSearch()
-            // } else {
-                
-            // }
+               console.log('status 200')
+               setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )
+               console.log(ProductsInfo[0].No)
+               console.log(ProductsInfo.length)               
         }).catch(err => {            
             console.log('err', err)
         })
@@ -77,7 +64,13 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColSubmitSearch">
                                 <ul>
                                     <li>   
-                                        <Link to="/MainServices/CheckStockAvaliable" 
+                                        <Link to={
+                                            ProductsInfo.length > 0 ? (
+                                            "/MainServices/ServiceOrder/ServiceOrderCard/"+ProductsInfo[0].No
+                                            ) : ( 
+                                                "/MainServices/CheckProduct/ResultSearch/"+serialno
+                                            )
+                                        }
                                         
                                         style={{fontFamily:'GothamBook'}}>
                                             Create Service Order

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container,Form } from "reactstrap";
+import { Container } from "reactstrap";
 import { Col, Row} from "react-bootstrap";
-import { Switch,Route,Link,Redirect } from 'react-router-dom';
+import { Switch,Route,Link,useParams } from 'react-router-dom';
 import CreateServiceOrder from './CreateServiceOrder';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import './CommonCss.css';
@@ -43,8 +43,8 @@ const data =[
     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
 ]
 const ServiceOrderCard = ()=>{ 
-    const [CustsInfo, setCustsInfo] = useState([])
-    
+    const { ProductNo } = useParams()
+    const [CustsInfo, setCustsInfo] = useState([])    
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
@@ -63,6 +63,33 @@ const ServiceOrderCard = ()=>{
 
     const [CustsInfoFromSearch, setCustsInfoFromSearch] = useState([])
     let textCustName = React.createRef()
+    //*********Initial GetCustInfo  */
+    useEffect(async () => {
+        const res = await axios({
+            headers: {
+                "Content-Type": "application/json",
+                "If-Match": "*"
+            },
+            method: "get",
+            url: "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=No eq '"+ProductNo+"'",
+            auth: {
+                username: 'TPPADMIN',
+                password: 'P@ssw0rd@1'
+            }
+        }).then(res => {
+            if (res.status == 200) {
+                setCustsInfoFromSearch( JSON.parse(  JSON.stringify( res.data.value ) ) )
+                console.log(CustsInfoFromSearch)                
+            } else {
+                
+            }
+        }).catch(err => {            
+            console.log('err', err)
+        });
+
+
+    },[CustsInfoFromSearch,ProductNo])
+    //*********End Initial GetCustInfo  */
     const GetCustInfo = () => {
     //setCustsInfo([])
     const CustName=textCustName.current.value
@@ -81,7 +108,7 @@ const ServiceOrderCard = ()=>{
             password: 'P@ssw0rd@1'
         }
     }).then(res => {
-        if (res.status === 200) {
+        if (res.status == 200) {
             setCustsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
             console.log(CustsInfo)                
         } else {
@@ -325,7 +352,7 @@ const ServiceOrderCard = ()=>{
                     </div>
                 </Col>
                 <Col sm={2} className="ServiceOrderColItem ServiceOrderColItemleft">  
-                    <label htmlFor="Sendto365BC" className="required">Send to 365 BC</label>                                       
+                    <label htmlFor="Sendto365BC" className="required">Post Sales Invoice</label>                                       
                 </Col>
                 <Col sm={3} className="ServiceOrderColItem ColItemright">
                 <div className="form-group">                                            
@@ -425,7 +452,7 @@ const ServiceOrderCard = ()=>{
                             </thead>
                             <tbody>                            
                             {
-                            dataItemLine.map((element)=>{
+                            dataItemLine.map( ( element )=>{
                             return(
                                     <tr>                                
                                         <td>{element.Type}</td>
@@ -670,16 +697,14 @@ const ServiceOrderCard = ()=>{
                                     </thead>
                                     <tbody>
                                     {
-                                        CustsInfo.map((element)=>{
+                                        CustsInfo.map( (element)=>{
                                             return(
                                                 <tr key={uuid()}>                                
-                                                    <td>
-                                                        <Link 
+                                                    <td><Link 
                                                         onClick={() => GetCustInfo_(element.No)}
-                                                        className="ServiceOrder_Menu" to="/MainServices/ServiceOrder/ServiceOrderCard">
+                                                        className="ServiceOrder_Menu" to={"/MainServices/ServiceOrder/ServiceOrderCard/"+ProductNo}>
                                                             {element.No}
-                                                        </Link>
-                                                    </td>
+                                                        </Link></td>
                                                     <td className="ServiceOrder_Menu">{element.Name}</td>
                                                 </tr>
                                                 ) 
@@ -884,7 +909,8 @@ const ServiceOrderCard = ()=>{
     )
 
 }
-const ResultSearch = ()=>{
+const ResultSearch = ()=>{ 
+    
     return (   
 
                 <Container fluid>
@@ -1221,7 +1247,7 @@ const ResultSearch = ()=>{
                 </Container>
         );
 }
-const MainComponent = ()=>{
+const MainComponent = ()=>{     
     const refSearchValue = React.createRef()
     const refSearchValueField = React.createRef()
     const [SearchResult, setSearchResult] = useState('')     
@@ -1232,7 +1258,7 @@ const MainComponent = ()=>{
         //return SearchValueField_
       }
       console.log(SearchResult.length)
-    const GetServiceOrderInfo = () => {        
+     const GetServiceOrderInfo = () => {        
         const SearchValue_=refSearchValue.current.value
         // const SearchValueField_=refSearchValueField.current.value         
         console.log('SearchValue: '+SearchValue_)      
@@ -1265,7 +1291,7 @@ const MainComponent = ()=>{
                     password: 'P@ssw0rd@1'
                 }
             }).then(res => {
-                if (res.status === 200) {
+                if (res.status == 200) {
                     setSearchResult( JSON.parse(  JSON.stringify( res.data.value ) ) )                                        
                     console.log(SearchResult)      
                     //window.location.href = "/MainServices/CheckProduct/ResultSearch"    
@@ -1295,6 +1321,7 @@ const MainComponent = ()=>{
                         <select className="custom-select select_control"
                         id="SearchValueField" 
                         name="SearchValueField" 
+                        defaultValue={'No'}
                         ref={refSearchValueField} onChange={SearchValueFieldChange}>
                             <option value="No" selected='selected'>No</option>
                             <option value="Name">Name</option>
@@ -1305,7 +1332,8 @@ const MainComponent = ()=>{
                     ,paddingLeft:'0px !important'
                     , width:'2rem'}}><ul style={{margin:'0 !important',padding:'0 !important', width:'7rem'}}>
                             <li style={{margin:'0 !important',padding:'0 !important'}}>   
-                                <Link style={{margin:'0 !important',padding:'0 !important',fontFamily:'GothamBook'}} onClick={GetServiceOrderInfo}>
+                                <Link style={{margin:'0 !important',padding:'0 !important',fontFamily:'GothamBook'}} 
+                                onClick={GetServiceOrderInfo} to='/MainServices/ServiceOrder' >
                                     Search
                                 </Link>                                   
                             </li>
@@ -1317,11 +1345,11 @@ const MainComponent = ()=>{
                         <Col  xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="ServiceOrderColContent"
                          style={{margin:'0 !important',padding:'0 !important'}}
                          ><Table striped bordered hover className='ServiceOrder_table_display_result' 
-                            style={{tableLayout: 'fixed', display: SearchResult.length>0 ? 'table' : 'none'
-                            , width:'100%' }}>
-                                <thead style={{width: '100% !important' }}>
+                            style={{display: SearchResult.length>0 ? 'contents' : 'none'
+                            , width:'200%',marginTop:'0 !important',paddingTop:'0 !important' }}>
+                                <thead style={{width: '200% !important' }}>
                                     <tr>
-                                        <th>No.</th>
+                                        <th style={{width: '50% !important' }}>No.</th>
                                         <th>Description</th>
                                         <th>Status</th>
                                         <th>Order Date</th>
@@ -1335,32 +1363,29 @@ const MainComponent = ()=>{
                                     </tr>
                                 </thead>
                                 <tbody>
-                           {
-                                    SearchResult.length>0 ?
-                                         SearchResult.map((element)=>{
-                                            return(
-                                                <tr key={uuid()}>                                
-                                                    <td><Link to="/MainServices/ServiceOrder/ServiceOrderCard">{element.No}</Link></td>
-                                                    <td>{element.Description}</td>
-                                                    <td>{element.Status}</td>
-                                                    <td>{element.Order_Date}</td>
-                                                    <td>{element.Serial_No}</td>
-                                                    <td>-</td>
-                                                    <td>{element.Customer_No}</td>
-                                                    <td>{element.Name}</td>
-                                                    <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}>
-                                                        <input type='checkbox' />                                 
-                                                    </td>
-                                                    <td>{element.Service_Order_Type}</td>
-                                                    <td>-</td>
-                                                </tr>
-                                    ) } )
-                                    :''
-
-
-                            }
-
-                     
+                                { 
+                                    SearchResult.length>0 ?( SearchResult.map( ( element ) => {
+                                                        return(
+                                                            <tr key={uuid()}>                                
+                                                                <td style={{width: '50% !important' }}>
+                                                                    <Link to={`/MainServices/ServiceOrder/ServiceOrderCard/${element.No}`}>{element.No}</Link>
+                                                                </td>
+                                                                <td>{element.Description}</td>
+                                                                <td>{element.Status}</td>
+                                                                <td>{element.Order_Date}</td>
+                                                                <td>{element.Serial_No}</td>
+                                                                <td>-</td>
+                                                                <td>{element.Customer_No}</td>
+                                                                <td>{element.Name}</td>
+                                                                <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}><input type='checkbox' /></td>
+                                                                <td>{element.Service_Order_Type}</td>
+                                                                <td>-</td>
+                                                            </tr>
+                                                                )
+                                                            } 
+                                                        )
+                                        ) : ('') 
+                                }
                                 </tbody>
                             </Table>
                         </Col>
@@ -1370,61 +1395,6 @@ const MainComponent = ()=>{
         </div>   
             );
 }
-// const MainList = (props) =>{ 
-//     const {data_} = props
-// const MainList = () =>{     
-//     return(
-//         <div>
-//             <Container fluid>
-//                 <Row>
-//                     <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="ColContent">
-//                         <form action="#">                   
-//                             <Table striped bordered hover>
-//                                     <thead>
-//                                         <tr>
-//                                             <th>No.</th>
-//                                             <th>Description</th>
-//                                             <th>Status</th>
-//                                             <th>Order Date</th>
-//                                             <th>Serial No.</th>
-//                                             <th>Branch</th>
-//                                             <th>Customer No.</th>
-//                                             <th>Name</th>
-//                                             <th>Send to 365 BC</th>
-//                                             <th>Service Order Type</th>
-//                                             <th>Release Status</th>
-//                                         </tr>
-//                                     </thead>
-//                                     <tbody>
-//                                     {
-//                                         data.map((element)=>{
-//                                             return(
-//                                                 <tr key={uuid()}>                                
-//                                                     <td><Link to="/MainServices/ServiceOrder/ServiceOrderCard">{element.No}</Link></td>
-//                                                     <td>{element.Description}</td>
-//                                                     <td>{element.Status}</td>
-//                                                     <td>{element.Order_Date}</td>
-//                                                     <td>{element.Serial_No}</td>
-//                                                     <td>-</td>
-//                                                     <td>{element.Customer_No}</td>
-//                                                     <td>{element.Name}</td>
-//                                                     <td style={{textAlign:"center", verticalAlign:"top", paddingTop:"0px"}}>
-//                                                         <input type='checkbox' />                                 
-//                                                     </td>
-//                                                     <td>{element.Service_Order_Type}</td>
-//                                                     <td>-</td>
-//                                                 </tr>
-//                                         ) } )
-//                                     } 
-//                                     </tbody>
-//                             </Table>
-//                         </form>
-//                     </Col>
-//                 </Row>
-//             </Container>
-//         </div>   
-//     );
-// }
 const ServiceOrder = ()=>{
     return (
         <div style={{ margin : 0, padding : 0 }} >
@@ -1444,8 +1414,7 @@ const ServiceOrder = ()=>{
                             </li>
                             <li>                                
                                 <Link to="/MainServices/ServiceOrder">Service Order</Link>  
-                            </li>
-                            
+                            </li>                            
                             {/* <li>
                                 <Link to="/MainServices/CreateServiceOrder">Create Service Order</Link>
                             </li> */}
@@ -1463,8 +1432,8 @@ const ServiceOrder = ()=>{
                                     <MainComponent />
                                 </Route>
                                 <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
-                                <Route path="/MainServices/CheckProduct/ResultSearch/" component={ResultSearch} />
-                                <Route path="/MainServices/ServiceOrder/ServiceOrderCard" component={ServiceOrderCard} /> 
+                                <Route path="/MainServices/CheckProduct/ResultSearch" component={ResultSearch} />
+                                <Route path="/MainServices/ServiceOrder/ServiceOrderCard/:ProductNo" component={ServiceOrderCard} /> 
                                 {/* <Route exact path="/Main/" /> */}
                             </Switch> 
                         {/* </Router> */}

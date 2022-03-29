@@ -44,7 +44,7 @@ const MainComponent = ()=>{
                 password: 'P@ssw0rd@1'
             }
         }).then(res => {
-            if (res.status === 200) {
+            if (res.status == 200) {
                 setStockInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
                 console.log(StockInfo)
                 console.log(StockInfo[2].LocationCode) 
