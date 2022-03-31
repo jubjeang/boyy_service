@@ -25,9 +25,9 @@ import axios from 'axios';
 const ResultSearch = ()=>{
     const { serialno } = useParams()
     const [ProductsInfo, setProductsInfo] = useState([])
-    //const ProductsInfo=[]
-    //console.log('serialno: '+serialno);
+
     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+serialno+"'"        
+    console.log( url_ )
     console.log('first ProductsInfo.length: '+ProductsInfo.length)
     React.useEffect(async () => {       
        const res = await axios({
@@ -45,8 +45,9 @@ const ResultSearch = ()=>{
         .then(res =>  {
                console.log('status 200')
                setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )
-               console.log(ProductsInfo[0].No)
-               console.log(ProductsInfo.length)               
+               console.log(ProductsInfo)
+               //console.log(ProductsInfo[0].No)
+               //console.log('ProductsInfo length :'+ProductsInfo.length)               
         }).catch(err => {            
             console.log('err', err)
         })
@@ -64,14 +65,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColSubmitSearch">
                                 <ul>
                                     <li>   
-                                        <Link to={
-                                            ProductsInfo.length > 0 ? (
-                                            "/MainServices/ServiceOrder/ServiceOrderCard/"+ProductsInfo[0].No
-                                            ) : ( 
-                                                "/MainServices/CheckProduct/ResultSearch/"+serialno
-                                            )
-                                        }
-                                        
+                                        <Link to={`/MainServices/CreateServiceOrder/MainComponent/${serialno}`}                                        
                                         style={{fontFamily:'GothamBook'}}>
                                             Create Service Order
                                         </Link>                                   
@@ -245,7 +239,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="County" id="County" className="required CheckProductTBandTextArea" 
-                                 value={ProductsInfo.length>0 ? ProductsInfo[0].County : ""} placeholder="County"
+                                  placeholder="County"
                                     defaultValue="" />
                             </div>
                         </Col>                                                               
@@ -267,7 +261,7 @@ const ResultSearch = ()=>{
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">                                            
                                 <input type="text" name="PostCode" id="PostCode" 
-                                 value={ProductsInfo.length>0 ? ProductsInfo[0].PostCode : ""} className="required CheckProductTBandTextArea" placeholder="Post Code" defaultValue="" />
+                                 value={ProductsInfo.length>0 ? ProductsInfo[0].Post_Code : ""} className="required CheckProductTBandTextArea" placeholder="Post Code" defaultValue="" />
                             </div>
                         </Col>                                                               
                     </Row>
@@ -502,7 +496,7 @@ const CheckProduct = ()=>{
                                     <hr />
                                     <MainComponent />
                                     </Route>
-                                    <Route path="/MainServices/CreateServiceOrder" component={CreateServiceOrder} />   
+                                    <Route path={`/MainServices/CreateServiceOrder/MainComponent/:serialno`} component={CreateServiceOrder} />   
                                     <Route path="/MainServices/CheckProduct/ResultSearch/:serialno" component={ResultSearch} />
                                     {/* <Route exact path="/Main/" /> */}
                                 </Switch> 

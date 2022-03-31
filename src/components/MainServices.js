@@ -8,6 +8,8 @@ import { Switch,Route,Link} from 'react-router-dom';
 import CheckStockAvaliable from './CheckStockAvaliable';
 import CheckProduct from './CheckProduct';
 import ServiceOrder from './ServiceOrder';
+import CreateServiceOrder from './CreateServiceOrder';
+
 // const MainComponent = ()=>{
 //     return(
 //         <div>
@@ -17,7 +19,7 @@ import ServiceOrder from './ServiceOrder';
 //         </div>
 //     );
 // }
-const MainServices = ()=>{
+const MainServices = ()=>{ 
     return ( 
         <div style={{ margin : 0, padding : 0 }} >
                         <Switch>
@@ -57,6 +59,7 @@ const MainServices = ()=>{
                                 <Route path="/MainServices/CheckStockAvaliable" component={CheckStockAvaliable} />
                                 <Route path="/MainServices/CheckProduct" component={CheckProduct} />
                                 <Route path="/MainServices/ServiceOrder" component={ServiceOrder} />                                
+                                <Route path="/MainServices/CreateServiceOrder/MainComponent" component={CreateServiceOrder} />                                
                                 {/* <Route exact path="/Main/" /> */}
                         </Switch>                      
 

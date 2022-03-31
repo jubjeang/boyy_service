@@ -3,7 +3,164 @@
     src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
 }
 font{
+    font-family: "Gotham-Bold", sans-serif;    
+}
+table{
+    width: 100%;
+}
+table tr th{
+    text-align: center;
+    font-size: 0.5rem;
+}
+table tr td{
+    font-family: 'GothamBook';
+    text-align: left;
+    font-size: 0.5rem;
+}
+.CreateServiceOrderrowForm{
+    padding-bottom: 0px;
+    height: 50px;
+}
+.CreateServiceOrderColContent
+{
+    padding-top: 0px;
+}
+.CreateServiceOrder_table_display_result table tr th{
+    text-align: center;
+    font-size: 0.8875rem;
+    margin-left:auto; 
+        			margin-right:auto;
+}
+.select_control{
     font-family: "Gotham-Bold", sans-serif;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+}
+.CreateServiceOrderbtn-secondary {
+    color: #fff;
+    background-color: grey;    
+    border-color: grey;    
+}
+.CreateServiceOrderbtn-secondary:visited{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.CreateServiceOrderbtn-secondary:focus{
+    color: #fff;
+    background-color: grey;    
+    border-color: grey;
+}
+.CreateServiceOrderbtn-secondary:hover 
+{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.CreateServiceOrderbtn-secondary:active{
+    color:black  !important;
+    background-color: white  !important;
+    border-color: black  !important; 
+}
+.CreateServiceOrderColItem {
+    padding: 0px;
+}
+.CreateServiceOrderColItemleft{
+    padding-left: 15px;
+    text-align: left;
+    margin-right: 1px;
+}
+.CreateServiceOrder_buttun{
+    font-size: 0.5rem  !important;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.ColContent
+{
+    padding-top: 0px;
+}
+.CreateServiceOrderCustNoSearchTB{
+    width: 80%  !important;
+}
+.ModalSearchCustName{
+    width: 200%   !important;
+    max-width: 200%  !important;
+}
+.CreateServiceOrderCustNameSearchTB{
+    width: 75%  !important;
+    height: 1.5rem !important;
+    text-transform: none;
+}
+.CreateServiceOrderTB_Small{
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    width: 65% !important;
+    height: 1.5rem !important;
+    border-radius: 2px;
+}
+.CreateServiceOrderTB{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 100% !important;
+    height: 2.0rem !important;
+    border-radius: 2px;
+}
+.CreateServiceOrderColSubmitSearch ul li a:hover{
+    background-color: white;
+    border: 1px black solid;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 11px;
+    width: 5.5rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    border-radius: 2px; 
+}
+.CreateServiceOrderColSubmitSearch li{    
+    padding: 0;    
+    display: block; 
+    border-radius: 2px; 
+}
+.CreateServiceOrderColSubmitSearch  ul li a{    
+    color: white;
+    background-color: #58595b;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 5.5rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px; 
+}
+.CreateServiceOrderColSubmitSearch{
+    padding-right: 0px;
+    margin-right: 0px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;   
+    text-align: center;
+    height: 4rem;
+    color: white;
+    font-size: 11px;
+    vertical-align: top;  
+    border-radius: 2px;  
+}
+.SubMainTitle{
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+}
+.MainTitle{
+    padding-top: 2%;
+    padding-bottom: 0px;
+    font-size: 12px;
 }
 .rowForm{
     padding-bottom: 0px;
@@ -19,8 +176,7 @@ font{
     padding: 0;
     overflow: hidden;   
     text-align: center;
-    height: 45px;   
-
+    height: 45px;
     color: white;
     font-size: 11px;
   }
@@ -31,8 +187,6 @@ font{
     text-decoration: none;
     text-transform: uppercase;
     font-size: 11px;
-    width: 450px;
-    height: 42px;   
     display:table-cell;
     vertical-align: middle; 
 }
@@ -44,9 +198,7 @@ font{
     color: white;
     background-color: #58595b;
     text-decoration: none;
-    text-transform: uppercase;    
-    width: 450px;
-    height: 40px;   
+    text-transform: uppercase;     
     display:table-cell;
     vertical-align: middle; 
     text-align: center;
@@ -54,12 +206,21 @@ font{
 label {
     display: block;
     margin-bottom: 5px;
+    font-size: 0.6rem  !important;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 80% !important;
+}
+.CreateServiceOrderTBSearch{
     font-size: 11px;
     font-size: 0.6875rem;
     line-height: 16px;
     font-weight: 300;
     text-transform: uppercase;
-    width: 80% !important;
+    width: 10% !important;
+    height: 30px !important;
+    border-radius: 2px;
 }
 /* input[type="text"], textarea{
     font-size: 11px;
@@ -67,9 +228,10 @@ label {
     line-height: 16px;
     font-weight: 300;
     text-transform: uppercase;
-    width: 95% !important;
-    height: 40px;
+    width: 10% !important;
+    height: 30px !important;
     border-radius: 2px;
+
 } */
 textarea{   
     height: 70px !important;
@@ -80,13 +242,9 @@ textarea{
     height: 20px;    
     border: 0px;
     border-bottom: 1px solid black;
-}
-/* input[type="checkbox"] { 
-    width: 5% !important;
-    text-align: left;
-    padding: 3px;
     border-radius: 2px;
-} */
+}
+
 .form-check{
     padding-left: 0px;
 }
@@ -115,18 +273,10 @@ textarea{
 #CreateServiceOrder .MenuTitle{
     float: right;
 }
-.ColItem{
-    padding: 15px; 
-}
-.ColItemright{
+.CreateServiceOrderColItemright{
     padding-left: 1px;
     text-align: left;
     margin-left: 1px;
-}
-.ColItemleft{
-    padding-right: 1px;
-    text-align: right;
-    margin-right: 1px;
 }
 .MenuTitle{
     width: 130px;
@@ -153,17 +303,22 @@ textarea{
 .gfh-logo a img{
     height: 20px;
 }
-.Menu{
+.CreateServiceOrder_Menu{
     width: 150px;
+    text-decoration: none;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #000000;
 }
-.Menu ul li{
+.CreateServiceOrder_Menu ul li{
     display: block;
     padding: 10px 0;   
 }
-.Menu ul li a{ 
+.CreateServiceOrder_Menu ul li a{ 
     text-transform: uppercase;
-    text-decoration: none;
-    
+    text-decoration: none;    
     font-size: 14px;
     font-stretch: normal;
     font-style: normal;
@@ -172,10 +327,7 @@ textarea{
     color: #000000;
     font-weight: bold;
 }
-.Menu.left{
-    float: left;
-    margin-right: 17px;
-}
+
 .right{
     float: right;
 }
