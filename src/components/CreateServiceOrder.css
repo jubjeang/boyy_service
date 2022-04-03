@@ -98,6 +98,25 @@ table tr td{
     height: 1.5rem !important;
     border-radius: 2px;
 }
+.CreateServiceOrderTB_InvoiceLine{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;    
+    height: 2.0rem !important;
+    border-radius: 2px;
+}
+.CreateServiceOrderTB_InvoiceLineReadOnly{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;    
+    height: 2.0rem !important;
+    border-radius: 2px; 
+    background-color:lightgray;
+}
 .CreateServiceOrderTB{
     font-size: 11px;
     font-size: 0.6875rem;
@@ -107,6 +126,17 @@ table tr td{
     width: 100% !important;
     height: 2.0rem !important;
     border-radius: 2px;
+}
+.CreateServiceOrder_Other_TB{
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 15rem !important;
+    height: 2.0rem !important;
+    border-radius: 2px;
+    text-align: left;
 }
 .CreateServiceOrderColSubmitSearch ul li a:hover{
     background-color: white;
@@ -203,7 +233,16 @@ table tr td{
     vertical-align: middle; 
     text-align: center;
 }
-label {
+.CreateServiceOrder_label_DustBag {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.6rem  !important;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 10rem !important;
+}
+.CreateServiceOrder_label {
     display: block;
     margin-bottom: 5px;
     font-size: 0.6rem  !important;

@@ -117,7 +117,7 @@ const ServiceOrderCard = ()=>{
     }).catch(err => {            
         console.log('err', err)
     });
-    }
+    }//const GetCustInfo
     const GetCustInfo_ = (no_) => { 
         setCustsInfoFromSearch( [] )
         setCustsInfoFromSearch( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )        
@@ -432,7 +432,7 @@ const ServiceOrderCard = ()=>{
                          style={{width:"3rem", height:"1.5rem", padding:"0", paddingBottom:"0rem"}}
                          >Add</Button>                           
                         </Col>                        
-                    </Row>                                                        
+                </Row>                                                        
                 <Row className="service_order_rowForm">
                     <Col sm={12} className="ServiceOrderColItem ServiceOrderColItemleft">  
                         <Table striped bordered hover>
