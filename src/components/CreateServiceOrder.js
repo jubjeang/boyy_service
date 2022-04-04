@@ -14,20 +14,8 @@ import axios from 'axios';
 import uuid from 'react-uuid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FaSistrix } from 'react-icons/fa'
+import moment from 'moment'
 
-// const dataItemLine_ =[
-//     {Type: <select className="custom-select select_control" id="DDL_ItemType" name="DDL_ItemType" style="width: auto;"><option value="Item">Item</option><option value="gl_account">G/L Account</option><option value="item_charge">Charge (Item)</option></select>
-//         ,No:''        
-//         ,Description:''
-//         ,Quantity:''
-//          ,UnitofMeasureCode:''
-//          ,UnitPriceExclVAT:''
-//          ,LineDiscount:''
-//          ,LineDiscountAmount:''
-//          ,LineAmountExclVAT:''
-//          ,AmountIncludingVAT:''
-//         }
-// ]
 const dataAttachFiles = [
     { No: "1", FileName: "Pic_Repair_1.JPG", AttachDate: "9-28-21 17:45" },
     { No: "2", FileName: "Pic_Repair_2.JPG", AttachDate: "9-29-21 17:46" },
@@ -35,23 +23,6 @@ const dataAttachFiles = [
     { No: "4", FileName: "Pic_Repair_4.JPG", AttachDate: "10-1-21 17:48" },
     { No: "5", FileName: "Pic_Repair_5.JPG", AttachDate: "10-2-21 17:49" }
 ]
-const dataServiceItemLine = [
-    {
-        ServiceItemNo: "SND05155", ItemNo: "1BKBB23EPO1SB", Code: "HANDBAG", SerialNo: "SN05155", Description: "BOBBY 23 EP SOME"
-        , RepairStatusCode: "COMPLETED", Warranty: <input type='checkbox' />, FaultAreaCode: "STRAP", SymptomCode: "ENDGE PAINT", FaultCode: "S001"
-        , WarrantyStartingDateParts: "27-09-21", WarrantyEndingDateParts: "27-09-21", WarrantyParts: "100", StartingDateLabor: "27-09-21"
-        , EndingDateLabor: "27-09-26", WarrantyLabor: 10
-    }
-]
-// const data =[
-//     {No:"BTH-SVO21090001",Description:"BOBBY TOURIST GOLD BUCKLE POUSSIN",Status:"Finished",OrderDate:"27-09-21",SerialNo:"SN00023",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"1",ServiceOrderType:"REPAIR",ReleaseStatus:"Locked"},
-//     {No:"BTH-SVO21090002",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00024",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"BOYY PTE LTD.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
-//     {No:"BTH-SVO21090003",Description:"BOBBY TOURIST GOLD BUCKLE POUSSIN",Status:"In process",OrderDate:"27-09-21",SerialNo:"SN00025",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"BOYY PTE LTD.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
-//     {No:"BTH-SVO21090004",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00026",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"BOYY PTE LTD.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
-//     {No:"BTH-SVO21090005",Description:"BOBBY TOURIST GOLD BUCKLE POUSSIN",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00027",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"BOYY PTE LTD.",Sendto365BC:"1",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
-//     {No:"BTH-SVO21090006",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00028",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"},
-//     {No:"BTH-SVO21090007",Description:"KARL 24 GOLD BUCKLE T-REX",Status:"Pending",OrderDate:"27-09-21",SerialNo:"SN00029",Branch:"CHIDLOM",CustomerNo:"3000001",Name:"Triple P Applications Co.,Ltd.",Sendto365BC:"0",ServiceOrderType:"REPAIR",ReleaseStatus:"Open"}
-// ]
 const MainComponent = () => {
     const { serialno } = useParams();
     const [CustsInfo, setCustsInfo] = useState([])
@@ -85,14 +56,12 @@ const MainComponent = () => {
     const refFaultArea_Val = React.createRef()
     const refSymptomCode_Val = React.createRef()
     const refFaultCode_Val = React.createRef()
-    const refDDL_ItemNo_Val = React.createRef()
-    const refDDL_ItemType_Val = React.createRef()
+    
+    
     // end dropdown
-    const SearchValueFieldChange = (e) => {
-        // setSearchValueField_(e.target.value)
-        // console.log(SearchValueField_)
-    }
-
+    // const SetDDL_CreateServiceOrderTypeVal = (e) => { 
+    //     setDDL_CreateServiceOrderType_Val( ( e.target.value ) )
+    // }
     let textCustName = React.createRef()
     //*********Initial GetCustInfo  */
     useEffect(async () => {
@@ -152,23 +121,45 @@ const MainComponent = () => {
         setCustsInfoFromSearch(CustsInfo.filter(CustsInfo => CustsInfo.No.includes(no_)))
         handleCloseshowCustSearch()
     }
-    //Invoice Line
+    //Save Data
+    //Save Data->General
+    const refDescription = React.createRef()
+    const refCustomerNo = React.createRef()
+    const refService_Order_Type = React.createRef()
+    const refShiptoName = React.createRef()
+    const refShiptoAddress = React.createRef()
+    const refShiptoAddress2 = React.createRef()
+    const refShiptoCity = React.createRef()
+    const refShiptoPostCode = React.createRef()
+    const refShiptoPhoneNo = React.createRef()
+    //Save Data->ServiceItemLine
+    const refService_Item_No = React.createRef()
+    const refRepair_Status_Code = React.createRef()
+    const refFault_Area_Code = React.createRef()
+    const refSymptom_Code = React.createRef()
+    const refFault_Cod = React.createRef()
 
+    //General 
+    const current = new Date()
+    const date_ = `${current.getFullYear()}-${  ("0" + ( current.getMonth() + 1 ) ).slice(-2)  }-${ ("0" + current.getDate() ).slice(-2) }`
+    var time_ = moment().format(' hh:mm:ss.SS')    
+    const [Status_Val, setStatus_Val] = useState('Pending')
+    const [Order_Date_Val, setOrder_Date_Val] = useState( date_ )
+    const [Order_Time_Val, setOrder_Time_Val] = useState(time_)    
+    //Invoice Line
     const [InvoiceLineDataAll, setInvoiceLineDataAll] = useState([])
     const [InvoiceLineNoData, setInvoiceLineNoData] = useState([])
     const [InvoiceLine_No, setInvoiceLine_No] = useState(0)
     const [DDL_ItemType_Val, setDDL_ItemType_Val] = useState('')//Type: "Item"
     const [InvoiceLineNo, setInvoiceLineNo] = useState('')
     const [Item_Desc_Val, setItem_Desc_Val] = useState('')
-    const [Item_Quantity, setItem_Quantity] = useState(0)
-    const [Item_LineDiscount, setItem_LineDiscount] = useState(0)
-    const [Item_LineDiscountAmount, setItem_LineDiscountAmount] = useState(0)    
+    const [DDL_ItemNo, setDDL_ItemNo] = useState('')
+    const [InvoiceLineAPI_Data, setInvoiceLineAPI_Data] = useState([])
+    const [ResponseData, setResponseData] = useState([])   
 
     const GetItemNo = (e) => {
         let url_ = ""
-        setItem_Desc_Val('')
-        setInvoiceLineNo('')
-        setDDL_ItemType_Val((e.target.value))
+        setDDL_ItemType_Val( ( e.target.value ) )
         if (e.target.value == 'Service') {
             url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/item/?$filter=Type eq 'Service'"
         }
@@ -211,12 +202,20 @@ const MainComponent = () => {
             console.log('err', err)
         })// axios
     }
+    let Item_Code_Val
+    let Item_Desc_Val_
     const SetItemDesc = (e) => {         
         //const arrItem = (e.target.options[e.target.selectedIndex].text).toString().split(':')
         const arrItem = (e.target.value).toString().split(':')
-        setItem_Desc_Val(arrItem[1].trim())
-        setInvoiceLineNo(arrItem[0].trim())
-        //refDDL_ItemNo_Val = e.target.value
+        setDDL_ItemNo(e.target.value)
+        setItem_Desc_Val( arrItem[1].trim() )
+        setInvoiceLineNo( arrItem[0].trim() )
+        Item_Desc_Val_ = arrItem[1].trim()
+        Item_Code_Val = arrItem[0].trim()
+        console.log(Item_Desc_Val_)
+        console.log(Item_Code_Val)
+
+
         // setItem_Desc_Val( ( prevItems ) => 
         //     [            
         //         arrItem[1].trim(),...prevItems 
@@ -229,8 +228,13 @@ const MainComponent = () => {
         // //Item_Desc_Val = arrItem[1].trim()
         // //console.log( arrItem[1].trim() )
         // console.log( Item_Desc_Val )
-
     }
+
+    const refItem_Quantity = React.createRef()
+    const refItem_LineDiscount = React.createRef()
+    const refItem_LineDiscountAmount = React.createRef()
+    const refDDL_ItemType = React.createRef()
+    const refDDL_ItemNo = React.createRef()
     const AddInvoiceLine = () => {
         //dataItemLine.push({Type:"Item",No:"SV005",Description:"เปลี่ยนซิมในกระเป๋า Slash+Pocket",Quantity:"1",UnitofMeasureCode:"PSC",UnitPriceExclVAT:"2,200.00",LineDiscount:"10",LineDiscountAmount:"220",LineAmountExclVAT:"1,980.00",AmountIncludingVAT:"2,118.60"})        
         setInvoiceLine_No(InvoiceLine_No+1)
@@ -241,14 +245,75 @@ const MainComponent = () => {
                 , Type: DDL_ItemType_Val
                 , No: InvoiceLineNo
                 , Description: Item_Desc_Val
-                , Quantity: Item_Quantity                
+                , Quantity: refItem_Quantity.current.value               
                 , UnitPriceExclVAT: ''
-                , LineDiscount: Item_LineDiscount
-                , LineDiscountAmount: Item_LineDiscountAmount
+                , LineDiscount: refItem_LineDiscount.current.value
+                , LineDiscountAmount: refItem_LineDiscountAmount.current.value
                 , LineAmountExclVAT: ''
                 , AmountIncludingVAT: ''
             }, ...prevItems])
-        console.log("InvoiceLineDataAll: " + InvoiceLineDataAll)
+        setInvoiceLineAPI_Data([
+            {
+                Document_Type: 'Service'
+                , Line_No: InvoiceLine_No
+                , Type: DDL_ItemType_Val
+                , No: InvoiceLineNo
+                , Quantity: parseInt(refItem_Quantity.current.value)
+                , Line_Discount_Percent: parseInt(refItem_LineDiscount.current.value)
+                , Line_Discount_Amount: parseInt(refItem_LineDiscountAmount.current.value)
+            }])        
+        //console.log("InvoiceLineDataAll: " + InvoiceLineDataAll)
+    }
+    //Save Data
+    const SendData =()=>
+    {
+        const data={
+            "Description": refDescription.current.value,			
+            "Customer_No": refCustomerNo.current.value,			
+            "Service_Order_Type": refService_Order_Type.current.value,			
+            "Status": Status_Val,			
+            "Order_Date": Order_Date_Val,			
+            "Order_Time": Order_Time_Val,			
+            "Ship_to_Name": refShiptoName.current.value,			
+            "Ship_to_Address": refShiptoAddress.current.value,			
+            "Ship_to_Address_2": refShiptoAddress2.current.value,			
+            "Ship_to_City": refShiptoCity.current.value,			
+            "Ship_to_Post_Code": refShiptoPostCode.current.value,			
+            "Ship_to_Phone_No": refShiptoPhoneNo.current.value,
+            "service_item_line": [{
+                "Line_No": 10000,		
+                "Service_Item_No": refService_Item_No.current.value,		
+                Repair_Status_Code: refRepair_Status_Code.current.value,		
+                Fault_Area_Code: refFault_Area_Code.current.value,		
+                Symptom_Code: refSymptom_Code.current.value,		
+                Fault_Code: refFault_Cod.current.value
+            }],
+            service_invoice_line:InvoiceLineAPI_Data
+        }
+        console.log( data )   
+             const res = axios({
+                 headers: {
+                     "Content-Type": "application/json",
+                     "If-Match": "*"
+                 },
+                 data: JSON.parse(data),
+                 method: "post",       
+                 url: "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line",
+                 auth: {
+                     username: 'TPPADMIN',
+                    password: 'P@ssw0rd@1'
+                }
+            }).then(res => {
+                if (res.status == 200) {
+                    setResponseData(JSON.parse(JSON.stringify(res.data.value)))
+                    console.log( ResponseData )
+                } else {
+
+                }
+            }).catch(err => {
+                console.log('err', err)
+            });
+           
     } 
     return (<>
         <Container fluid style={{ width: "100%" }}>
@@ -264,7 +329,7 @@ const MainComponent = () => {
                     <Button variant="primary" className='CreateServiceOrder_buttun'>Print Tax Invoice/Receipt</Button>&nbsp;
                     <Button variant="primary" className='CreateServiceOrder_buttun'>Print Repair Form</Button>&nbsp;
                     <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary'>Post Sales Invoice</Button>&nbsp;
-                    <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary'>Save</Button>
+                    <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary' onClick={SendData}>Save</Button>
                 </Col>
             </Row>
             <Row className="service_order_rowForm">
@@ -305,7 +370,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="Description" id="Description"
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Description : ""}
+                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Description : ""} 
+                            ref={refDescription} 
                             className="required CreateServiceOrderTB" placeholder="Description"
                         />
                     </div>
@@ -329,7 +395,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="CustomerNo" id="CustomerNo"
-                            className="required CreateServiceOrderCustNoSearchTB"
+                            className="required CreateServiceOrderCustNoSearchTB" 
+                            ref={refCustomerNo}  
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Customer_No : ""}
                             placeholder="Customer No" />&nbsp;
                         <Button variant="primary" style={{ width: "2.5rem" }} className='CreateServiceOrder_buttun'
@@ -342,10 +409,17 @@ const MainComponent = () => {
                 </Col>
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
+                    {/* <select className="custom-select select_control"
+                                            id="DDL_ItemType"
+                                            name="DDL_ItemType"
+                                            style={{ width: 'auto' }}
+                                            onChange={GetItemNo}> */}
+
                         <select className="custom-select select_control"
                             id="DDL_CreateServiceOrderType"
                             name="DDL_CreateServiceOrderType"
-                            ref={refServiceOrderType_Val} onChange={SearchValueFieldChange}>
+                            ref={refService_Order_Type}  
+                            >
                             {
                                 useEffect(async () => {
                                     const res = await axios({
@@ -530,7 +604,7 @@ const MainComponent = () => {
                             id="DDL_Branch"
                             name="DDL_Branch"
                             ref={refServiceOrderType_Val} style={{ width: "auto" }}
-                            onChange={SearchValueFieldChange}>
+                            >
                             {
                                 useEffect(async () => {
                                     const res = await axios({
@@ -725,7 +799,7 @@ const MainComponent = () => {
                                     CustsInfoFromSearch.map((element) => {
                                         return (
                                             <tr key={uuid()}>
-                                                <td>{element.No}</td>
+                                                <td>{element.No}<input type="hidden" name="hiddenInput" id="hiddenInput" ref={refService_Item_No} value={element.No} /></td>
                                                 <td>{element.Item_No}</td>
                                                 <td>-</td>
                                                 <td>{element.Serial_No}</td>
@@ -735,9 +809,9 @@ const MainComponent = () => {
                                                         <select className="custom-select select_control"
                                                             id="DDL_RelpairStatus"
                                                             name="DDL_RelpairStatus"
-                                                            ref={refRepairStatus_Val}
+                                                            ref={refRepair_Status_Code}
                                                             style={{ width: "auto" }}
-                                                            onChange={SearchValueFieldChange}>
+                                                            >
                                                             <option></option>
                                                             {
                                                                 RepairStatus.map((element) => {
@@ -757,9 +831,9 @@ const MainComponent = () => {
                                                     <select className="custom-select select_control"
                                                         id="DDL_Fault_Area"
                                                         name="DDL_Fault_Area"
-                                                        ref={refRepairStatus_Val}
+                                                        ref={refFault_Area_Code}
                                                         style={{ width: "auto" }}
-                                                        onChange={SearchValueFieldChange}>
+                                                        >
                                                         <option key={uuid()}></option>
                                                         {
                                                             FaultArea.map((element) => {
@@ -777,9 +851,9 @@ const MainComponent = () => {
                                                     <select className="custom-select select_control"
                                                         id="DDL_SymptomCode"
                                                         name="DDL_SymptomCode"
-                                                        ref={refRepairStatus_Val}
+                                                        ref={refSymptom_Code}
                                                         style={{ width: "auto" }}
-                                                        onChange={SearchValueFieldChange}>
+                                                        >
                                                         <option key={uuid()}></option>
                                                         {
                                                             SymptomCode.map((element) => {
@@ -797,9 +871,9 @@ const MainComponent = () => {
                                                     <select className="custom-select select_control"
                                                         id="DDL_Fault_Code"
                                                         name="DDL_Fault_Code"
-                                                        ref={refRepairStatus_Val}
+                                                        ref={refFault_Cod}
                                                         style={{ width: "auto" }}
-                                                        onChange={SearchValueFieldChange}>
+                                                        >
                                                         <option key={uuid()}></option>
                                                         {
                                                             FaultCode.map((element) => {
@@ -883,8 +957,9 @@ const MainComponent = () => {
                                         <select className="custom-select select_control"
                                             id="DDL_ItemType"
                                             name="DDL_ItemType"
-                                            style={{ width: 'auto' }}
-                                            onChange={GetItemNo}                                         >
+                                            style={{ width: 'auto' }} 
+                                            ref={refDDL_ItemType}
+                                            onChange={GetItemNo}>
                                             <option></option>
                                             <option value="Service">Item</option>
                                             <option value="gl_account">G/L Account</option>
@@ -894,14 +969,15 @@ const MainComponent = () => {
                                     <td>
                                         <select className="custom-select select_control"
                                             id="DDL_ItemNo" name="DDL_ItemNo"
-                                            style={{ width: 'auto' }}
+                                            style={{ width: 'auto' }} 
+                                            ref={refDDL_ItemNo} 
+                                            value={DDL_ItemNo}
                                             onChange={SetItemDesc}>
                                             <option key={uuid()}></option>
                                             {
-                                                InvoiceLineNoData.map((element) => { 
-                                                    
+                                                InvoiceLineNoData.map((element) => {                                                     
                                                     return (
-                                                        <option key={element.No} value={element.No + `: ` + element.Description}>
+                                                        <option key={uuid()} value={element.No + `: ` + element.Description}>
                                                             {element.No}
                                                         </option>
                                                     )
@@ -913,13 +989,13 @@ const MainComponent = () => {
                                     <td>
                                         <input type="text" name="Item_Desc" id="Item_Desc" style={{ width: "15rem" }}
                                             className="required CreateServiceOrderTB_InvoiceLineReadOnly"
-                                            defaultValue={Item_Desc_Val.length > 0 ? Item_Desc_Val : ""}
+                                            defaultValue={Item_Desc_Val}
                                             readOnly="readOnly" />
                                     </td>
                                     <td>
                                         <input type="text" name="Item_Quantity" id="Item_Quantity"
                                             className="required CreateServiceOrderTB_InvoiceLine" style={{ width: "5rem" }} 
-                                            onChange={(event) => { setItem_Quantity(event.target.value) }}
+                                            ref={refItem_Quantity} 
                                             defaultValue="" />
                                     </td>                                    
                                     <td>
@@ -927,14 +1003,14 @@ const MainComponent = () => {
                                     </td>
                                     <td>
                                         <input type="text" name="Item_LineDiscount" id="Item_LineDiscount" 
-                                        onChange={(event) => { setItem_LineDiscount(event.target.value) }} 
+                                        ref={refItem_LineDiscount}                                          
                                         className="required CreateServiceOrderTB_InvoiceLine" />
                                     </td>
                                     <td>
                                         <input type="text" 
                                         name="Item_LineDiscountAmount" 
                                         id="Item_LineDiscountAmount"  
-                                        onChange={(event) => { setItem_LineDiscountAmount(event.target.value) }}                                        
+                                        ref={refItem_LineDiscountAmount}                                        
                                         className="required CreateServiceOrderTB_InvoiceLine" />
                                     </td>
                                     <td>
@@ -1078,7 +1154,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="ShiptoName" id="ShiptoName"
-                            className="required CreateServiceOrderTB" placeholder="Ship-to Name"
+                            className="required CreateServiceOrderTB" placeholder="Ship-to Name" 
+                            ref={refShiptoName}
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Customer_Name : ""}
                         />
                     </div>
@@ -1089,7 +1166,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="ShiptoCity" id="ShiptoCity"
-                            className="required CreateServiceOrderTB" placeholder="Ship-to City"
+                            className="required CreateServiceOrderTB" placeholder="Ship-to City" 
+                            ref={refShiptoCity} 
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].City : ""}
                         />
                     </div>
@@ -1101,7 +1179,8 @@ const MainComponent = () => {
                 </Col>
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
-                        <input type="text" name="ShiptoAddress"
+                        <input type="text" name="ShiptoAddress" 
+                            ref={refShiptoAddress} 
                             id="ShiptoAddress"
                             className="required CreateServiceOrderTB" placeholder="Ship-to Address"
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Address : ""}
@@ -1114,7 +1193,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="ShiptoPostCode"
-                            id="ShiptoPostCode" className="required CreateServiceOrderTB"
+                            id="ShiptoPostCode" className="required CreateServiceOrderTB" 
+                            ref={refShiptoPostCode} 
                             placeholder="Ship-to Post Code"
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Post_Code : ""}
                         />
@@ -1128,7 +1208,8 @@ const MainComponent = () => {
                 <Col sm={3} className="CreateServiceOrderColItem ColItemright">
                     <div className="form-group">
                         <input type="text" name="ShiptoAddress2"
-                            id="ShiptoAddress2" className="required CreateServiceOrderTB"
+                            id="ShiptoAddress2" className="required CreateServiceOrderTB" 
+                            ref={refShiptoAddress2} 
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Address_2 : ""}
                             placeholder="Ship-to Address 2"
                         />
@@ -1142,24 +1223,11 @@ const MainComponent = () => {
                         <input type="text" name="ShiptoPhoneNo"
                             id="ShiptoPhoneNo"
                             className="required CreateServiceOrderTB"
-                            placeholder="Ship-to Phone No"
+                            placeholder="Ship-to Phone No" 
+                            ref={refShiptoPhoneNo}                             
                             defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Phone_No : ""}
                         />
                     </div>
-                </Col>
-            </Row>
-            <Row className="service_order_rowForm">
-                <Col sm={2} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
-                    <label htmlFor="ShiptoAddress2" className="required CreateServiceOrder_label"></label>
-                </Col>
-                <Col sm={3} className="CreateServiceOrderColItem ColItemright">
-
-                </Col>
-                <Col sm={2} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
-
-                </Col>
-                <Col sm={3} className="CreateServiceOrderColItem ColItemright">
-
                 </Col>
             </Row>
         </Container>
