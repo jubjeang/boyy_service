@@ -87,11 +87,8 @@ const ResultSearch = ()=>{
                             <div className="form-group">    
                             {() => console.log(ProductsInfo.length) }                                        
                                 <input type="text" name="No" id="No"
-                                 className="required CheckProductTBandTextArea" placeholder="No" 
-                                 defaultValue="" 
-                                 value={ProductsInfo.length>0 ? ProductsInfo[0].No : ""}
-                                                                
-                                     />
+                                 className="required CheckProductTBandTextArea" placeholder="No"                                  
+                                 defaultValue={ProductsInfo.length>0 ? ProductsInfo[0].No : ""} />
                             </div>
                         </Col>
                         <Col sm={2} className="CheckProductColItem CheckProductColItemleft">                                        

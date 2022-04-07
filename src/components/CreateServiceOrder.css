@@ -17,6 +17,29 @@ table tr td{
     text-align: left;
     font-size: 0.5rem;
 }
+
+ /* css */
+  .input-icon-wrap {
+    border: 1px solid;    
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+  }
+  
+  .input-icon {
+    background: #ddd;
+    vertical-align: middle;
+  }
+  
+  .input-with-icon {
+    border: none;
+    flex: 1;
+  }
+  
+  .input-icon, .input-with-icon {
+    padding: 5px;
+  }
+ /* end css icon in textbox */
 .CreateServiceOrderrowForm{
     padding-bottom: 0px;
     height: 50px;

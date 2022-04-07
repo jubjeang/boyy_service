@@ -30,7 +30,7 @@ const MainComponent = ()=>{
     const GetStockInfo = () => {
         const ItemNo_=ItemNo.current.value
         console.log(ItemNo_);       
-        const url_ = "http://office.triplepcloud.com:21012/Boyy_Dev/api/TPP/API/v1.0/companies(b9f4932b-b493-ec11-a5c8-00155d040808)/stock?$filter=ItemNo eq '"+ItemNo_+"'"
+        const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/stock?$filter=ItemNo eq '"+ItemNo_+"'"
         console.log(url_)
         axios({
             headers: {
