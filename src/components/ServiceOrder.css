@@ -17,6 +17,80 @@ table tr td{
     text-align: left;
     font-size: 0.5rem;
 }
+ /* css icon in textbox */
+ .ServiceOrder_input-icon-wrap {
+    border: 1px solid;    
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+  }
+  .ServiceOrder_input-icon {
+    background: #ddd;
+    vertical-align: middle;
+  }
+  .ServiceOrder_input-with-icon {
+    border: none;
+    flex: 1;
+  }
+  .ServiceOrder_input-icon, .input-with-icon
+  {
+    padding: 10px;
+    padding-top: 1px;
+  }
+  .ServiceOrder_input-icon a :hover
+  {
+    text-decoration: none;
+    color: black;
+    border: none;
+  }  
+  .ServiceOrder_ColSubmitSearch
+  {
+    padding-right: 1px;
+    margin-right: 1px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;   
+    text-align: center;
+    height: 4rem;
+    color: white;
+    font-size: 11px;
+    vertical-align: top;  
+    border-radius: 2px;
+    text-align: left;
+}
+.ServiceOrder_ColSubmitSearch ul li a:hover
+{    
+    color: black;
+    border: 1px black solid;
+    background-color: white;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 10rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px;
+}
+.ServiceOrder_ColSubmitSearch li
+{    
+    padding: 1px 0;    
+    display: block; 
+    border-radius: 2px; 
+}
+.ServiceOrder_ColSubmitSearch  ul li a
+{        
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 3rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px; 
+}
+ /* end css icon in textbox */
 .ServiceOrderrowForm{
     padding-bottom: 0px;
     height: 50px;
@@ -29,7 +103,7 @@ table tr td{
     text-align: center;
     font-size: 0.8875rem;
     margin-left:auto; 
-        			margin-right:auto;
+    margin-right:auto;
 }
 .select_control{
     font-family: "Gotham-Bold", sans-serif;
@@ -222,17 +296,6 @@ label {
     height: 30px !important;
     border-radius: 2px;
 }
-/* input[type="text"], textarea{
-    font-size: 11px;
-    font-size: 0.6875rem;
-    line-height: 16px;
-    font-weight: 300;
-    text-transform: uppercase;
-    width: 10% !important;
-    height: 30px !important;
-    border-radius: 2px;
-
-} */
 textarea{   
     height: 70px !important;
     border-radius: 2px;

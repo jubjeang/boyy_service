@@ -23,13 +23,24 @@
     text-align: center;
     color:black;
     margin: 0 !important;
+    text-decoration: none;
+    /* font-weight: bold; */
+}
+.TextLogo a
+{
+    font-family: GothamBook;
+    font-size: 40px !important;
+    text-align: center;
+    color:black !important;
+    margin: 0 !important;
+    text-decoration: none !important;
     /* font-weight: bold; */
 }
 .TextLogo a :hover{
-  text-decoration: none;
-  color: black;
+  text-decoration: none !important;
+  color: black !important;
 }
 .TextLogo a{
-  text-decoration: none;
+  text-decoration: none !important;
   color: black;
 }

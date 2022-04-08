@@ -470,7 +470,7 @@ const MainComponent = () => {
                             placeholder="Customer No" 
                             style={{height:"1.6rem"}}
                             />
-                        <span class="input-icon"  style={{height:"2rem"}}>
+                        <span className="input-icon"  style={{height:"2rem"}}>
                             <FaSistrix onClick={handleShowshowCustSearch} style={{cursor: "pointer"}} />        
                         </span> 
                     </div>

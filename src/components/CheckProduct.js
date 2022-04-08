@@ -7,8 +7,8 @@ import CreateServiceOrder from './CreateServiceOrder'
 import CheckStockAvaliable from './CheckStockAvaliable'
 import './CommonCss.css'
 import './CheckProduct.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios';
+import { FaSistrix } from 'react-icons/fa'
 
 
 // const data =[
@@ -419,34 +419,23 @@ const MainComponent = ()=>{
     return (
             <Container fluid>                
                         <Row style={{display: "flex", alignItems: "center"}}>
-                            <Col sm={1} className="CheckProductColItem CheckProductColItemleft">                                        
-                                <label htmlFor="name" className="required">SERIAL NO.</label>                                            
-                            </Col>
-                            <Col sm={5} className="CheckProductColItem CheckProductColItemright">
-                                <div className="form-group">                                            
+                            <Col sm={4} className="CheckProductColItem CheckProductColItemright">
+                                <div className="form-group CheckProduct_input-icon-wrap">                   
                                     <input type="text" name="SerialNo" id="SerialNo" 
-                                    className="required CheckProductTBandTextArea" 
-                                    style={{width:"150%",fontFamily: 'FontAwesome'}} 
-                                     placeholder="&#xf002;" 
-                                     onChange={GetSerial_No}
-                                        defaultValue="" ref={textSerialNo} />
+                                        className="required CheckProductTBandTextArea CheckProduct_input-with-icon" 
+                                        style={{height:"1.6rem"}} 
+                                        placeholder="Serial No" 
+                                        onChange={GetSerial_No} 
+                                        defaultValue="" 
+                                        ref={textSerialNo} 
+                                        />
+                                    <span className="CheckProduct_input-icon"  style={{height:"2rem", width:"2rem"}}> 
+                                        <a href={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`}>
+                                            <FaSistrix  /> 
+                                        </a> 
+                                    </span> 
                                 </div>
-                            </Col>
-                            <Col sm={2} className="align-left ColSubmitSearch">                                        
-                                    <div className="text-center" 
-                                    style={{height: "45px", padding:"0px", marginLeft:'0px', paddingLeft:'0px'}} >                                             
-                                            <ul>
-                                                <li>
-                                                {/* <FontAwesomeIcon icon={['fab', 'google']} /> */}
-                                                <Link 
-                                                to={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`} 
-                                                >                                                        
-                                                        Search
-                                                    </Link>                                   
-                                                </li>
-                                            </ul>
-                                    </div>                                           
-                            </Col>           
+                            </Col>                                      
                         </Row>
             </Container>
             );
@@ -457,8 +446,8 @@ const CheckProduct = ()=>{
                 <Container fluid>
                     <Row>
                         <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
-                                <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
-                                    <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
+                                <div style={{ marginTop : 0, paddingTop : "5%"}} className="TextLogo">                                                    
+                                    <Link  to="/MainServices">B O Y Y</Link>
                                 </div>
                         </Col>
                     </Row>

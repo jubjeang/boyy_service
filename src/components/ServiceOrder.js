@@ -205,9 +205,7 @@ const ServiceOrderCard = ()=>{
                         <input type="text" name="CustomerNo" id="CustomerNo"
                         className="required ServiceOrderCustNoSearchTB"                          
                         value={CustsInfoFromSearch.length>0 ? CustsInfoFromSearch[0].No : ""}
-                         placeholder="Customer No"
-                           
-                             />&nbsp;
+                         placeholder="Customer No" />&nbsp;
                             <Button variant="primary" style={{width: "2.5rem" }}  className='servic_eorder_buttun'
                              onClick={handleShowshowCustSearch}>Search
                             </Button>
@@ -1306,17 +1304,6 @@ const MainComponent = ()=>{
         <div style={{display: "flex"}}>
             <Container fluid>
                 <Row className="ServiceOrderrowForm">
-                    <Col sm={5} className="ServiceOrderColItem ServiceOrderColSubmitSearch" 
-                    style={{marginTop:'0 !important',paddingTop:'0 !important', verticalAlign:'top'}}
-                    >       
-                        <input type="text" 
-                            name="SearchValue" 
-                            id="SearchValue" 
-                            className="required  ServiceOrderTB"                     
-                            placeholder="&#xf002;" 
-                            style={{width: '100%',fontFamily: 'FontAwesome'}}
-                            ref={refSearchValue} />
-                   </Col>
                     <Col sm={2} className="ServiceOrderColContent" style={{marginRight:'0px !important',paddingRight:'0px !important'}}>  
                         <select className="custom-select select_control"
                         id="SearchValueField" 
@@ -1327,18 +1314,24 @@ const MainComponent = ()=>{
                             <option value="Name">Name</option>
                             <option value="Serial_No">Serial No</option>
                         </select>
-                        </Col>
-                    <Col sm={2} className="ServiceOrderColSubmitSearch" style={{marginLeft:'0px !important'
-                    ,paddingLeft:'0px !important'
-                    , width:'2rem'}}><ul style={{margin:'0 !important',padding:'0 !important', width:'7rem'}}>
-                            <li style={{margin:'0 !important',padding:'0 !important'}}>   
-                                <Link style={{margin:'0 !important',padding:'0 !important',fontFamily:'GothamBook'}} 
-                                onClick={GetServiceOrderInfo} to='/MainServices/ServiceOrder' >
-                                    Search
-                                </Link>                                   
-                            </li>
-                        </ul>                            
-                    </Col>
+                    </Col>                    
+                    <Col sm={4} className="ServiceOrderColItem " 
+                    style={{marginTop:'0 !important',paddingTop:'0 !important', verticalAlign:'top'}} >
+                        <div className="form-group ServiceOrder_input-icon-wrap">                   
+                                    <input type="text" name="SearchValue" id="SearchValue" 
+                                        className="required ServiceOrder_input-with-icon" 
+                                        style={{height:"1.7rem"}} 
+                                        placeholder=""                                         
+                                        defaultValue="" 
+                                        ref={refSearchValue} />
+                                    <span className="ServiceOrder_input-icon"  style={{height:"1.7rem", width:"2rem",cursor:"pointer"}}> 
+                                        <a onClick={GetServiceOrderInfo}>
+                                            <FaSistrix  /> 
+                                        </a> 
+                                    </span> 
+                        </div>
+                   </Col>
+                    
                 </Row>
                 <Row className="ServiceOrderrowForm" 
                  style={{margin:'0 !important',padding:'0 !important'}}>
@@ -1401,8 +1394,8 @@ const ServiceOrder = ()=>{
             <Container fluid>
                 <Row>
                     <Col xs={12} lg={12} xl={12} md={12} sm={12} xxl={12} className="gfh-logo">
-                            <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
-                                <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
+                            <div style={{ marginTop : 0, paddingTop : "5%"}} className="TextLogo">                                                    
+                                <Link  to="/MainServices">B O Y Y</Link>
                             </div>
                     </Col>
                 </Row>

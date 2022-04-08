@@ -5,6 +5,80 @@
 font{
     font-family: "Gotham-Bold", sans-serif;
 }
+ /* css icon in textbox */
+ .CheckStockAvailable_input-icon-wrap {
+    border: 1px solid;    
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+  }
+  .CheckStockAvailable_input-icon {
+    background: #ddd;
+    vertical-align: middle;
+  }
+  .CheckStockAvailable_input-with-icon {
+    border: none;
+    flex: 1;
+  }
+  .CheckStockAvailable_input-icon, .input-with-icon
+  {
+    padding: 10px;
+    padding-top: 1px;
+  }
+  .CheckStockAvailable_input-icon a :hover
+  {
+    text-decoration: none;
+    color: black;
+    border: none;
+  }  
+  .CheckStockAvailable_ColSubmitSearch
+  {
+    padding-right: 1px;
+    margin-right: 1px;
+    padding-top: 0;
+    margin-top: 0;
+    list-style: none;
+    overflow: hidden;   
+    text-align: center;
+    height: 4rem;
+    color: white;
+    font-size: 11px;
+    vertical-align: top;  
+    border-radius: 2px;
+    text-align: left;
+}
+.CheckStockAvailable_ColSubmitSearch ul li a:hover
+{    
+    color: black;
+    border: 1px black solid;
+    background-color: white;
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 10rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px;
+}
+.CheckStockAvailable_ColSubmitSearch li
+{    
+    padding: 1px 0;    
+    display: block; 
+    border-radius: 2px; 
+}
+.CheckStockAvailable_ColSubmitSearch  ul li a
+{        
+    text-decoration: none;
+    text-transform: uppercase;    
+    width: 3rem;
+    height: 1rem;   
+    display:table-cell;
+    vertical-align: middle; 
+    text-align: center;
+    border-radius: 2px; 
+}
+ /* end css icon in textbox */
 
 .table_display_result table tr th{
     text-align: center;

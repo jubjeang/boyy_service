@@ -11,6 +11,7 @@ import CreateServiceOrder from './CreateServiceOrder';
 import CheckProduct from './CheckProduct';
 import axios from 'axios';
 import uuid from 'react-uuid'
+import { FaSistrix } from 'react-icons/fa'
 
 
 const data =[
@@ -62,30 +63,22 @@ const MainComponent = ()=>{
                     <Col sm={1} className=" CheckStockAvailColItem  CheckStockAvailColItemleft">                                        
                         <label htmlFor="name" className="required">Item No</label>                                            
                     </Col>
-                    <Col sm={5} className=" CheckStockAvailColItem CheckStockAvailColSubmitSearch">
-                        <div className="form-group">                                            
-                            <input type="text" 
-                            style={{fontFamily: 'FontAwesome',width:"25rem",height:'2rem'}} 
-                            name="ItemNo" id="ItemNo" 
-                            className="required" 
-                            placeholder="&#xf002;" 
-                            ref={ItemNo}
-                                defaultValue="" />
+                    <Col sm={5} className=" CheckStockAvailColItem"   style={{paddingTop:"1.7rem"}}>
+                        <div className="form-group CheckStockAvailable_input-icon-wrap">                   
+                            <input type="text" name="SearchValue" id="SearchValue" 
+                                className="required CheckStockAvailable_input-with-icon" 
+                                style={{height:"1.7rem"}} 
+                                placeholder=""                                         
+                                defaultValue="" 
+                                ref={ItemNo} />
+                            <span className="CheckStockAvailable_input-icon"  style={{height:"1.7rem", width:"2rem",cursor:"pointer"}}> 
+                                <a onClick={GetStockInfo}>
+                                    <FaSistrix  /> 
+                                </a> 
+                            </span> 
                         </div>
                     </Col>
-                    <Col sm={2} className=" CheckStockAvailColItem CheckStockAvailColSubmitSearch"
-                    style={{marginLeft:'0',paddingLeft:'0'}}
-                    >
-                        <ul>
-                            <li>   
-                                <Link
-                                onClick={GetStockInfo} 
-                                style={{fontFamily:'GothamBook'}}>
-                                    Search
-                                </Link>                                   
-                            </li>
-                        </ul>
-                    </Col>  
+
        
                 </Row>
                 <Row className="CheckStockAvailrowForm">
@@ -140,8 +133,8 @@ const CheckStockAvaliable = ()=>{
                                                     alt="Boyy Logo"  
                                                     />
                                                 </a> */}
-                                                <div style={{ marginTop : 0, paddingTop : "5%"}}>                                                    
-                                                    <Link className="TextLogo" to="/MainServices">B O Y Y</Link>
+                                                <div style={{ marginTop : 0, paddingTop : "5%"}} className="TextLogo">                                                     
+                                                    <Link  to="/MainServices">B O Y Y</Link>
                                                 </div>
                         </Col>
                     </Row>
