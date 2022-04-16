@@ -5,6 +5,24 @@
 font{
     font-family: "Gotham-Bold", sans-serif;
 }
+.CheckStockAvailable_ColItem {
+    padding: 0px;
+}
+.CheckStockAvailable_ColItemleft{
+    padding-left: 15px;
+    text-align: left;
+    margin-right: 1px;
+}
+.CheckStockAvailable_IconInTB{
+    font-size: 11px;
+    margin-top: 0.39rem;
+    padding-top: 0px;
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    width: 85% !important;
+    height: 1.6rem !important;
+    border-radius: 2px;
+}
  /* css icon in textbox */
  .CheckStockAvailable_input-icon-wrap {
     border: 1px solid;    
@@ -31,6 +49,7 @@ font{
     color: black;
     border: none;
   }  
+/* end css icon in textbox */
   .CheckStockAvailable_ColSubmitSearch
   {
     padding-right: 1px;

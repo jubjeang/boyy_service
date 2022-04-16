@@ -79,7 +79,7 @@ const ServiceOrderCard = ()=>{
         }).then(res => {
             if (res.status == 200) {
                 setCustsInfoFromSearch( JSON.parse(  JSON.stringify( res.data.value ) ) )
-                console.log(CustsInfoFromSearch)                
+           
             } else {
                 
             }
@@ -93,9 +93,9 @@ const ServiceOrderCard = ()=>{
     const GetCustInfo = () => {
     //setCustsInfo([])
     const CustName=textCustName.current.value
-    console.log(CustName);       
-    const url_ = "http://office.triplepcloud.com:21012/Boyy_Dev/ODataV4/Company('CRONUS - LS Central')/API_Customer?$filter=Name eq '"+CustName+"*'"
-    console.log(url_)
+    
+    const url_="http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/customer'"+CustName+"*'"
+    //const url_ = "http://office.triplepcloud.com:21012/Boyy_Dev/ODataV4/Company('CRONUS - LS Central')/API_Customer?$filter=Name eq '"+CustName+"*'"
     axios({
         headers: {
             "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const ServiceOrderCard = ()=>{
     }).then(res => {
         if (res.status == 200) {
             setCustsInfo( JSON.parse(  JSON.stringify( res.data.value ) ) )
-            console.log(CustsInfo)                
+          
         } else {
             
         }
@@ -121,8 +121,6 @@ const ServiceOrderCard = ()=>{
     const GetCustInfo_ = (no_) => { 
         setCustsInfoFromSearch( [] )
         setCustsInfoFromSearch( CustsInfo.filter( CustsInfo => CustsInfo.No.includes( no_ ) ) )        
-        console.log( CustsInfoFromSearch )
-        console.log( CustsInfoFromSearch[0].No )
         handleCloseshowCustSearch()
     }
     return (<>
@@ -1252,22 +1250,16 @@ const MainComponent = ()=>{
     const [SearchValueField_, setSearchValueField_] = useState('No')   
     const SearchValueFieldChange = (e) => {
         setSearchValueField_(e.target.value)
-        console.log(SearchValueField_)
         //return SearchValueField_
       }
-      console.log(SearchResult.length)
      const GetServiceOrderInfo = () => {        
         const SearchValue_=refSearchValue.current.value
         // const SearchValueField_=refSearchValueField.current.value         
-        console.log('SearchValue: '+SearchValue_)      
-        console.log("SearchValueField_: "+SearchValueField_)
         const SearchValueField__ = SearchValueField_
-        console.log(SearchResult.length)
         let url_ = ""
         if(SearchValueField__ == 'No')
         {
             url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=No eq '"+SearchValue_+"*'"
-            console.log('Search From No')
         }
         else if (SearchValueField_ == 'Name') {
             url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=Name eq '"+SearchValue_+"*'"
@@ -1276,7 +1268,6 @@ const MainComponent = ()=>{
             console.log('Search From Serial No')
             url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=Serial_No eq '"+SearchValue_+"*'"
         }
-        console.log(url_)
             axios({
                 headers: {
                     "Content-Type": "application/json",
@@ -1291,7 +1282,6 @@ const MainComponent = ()=>{
             }).then(res => {
                 if (res.status == 200) {
                     setSearchResult( JSON.parse(  JSON.stringify( res.data.value ) ) )                                        
-                    console.log(SearchResult)      
                     //window.location.href = "/MainServices/CheckProduct/ResultSearch"    
                 } else {
                     

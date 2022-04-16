@@ -17,8 +17,21 @@ table tr td{
     text-align: left;
     font-size: 0.5rem;
 }
+.CreateServiceOrderIconInTB{
+    font-size: 11px;
+    margin-top: 0.39rem;
+    padding-top: 15px;
+    text-transform: uppercase;
+    width: 85% !important;
+    height: 1.6rem !important;
+    border-radius: 2px;
+}
+.form-group-CreateCust {
+    padding-Bottom:"0px";
+    margin-Bottom:"0px";
+  }
 
- /* css */
+ /* css icon in textbox*/
   .input-icon-wrap {
     border: 1px solid;    
     display: flex;
@@ -30,7 +43,6 @@ table tr td{
     background: #ddd;
     vertical-align: middle;
   }
-  
   .input-with-icon {
     border: none;
     flex: 1;
@@ -38,7 +50,17 @@ table tr td{
   
   .input-icon, .input-with-icon {
     padding: 5px;
+    padding-top: 5px;
   }
+    /* .input-with-icon {
+    border: none;
+    flex: 1;
+  }
+  
+  .input-icon, .input-with-icon {
+    padding: 5px;
+  } */
+
  /* end css icon in textbox */
 .CreateServiceOrderrowForm{
     padding-bottom: 0px;
@@ -117,7 +139,7 @@ table tr td{
 .CreateServiceOrderTB_Small{
     font-size: 0.6875rem;
     text-transform: uppercase;
-    width: 65% !important;
+    width: 60% !important;
     height: 1.5rem !important;
     border-radius: 2px;
 }

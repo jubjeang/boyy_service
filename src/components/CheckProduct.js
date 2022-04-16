@@ -27,8 +27,6 @@ const ResultSearch = ()=>{
     const [ProductsInfo, setProductsInfo] = useState([])
 
     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+serialno+"'"        
-    console.log( url_ )
-    console.log('first ProductsInfo.length: '+ProductsInfo.length)
     React.useEffect(async () => {       
        const res = await axios({
             headers: {
@@ -42,18 +40,14 @@ const ResultSearch = ()=>{
                 password: 'P@ssw0rd@1'
             }
         })
-        .then(res =>  {
-               console.log('status 200')
-               setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )
-               console.log(ProductsInfo)
-               //console.log(ProductsInfo[0].No)
-               //console.log('ProductsInfo length :'+ProductsInfo.length)               
+        .then(res =>  { 
+               setProductsInfo(   JSON.parse( JSON.stringify( res.data.value ) )   )            
         }).catch(err => {            
             console.log('err', err)
         })
 
    },[])
-   console.log(ProductsInfo.length)
+
    return (   
                 <Container fluid>
                     <Row className="rowForm">
@@ -85,7 +79,7 @@ const ResultSearch = ()=>{
                         </Col>
                         <Col sm={3} className="CheckProductColItem CheckProductColItemright">
                             <div className="form-group">    
-                            {() => console.log(ProductsInfo.length) }                                        
+                                   
                                 <input type="text" name="No" id="No"
                                  className="required CheckProductTBandTextArea" placeholder="No"                                  
                                  defaultValue={ProductsInfo.length>0 ? ProductsInfo[0].No : ""} />
@@ -412,7 +406,6 @@ const MainComponent = ()=>{
     const [Serial_No, setSerial_No] = useState('')    
     const textSerialNo = React.createRef()
     const GetSerial_No= (e) => {
-        //console.log(e.target.value)
         setSerial_No(e.target.value)
     }    
     
