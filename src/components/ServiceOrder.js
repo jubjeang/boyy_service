@@ -73,8 +73,8 @@ const ServiceOrderCard = ()=>{
             method: "get",
             url: "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_order?$expand=service_item_line,service_invoice_line&$filter=No eq '"+ProductNo+"'",
             auth: {
-                username: 'TPPADMIN',
-                password: 'P@ssw0rd@1'
+                username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+                password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
             }
         }).then(res => {
             if (res.status == 200) {
@@ -104,8 +104,8 @@ const ServiceOrderCard = ()=>{
         method: "get",
         url: url_,
         auth: {
-            username: 'TPPADMIN',
-            password: 'P@ssw0rd@1'
+            username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+            password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
         }
     }).then(res => {
         if (res.status == 200) {
@@ -1276,8 +1276,8 @@ const MainComponent = ()=>{
                 method: "get",
                 url: url_,
                 auth: {
-                    username: 'TPPADMIN',
-                    password: 'P@ssw0rd@1'
+                    username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+                    password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
                 }
             }).then(res => {
                 if (res.status == 200) {

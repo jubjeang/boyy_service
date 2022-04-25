@@ -13,7 +13,7 @@
   border: 1px black solid;
   color: black;
   text-decoration: none;
-  
+ 
   width: 405px;
   display: table-cell;
   vertical-align: middle;
@@ -28,7 +28,7 @@
   color: white;
   background-color: #58595b;
   text-decoration: none;
-  
+ 
   height: 50px;
   width: 405px;
   display: table-cell;
@@ -85,7 +85,7 @@
   margin-bottom: 12px;
 }
 .uppercase {
-  
+ 
 }
 /* Table of Contents
 ==================================================
@@ -179,33 +179,35 @@ html [type="button"],
   letter-spacing: 0.5px;
 }
 
-.button-submit {
-  height: 50px !important;
-  border: 100px !important;
-  border-color: rgb(255, 0, 0) !important;
-  color: white;
-  background-color: #58595b !important;
+/* 
+  .button-submit{
+    height: 50px !important;
+    border: 1rem !important;
+    border-color: #000 !important;
+    color: white;
+    background-color: #58595b !important;
+   
+    font-size: 0.78rem;
+    word-spacing: 2px;
+    margin-top: 2rem;
+    width: 100%;
+  }
   
-  font-size: 0.78rem;
-  word-spacing: 2px;
-  margin-top: 2rem;
-  width: 100%;
-}
-
-.button-submit :hover {
-  vertical-align: middle;
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  color: black;
-  border: solid 1px black !important;
-  background-color: #ffffff !important;
-  transition: color 0.4s;
-  transition: background-color 0.4s;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 50px;
-  
-  font-size: 0.78rem;
-  word-spacing: 2px;
-}
+  .button-submit :hover{
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    color: black;
+    border-color: #000000 !important;
+    border: 1px solid black !important;
+    background-color: #ffffff !important;
+    transition: color 0.4s;
+    transition: background-color 0.4s;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+   
+    font-size: 0.78rem;
+    word-spacing: 2px;
+  } */

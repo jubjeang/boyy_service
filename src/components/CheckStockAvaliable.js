@@ -51,8 +51,8 @@ const MainComponent = ()=>{
             method: "get",
             url: url_,
             auth: {
-                username: 'TPPADMIN',
-                password: 'P@ssw0rd@1'
+                username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+                password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
             }
         }).then(res => {
             if (res.status == 200) {

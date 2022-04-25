@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'GothamBook';
+  src: local('GothamBook'), url(./GothamBook.ttf) format('truetype');
+}
+
+.horizontal-menu-login{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;   
+  text-align: center;
+  color: white;
+  font-size: 11px;
+
+}
+.horizontal-menu-login ul li a:hover{
+  background-color: white;
+  border: 1px black solid;
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+    width: 405px;  
+  display:table-cell;
+  vertical-align: middle;
+  transition: 0.4s;
+}
+.horizontal-menu-login li{    
+  padding: 1px 0;    
+  display: block; 
+    width: 405px; 
+}
+.horizontal-menu-login  ul li a{    
+  color: white;
+  background-color: #58595b;
+  text-decoration: none;
+  text-transform: uppercase;    
+  height: 50px;
+    width: 405px; 
+  display:table-cell;
+  vertical-align: middle; 
+  text-align: center;
+
+}
+.textbox_login
+{
+  width: 100% !important;
+  border-color:#000 !important;
+  background-color: transparent !important;
+  font-size: 0.75rem !important;
+  line-height: 45px !important;
+  height: 45px !important;
+}
+
+.textbox_login_fixed
+{
+  width: 100% !important;
+  border-color:#000 !important;
+  color: rgb(0, 0, 0);
+  background-color: transparent !important;
+  font-size: 0.8rem !important;
+  line-height: 30px !important;
+  height: 50px !important;
+  text-transform: none !important;
+}
+
+.textbox_login_fixed_pass
+{
+  width: 100% !important;
+  border-color:#000 !important;
+  color: rgb(0, 0, 0);
+  background-color: transparent !important;
+  font-size: 1rem !important;
+  line-height: 50px !important;
+  height: 50px !important;
+  text-transform: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
+}
+
+#CustomerLoginForm h2, #RecoverPasswordForm h2, #CreateAccount h2 {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 1.5px;
+  margin: 0 !important;
+  padding: 15px 0; }
+@media only screen and (min-width: 50%) {
+    #CustomerLoginForm h2, #RecoverPasswordForm h2, #CreateAccount h2 {
+    font-size: 18px;
+    line-height: 36px;
+    letter-spacing: 2px;
+    margin-bottom: 11px;
+    padding: 0px; } 
+}
+#CustomerLoginForm input, #CustomerLoginForm textarea, #RecoverPasswordForm input, #RecoverPasswordForm textarea, #CreateAccount input, #CreateAccount textarea {
+  -webkit-appearance: none;
+  box-shadow: none; }
+#CustomerLoginForm [type="checkbox"], #RecoverPasswordForm [type="checkbox"], #CreateAccount [type="checkbox"] {
+  -webkit-appearance: checkbox; }
+#CustomerLoginForm [type="radio"], #RecoverPasswordForm [type="radio"], #CreateAccount [type="radio"] {
+  -webkit-appearance: radio; }
+#CustomerLoginForm [type="submit"], #RecoverPasswordForm [type="submit"], #CreateAccount [type="submit"] {
+  margin-bottom: 12px; }
+.uppercase {
+    text-transform: uppercase;
+}
+/* Table of Contents
+==================================================
+
+    #Forms
+    #Site Search
+    #Custom Styling
+    #Error Styling
+==================================================
+*/
+/* ==========================================================================
+#Forms
+========================================================================== */
+/*============================================================================
+  Form scaffolding
+    - Selectors setup for you to style form elements how you want
+    - Focus, error, and disabled states are set to be extended
+==============================================================================*/
+
+/* ==========================================================================
+#Button Wide
+========================================================================== */
+.SignIn { 
+  font-weight: normal; 
+  font-size: 16px;
+  text-align: left;
+}
+#divFormLogin {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.btn-wide {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100% !important; }
+@media only screen and (min-width: 100%) {
+  .btn-wide {
+    padding-left: 3rem;
+    padding-right: 3rem; } }
+/* ==========================================================================
+#Button Secondary
+========================================================================== */
+.btn-secondary {
+    color: #58595b;
+    background-color: #fff;
+    border: 0.5px solid #58595b;
+    height: 40px;
+    line-height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: all .3s ease-in-out; }
+    @media only screen and (min-width: 50%) {
+.btn-secondary {
+        height: 50px;
+        line-height: 50px; } }
+.btn-secondary:hover {
+      background-color: #58595b;
+      color: #fff; }
+      button,
+      html [type="button"],
+      [type="reset"],
+      [type="submit"] {
+        -webkit-appearance: button; }
+.login-exisiting {
+  height: 100%;
+  background-color: whitesmoke;
+  padding: 1rem; }
+  .login-exisiting h2 {
+    margin-top: 0; }
+          
+#RecoverPassword, .registerLink {
+  color: #000;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.5px; }
+
+.label-text{
+    font-size: 0.8rem;
+}
+
+/* 
+.button-submit{
+  height: 50px !important;
+  border: 1rem !important;
+  border-color: #000 !important;
+  color: white;
+  background-color: #58595b !important;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  word-spacing: 2px;
+  margin-top: 2rem;
+}
+
+.button-submit:hover{
+  vertical-align: middle;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  color: black;
+  border-color: #000000 !important;
+  border: 1px solid black !important;
+  background-color: #ffffff !important;
+  transition: color 0.4s;
+  transition: background-color 0.4s;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  word-spacing: 2px;
+} */
+
+.create-account-error{
+  color:red;
+  font-size: 0.6rem;
+  height: auto;
+  text-align: right;
+  opacity: 0;
+  margin-bottom: 1rem;
+}
+
+.create-account-error-show{
+  color:red;
+  font-size: 0.6rem;
+  height: auto;
+  text-align: right;
+  opacity: 1;
+  height:auto;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  transition: opacity 0.6s;
+  text-align: right;
+}
+
+table.table-bordered{
+  border:1px solid transparent;
+}
+table.table-bordered > thead > tr > th{
+  border:1px solid rgb(255, 255, 255);
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid transparent;
+}

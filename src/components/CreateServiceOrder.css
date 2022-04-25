@@ -20,7 +20,8 @@ table tr td{
 .CreateServiceOrderIconInTB{
     font-size: 11px;
     margin-top: 0.39rem;
-    padding-top: 15px;
+    margin-left: 0.8rem;
+    padding-top: 15px;   
     text-transform: uppercase;
     width: 85% !important;
     height: 1.6rem !important;
@@ -178,7 +179,7 @@ table tr td{
     line-height: 16px;
     font-weight: 300;
     text-transform: uppercase;
-    width: 15rem !important;
+    width: 14rem !important;
     height: 2.0rem !important;
     border-radius: 2px;
     text-align: left;
@@ -295,6 +296,15 @@ table tr td{
     font-weight: 300;
     text-transform: uppercase;
     width: 80% !important;
+}
+.CreateServiceOrder_label_Other {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.6rem  !important;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 15% !important;
 }
 .CreateServiceOrderTBSearch{
     font-size: 11px;

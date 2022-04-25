@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'GothamBold';
+    src: local('GothamBold'), url(GothamBold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'GothamBook';
+    src: local('GothamBook'), url(GothamBook.ttf) format('truetype');
+  }
+font{
+    font-family: "GothamBold", sans-serif;
+}
+
+.SidebarNav_ColTwiceTitle{
+    height: 100%;
+    display: flex;
+    padding-top: 20%;
+    padding-bottom: 0%;
+    padding-left: 0%;
+    padding-Right: 0%;
+    margin-left: 0%;
+    margin-right: 0%;
+    justify-Content: center;
+    align-Items: center;
+    text-Align: center;
+    /* border-right: 1px solid black; */
+}
+
+.SidebarNav_ColTwiceTitle a {
+    text-decoration: none;
+    color: black;
+}
+.SidebarNav_twiceTitle {
+    font-Size:100%;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.SidebarNav_label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-size: 0.6875rem;
+    line-height: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 80% !important;
+}

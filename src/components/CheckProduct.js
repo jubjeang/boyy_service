@@ -25,6 +25,7 @@ import { FaSistrix } from 'react-icons/fa'
 const ResultSearch = ()=>{
     const { serialno } = useParams()
     const [ProductsInfo, setProductsInfo] = useState([])
+    
 
     const url_ = "http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/service_item?$filter=Serial_No eq '"+serialno+"'"        
     React.useEffect(async () => {       
@@ -36,8 +37,8 @@ const ResultSearch = ()=>{
             method: "get",
             url: url_,
             auth: {
-                username: 'TPPADMIN',
-                password: 'P@ssw0rd@1'
+                username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+                password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
             }
         })
         .then(res =>  { 
@@ -407,6 +408,7 @@ const MainComponent = ()=>{
     const textSerialNo = React.createRef()
     const GetSerial_No= (e) => {
         setSerial_No(e.target.value)
+        // console.log(e.target.value);
     }    
     
     return (
@@ -423,9 +425,14 @@ const MainComponent = ()=>{
                                         ref={textSerialNo} 
                                         />
                                     <span className="CheckProduct_input-icon"  style={{height:"2rem", width:"2rem"}}> 
-                                        <a href={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`}>
+                                        {/* <a href={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`}>
                                             <FaSistrix  /> 
-                                        </a> 
+                                        </a>  */}
+                                       <Link to={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`}>
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Search_Icon.svg" width="20px"
+                                             height="20px" />
+                                        </Link> 
+                                        {/* <FaSistrix href={`/MainServices/CheckProduct/ResultSearch/${Serial_No}`} />                                          */}
                                     </span> 
                                 </div>
                             </Col>                                      

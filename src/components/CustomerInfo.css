@@ -1,0 +1,13 @@
+.customer-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.customer-flex-left{
+    text-transform: uppercase;
+}
+
+.customer-flex-right{
+    text-transform: uppercase;
+    text-align: right;
+}

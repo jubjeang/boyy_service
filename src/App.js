@@ -1,12 +1,12 @@
 import React from 'react';
-import Menu from './components/Menu';
-import Footer from './components/Footer';
 import { BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom';
 import MainServices from './components/MainServices';
 import './components/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container } from "reactstrap";
-import { Col, Row, Form } from "react-bootstrap";
+import Login from './components/Login';
+import Verify from './components/Verify';
+import ForgotPass from './components/ForgotPass';
+import CustomerInfo from './components/CustomerInfo';
 
 function App() {
   return (    
@@ -17,63 +17,28 @@ function App() {
               <Route path="/MainServices">                
                   <MainServices /> 
               </Route>
-              <Route path="/" exact>                
-                <Menu />
-                 <Container fluid id="divFormLogin">
-                    <Row   style={{width:"200px", textAlign:"center"}} >
-                        <Col sm={12}>
-                            <label className="uppercase">Sign In</label>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <div className="form-group">
-                                <label htmlFor="CustomerEmail" className="uppercase bold">
-                                    Email
-                                </label>
-                                <br />
-                                <input type="email" className="textbox_login" name="customer[email]" id="CustomerEmail" 
-                                spellCheck="false" autoComplete="off" autoCapitalize="off" placeholde="careers@geeksforgeeks.org" 
-                                autoFocus="" />
-                            </div>		
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <div className="form-group">
-                                <label htmlFor="CustomerPassword" className="uppercase bold">
-                                    Password
-                                </label>
-                                <br />
-                                <input type="password" className="textbox_login" 
-                                name="customer[password]" 
-                                id="CustomerPassword" 
-                                placeholder="Password"  />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>
-                            <div className='form-group'>
-                                <div className='horizontal-menu-login'>
-                                    <ul className='horizontal-menu-login'>
-                                        <li>
-                                            <Link to="/MainServices">Sign In</Link>                                    
-                                        </li>
-                                    </ul>   
-                                </div>
-                                
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm={12}>                            
-                            <a href="#recover" id="RecoverPassword">Forgot your password?</a>
-                        </Col>
-                    </Row>
-                </Container>
-                <Footer />
-              </Route>              
+              <Route path="/" exact> 
+                <div style={{ marginTop : 0, paddingTop : 0 }}> 
+                  <div className='TextLogo' style={{ marginTop : 0, paddingTop : 0 }}>
+                    <p>B O Y Y</p>
+                  </div>
+                </div>               
+                <Login />                                 
+              </Route>     
+              <Route path="/Verify">    
+                <Verify />
+              </Route>
+              <Route path="/login"> 
+                <div style={{ marginTop : 0, paddingTop : 0 }}> 
+                  <div className='TextLogo' style={{ marginTop : 0, paddingTop : 0 }}>
+                    <p>B O Y Y</p>
+                  </div>
+                </div>               
+                <Login />                                 
+              </Route>
+              <Route path="/forgot_password"> 
+                <ForgotPass /> 
+              </Route>             
           </Switch> 
       </Router>
     </div>

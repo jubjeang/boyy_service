@@ -29,7 +29,14 @@ const MainComponent = () => {
     const { serialno } = useParams();
     const [CustsInfo, setCustsInfo] = useState([])
     const [show, setShow] = useState(false)
-    const handleClose = () => setShow(false)
+    const handleClose = () =>{ 
+        setShow(false) 
+        // document.getElementById("ShiptoName").value = ""
+        // document.getElementById("ShiptoCity").value = ""
+        // document.getElementById("ShiptoAddress").value = ""
+        // document.getElementById("ShiptoAddress2").value = ""
+        // document.getElementById("ShiptoPhoneNo").value = ""
+    }
     const handleShow = () => setShow(true)
 
     const [ShoweCreateCust, setShoweCreateCust] = useState(false)
@@ -55,6 +62,9 @@ const MainComponent = () => {
 
     const refServiceOrderType_Val = React.createRef()
     const refShiptoCode_Val = React.createRef()
+
+    const refImage_Link=React.createRef()
+    const refImage_Description=React.createRef()
     
     let textCustName = React.createRef()
     let CustsInfoFromSearch_ =[]
@@ -79,11 +89,13 @@ const MainComponent = () => {
         }).then(res => {
             if (res.status == 200) {
                 console.log("CustsInfoFromSearch")
-                setCustsInfoFromSearch( JSON.parse( JSON.stringify( res.data.value ) ) )
+                
                 CustsInfoFromSearch_.push( JSON.parse( JSON.stringify( res.data.value ) ) )
                 console.log(CustsInfoFromSearch_)
                 CustsInfoFromSearch_Customer_No = CustsInfoFromSearch_[0][0].Customer_No
-                console.log(CustsInfoFromSearch_Customer_No)                
+                console.log(CustsInfoFromSearch_Customer_No)     
+                window.sessionStorage.setItem("CustsInfoFromSearch_Customer_No", CustsInfoFromSearch_Customer_No);
+                setCustsInfoFromSearch( JSON.parse( JSON.stringify( res.data.value ) ) )           
             } else {
 
             }
@@ -188,7 +200,6 @@ const MainComponent = () => {
     const [InvoiceLineNo, setInvoiceLineNo] = useState('')
     const [Item_Desc_Val, setItem_Desc_Val] = useState('')
 
-
     const [InvoiceLineAPI_Data, setInvoiceLineAPI_Data] = useState([])
     const [Fault_Area_Selected, setFault_Area_Selected] = useState('')
 
@@ -243,10 +254,53 @@ const MainComponent = () => {
         setInvoiceLineNo(arrItem[0].trim())
     }
     const [ShiptoCode_Selected, setShiptoCode_Selected] = useState('')
-    const Set_ShiptoCode_Selected = (e) => {
+    const Set_ShiptoCode_Selected = (e) => { 
+        const ShiptoCode_val =  ( e.target.options[ e.target.selectedIndex ].text ).toString().split(':')
         setShiptoCode_Selected(e.target.value)
-    }
+        console.log( 'ShiptoCode_val[1]' )
+        console.log( ShiptoCode_val[1] )
+        // console.log( e.target.value )
+        // console.log( e.target.key )
+        // console.log( e.target.item )
+        console.log( "ShiptoCode" )
+        console.log( ShiptoCode )
+        let ShiptoCodeFilter=[]
+        ShiptoCodeFilter.push(ShiptoCode.filter( ShipCode=> 
+                {
+                 if( ShipCode.Name.includes( ShiptoCode_val[1].trim() ) ) 
+                 {
+                    console.log( '11111' )
+                    return ShipCode 
+                 }
+                 else
+                 {
+                    console.log( '2222' )
+                    console.log( ShipCode.Name )
+                    console.log( ShiptoCode_val[1] )
 
+                 }
+                })
+                //ShipCode.Name === ShiptoCode_val[1]
+                //console.log(ShipCode.Name)   
+            )
+
+        if(ShiptoCodeFilter.length>0)
+        {
+            console.log(ShiptoCodeFilter.length)
+            console.log(ShiptoCodeFilter[0])
+            console.log(ShiptoCodeFilter[0][0].Name)
+            document.getElementById("ShiptoName").value = ShiptoCodeFilter[0][0].Name
+            document.getElementById("ShiptoCity").value = ShiptoCodeFilter[0][0].city
+            document.getElementById("ShiptoAddress").value = ShiptoCodeFilter[0][0].Address
+            document.getElementById("ShiptoAddress2").value = ShiptoCodeFilter[0][0].Address_2
+            document.getElementById("ShiptoPhoneNo").value = ShiptoCodeFilter[0][0].Phone_No
+        }        
+        // setShiptoCode( (prevItems) => {
+        //     return prevItems.filter( ( item,index ) => item === e.target.value )
+        //     }      
+        //)
+        //console.log( ShiptoCode.length )
+    }
     const [Branch_Selected, setBranch_Selected] = useState('')
     const Set_Branch_Selected = (e) => {
         setBranch_Selected(e.target.value)
@@ -290,7 +344,6 @@ const MainComponent = () => {
     const Set_Fault_Code_Selected = (e) => {
         setFault_Code_Selected(e.target.value)
     }
-
     const SetDDL_Fault_Area_Selected = (e) => {
         setFault_Area_Selected(e.target.value)
     }
@@ -391,15 +444,87 @@ const MainComponent = () => {
             alert("Error: " + err_.data.error.message)
         });
     }
+    //GetTaxInvoiceReceipt
+    const GetTaxInvoiceReceipt = () => { 
+
+        let data=null  
+        let docno_ =""      
+        docno_ = document.getElementById("No").value+"|"
+        data = {
+                functionfilter : "TaxInvoiceReceiptReport",
+                docno: docno_,
+                customerno: "",
+                itemno: "",
+                quantity: "",
+                linenumber: "",
+                typefunc: "",
+                datevar: "",
+                variantcode: ""
+        }
+        console.log( data )
+        axios({
+            header: {
+                "Content-Type": "application/json",
+                "If-Match": "*"
+            },
+            data: data,
+            method: 'post',
+            url: "http://office.triplepcloud.com:27053/Boyy_UAT/ODataV4/APIPortal_PortalAPIFunction?company=26a95657-849b-ec11-a5c9-00155d040808",
+            auth: {
+                username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
+                password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
+            }
+        }).then(res => {
+            if (res.status == 200) { 
+                let output = JSON.parse( res.data.value  )
+                output = output.value[0].Base64 
+                console.log( output )
+                const blob = base64toBlob( output )
+                const url = URL.createObjectURL(blob)
+                window.open(url, '_blank', 'noopener,noreferrer')
+            } else {
+                    console.log( res.status )
+                // console.log( JSON.parse(JSON.stringify(res.data)) )
+            }
+        }).catch(err => {
+            const err_ = JSON.parse(JSON.stringify(err.response))
+            console.log(err_.data.error.message)
+            console.log(err_.data.error.code)
+            alert("Error: " + err_.data.error.message)
+        })
+
+    }
+    const base64toBlob = (img) => {
+        // console.log(img);
+        var atob = require('atob');
+        const bytes = atob(img);
+        let length = bytes.length;
+        let out = new Uint8Array(length);
+    
+        while (length--) {
+            out[length] = bytes.charCodeAt(length);
+        }
+    
+        return new Blob([out], { type: 'application/pdf' });
+      };
     //Save Data
+    // const SendData = () => { 
+    //     //selected.length ? selected.join(', ') : null
+    //     selected.map( ( element ) => 
+    //     {           
+    //         console.log( element )
+    //         selected.join(', ')
+    //     })
+                  
+    // }
     const SendData = () => { 
         let data=null
         let dataNew0
         let dataNew=[]
         if(document.getElementById("No").value != "")
         {    
-            console.log( 'InvoiceLineAPI_Data.length' )
-            console.log( InvoiceLineAPI_Data.length )
+            // console.log( 'InvoiceLineAPI_Data.length' )
+            // console.log( InvoiceLineAPI_Data.length )
             InvoiceLineAPI_Data.map((element) => 
             {                
                 dataNew0 = {
@@ -414,8 +539,10 @@ const MainComponent = () => {
                 }
                 dataNew.push(dataNew0)
             })
-            console.log( 'dataNew' )
-            console.log( dataNew )
+            // console.log( 'dataNew' )
+            // console.log( dataNew )
+            let refImage_Link_ = Image_Link
+            let refImage_Description_ = Image_Description
             data = null
             data = {
                 Document_Type: "Order",
@@ -433,6 +560,8 @@ const MainComponent = () => {
                 Ship_to_Post_Code: refShiptoPostCode.current.value,
                 Ship_to_Phone_No: refShiptoPhoneNo.current.value,
                 Service_Item_No: refService_Item_No.current.value,
+                Image_Link: `Link : ${refImage_Link_}`,
+                "Image_Description": `Description : ${refImage_Description_}`,
                 service_item_line: [{
                     Document_Type: "Order",
                     Document_No: document.getElementById("No").value,
@@ -473,8 +602,8 @@ const MainComponent = () => {
                 service_invoice_line: InvoiceLineAPI_Data
             }
         }
-        console.log('data')
-        console.log(data)
+        // console.log('data')
+        // console.log(data)
         axios({
             header: {
                 "Content-Type": "application/json",
@@ -487,25 +616,25 @@ const MainComponent = () => {
                 username: process.env.REACT_APP_UNSPLASH_USERNAME_API,
                 password: process.env.REACT_APP_UNSPLASH_PASSWORD_API
             }
-        }).then(res => {
-            if (res.status == 201) {
-                console.log( JSON.parse(JSON.stringify( res.data ) ) )
-                SendData2( JSON.parse( JSON.stringify( res.data ) )  )
-                document.getElementById("No").value = ( JSON.parse(JSON.stringify(res.data) ) ).No
-                document.getElementById("SalesInvoice").value = ( JSON.parse(JSON.stringify(res.data) ) ).Sales_Invoice_No
-                document.getElementById("Status").value = ( JSON.parse(JSON.stringify(res.data) ) ).Status
-                
-            } else {
-                    console.log( res.status )
-                // console.log( JSON.parse(JSON.stringify(res.data)) )
-            }
-        }).catch(err => {
-            const err_ = JSON.parse(JSON.stringify(err.response))
-            console.log(err_.data.error.message)
-            console.log(err_.data.error.code)
-            alert("Error: " + err_.data.error.message)
-        })
-               
+            }).then(res => {
+                if (res.status == 201) {
+                    console.log( "Response:" )
+                    console.log( JSON.parse(JSON.stringify( res.data ) ) )
+                    SendData2( JSON.parse( JSON.stringify( res.data ) )  )
+                    document.getElementById("No").value = ( JSON.parse(JSON.stringify(res.data) ) ).No
+                    document.getElementById("SalesInvoice").value = ( JSON.parse(JSON.stringify(res.data) ) ).Sales_Invoice_No
+                    document.getElementById("Status").value = ( JSON.parse(JSON.stringify(res.data) ) ).Status
+                    
+                } else {
+                        console.log( res.status )
+                    // console.log( JSON.parse(JSON.stringify(res.data)) )
+                }
+            }).catch(err => {
+                const err_ = JSON.parse(JSON.stringify(err.response))
+                // console.log(err_.data.error.message)
+                // console.log(err_.data.error.code)
+                alert("Error: " + err_.data.error.message)
+            })               
     }
     const SendData2 = ( outpu_ ) => {        
         if (outpu_ != [])
@@ -577,6 +706,37 @@ const MainComponent = () => {
         } 
         SendDataCreateCustomer( output_ )  
     }
+    //Modal Image Link   
+    const [Image_Link, setImage_Link] = useState('')
+    const [Image_Description, setImage_Description] = useState('')
+
+    const [Error_Image_Link, setError_Image_Link] = useState('')
+    const [Error_Image_Description, setError_Image_Description] = useState('')
+    
+    const [Color_Image_Link, setColor_Image_Link] = useState('')
+    const [Color_Image_Description, setColor_Image_Description] = useState('')
+    const validateFormImageLink = (e)=>{
+        e.preventDefault() 
+        let output_ = true
+        if(Image_Link.length>8){
+            setError_Image_Link('')
+            setColor_Image_Link('green')
+        }else{
+            setError_Image_Link('ป้อน Link จำนวนมากกว่า 8 ตัวอักษร')
+            setColor_Image_Link('red')
+            output_ = false
+        }   
+        if(Image_Description.length>8){
+            setError_Image_Description('')
+            setColor_Image_Description('green')
+        }else{
+            setError_Image_Description('ป้อน Description จำนวนมากกว่า 8 ตัวอักษร')
+            setColor_Image_Description('red')
+            output_ = false
+        }
+        if( output_ == true) alert("Add Link Complete")
+        //SendDataCreateCustomer( output_ )  
+    }
     const SendDataCreateCustomer = (output_)=>{ 
         if( output_ == true)
         {
@@ -620,13 +780,22 @@ const MainComponent = () => {
                 // console.log(err_.data.error.code)
                 // alert("Error: " + err_.data.error.message)
                 console.log( err.response )
-
                 alert("Error: " + err.response.statusText)
             })
 
         }
         
     }
+    let [selected, setSelected] = React.useState([])
+    let setSelectedValue = (name, isSelected) => {
+        setSelected((selected) => {
+          if (isSelected && !selected.includes(name)) {
+            return selected.concat(name);
+          } else if (!isSelected && selected.includes(name)) {
+            return selected.filter((v) => v !== name);
+          }
+        });
+      };
     //End Modal Create Customer
     return (<>
         <Container fluid style={{ width: "100%" }}>
@@ -639,7 +808,7 @@ const MainComponent = () => {
                 <Col sm={6} className="CreateServiceOrderColItem ColItemright" style={{ textAlign: "right !important" }}>
                     <Button variant="primary" className='CreateServiceOrder_buttun' onClick={handleCreateCustShow}>Create Customer</Button>&nbsp;
                     <Button variant="primary" className='CreateServiceOrder_buttun' onClick={handleShow}>Attach files</Button>&nbsp;
-                    <Button variant="primary" className='CreateServiceOrder_buttun'>Print Tax Invoice/Receipt</Button>&nbsp;
+                    <Button variant="primary" className='CreateServiceOrder_buttun' onClick={GetTaxInvoiceReceipt}>Print Tax Invoice/Receipt</Button>&nbsp;
                     <Button variant="primary" className='CreateServiceOrder_buttun'>Print Repair Form</Button>&nbsp;
                     <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary' onClick={PostSalesInvoice}>Post Sales Invoice</Button>&nbsp;
                     <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary' onClick={SendData}>Save</Button>
@@ -759,9 +928,7 @@ const MainComponent = () => {
                             {
                                 ServiceOrderType.map((element) => {
                                     return (
-                                        <option key={uuid()} value={element.Code}>
-                                            {element.Code + `: ` + element.Description}
-                                        </option>
+                                        <option key={uuid()} value={element.Code}>{element.Code + `: ` + element.Description}</option>
                                     )
                                 }
                                 )
@@ -961,24 +1128,22 @@ const MainComponent = () => {
                 <Col sm={2} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
                     <label htmlFor="Sendto365BC" className="required CreateServiceOrder_label">Accessories included with handbags/SLG</label>
                 </Col>
-                <Col sm={3} className="CreateServiceOrderColItem ColItemright">
-                    <div className="form-check form-check-inline">
-                        <input type="checkbox" id="Card" />
-                        &nbsp;<label className="form-check-label CreateServiceOrder_label_DustBag" htmlFor="Card">Card</label>
-                        <input type="checkbox" id="DustBag" />
-                        &nbsp;<label className="form-check-label CreateServiceOrder_label_DustBag" htmlFor="DustBag">Dust Bag</label>
-                        <input type="checkbox" id="Strap" />
-                        &nbsp;<label className="form-check-label CreateServiceOrder_label">Strap</label>
-
-                    </div>
-                    <div className="form-check form-check-inline" style={{ verticalAlign: "middle" }}>
-                        <input type="checkbox" id="Card" />
-                        &nbsp;<label className="form-check-label CreateServiceOrder_label">Other</label>
-                        <input type="text" name="Other_TB" id="Other_TB"
-                            className="required CreateServiceOrder_Other_TB"
-                            placeholder="Other"
-                            style={{ width: "150rem" }} />
-                    </div>
+                <Col sm={3} className="CreateServiceOrderColItem ColItemright">                    
+                        <div className="form-check form-check-inline">
+                            <input type="checkbox" checked={selected.includes("Card")} onChange={(e) => setSelectedValue("Card", e.target.checked)} />
+                            &nbsp;<label className="form-check-label CreateServiceOrder_label_DustBag" htmlFor="Card">Card</label>
+                            <input type="checkbox" checked={selected.includes("Dust Bag")} onChange={(e) => setSelectedValue("Dust Bag", e.target.checked)} />
+                            &nbsp;<label className="form-check-label CreateServiceOrder_label_DustBag" htmlFor="DustBag">Dust Bag</label>
+                            <input type="checkbox" checked={selected.includes("Strap")} onChange={(e) => setSelectedValue("Strap", e.target.checked)} />
+                            &nbsp;<label className="form-check-label CreateServiceOrder_label">Strap</label>
+                        </div>
+                        <div className="form-check form-check-inline" style={{ verticalAlign: "middle",padding:"0px" }}>
+                            <input type="checkbox"  checked={selected.includes("Other")} onChange={(e) => setSelectedValue("Other", e.target.checked)}  />&nbsp;
+                            <label className="form-check-label CreateServiceOrder_label_Other" style={{padding:"0px",margin:"0px",width:"1rem"}}>Other</label>
+                            &nbsp; &nbsp;<input type="text" name="Other_TB" id="Other_TB" 
+                            className="required CreateServiceOrder_Other_TB" 
+                            placeholder="Other" />
+                        </div>                    
                 </Col>
             </Row>
 
@@ -1466,11 +1631,10 @@ const MainComponent = () => {
                                 name="DDL_ShiptoCode"
                                 ref={refShiptoCode_Val}
                                 value={ShiptoCode_Selected}
-                                onChange={Set_ShiptoCode_Selected}
-                            >
+                                onChange={Set_ShiptoCode_Selected} >
                                 {
                                     useEffect(async () => {
-                                        const url_="http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/ship_to_address/?$filter=Customer_No eq '"+refCustomerNo.current.value+"'"
+                                        const url_="http://office.triplepcloud.com:27053/Boyy_UAT/api/TPP/BC/v2.0/companies(26a95657-849b-ec11-a5c9-00155d040808)/ship_to_address/?$filter=Customer_No eq '"+window.sessionStorage.getItem("CustsInfoFromSearch_Customer_No")+"'"
                                         console.log( url_ )
                                         const res = await axios({
                                             headers: {
@@ -1498,7 +1662,7 @@ const MainComponent = () => {
                                 {
                                     ShiptoCode.map((element,index) => {
                                         return (
-                                            <option key={uuid()} value={element.code}>
+                                            <option key={index} value={element.code} >
                                                 {element.code + `: ` + element.Name}
                                             </option>
                                         )
@@ -1524,7 +1688,7 @@ const MainComponent = () => {
                         <input type="text" name="ShiptoName" id="ShiptoName"
                             className="required CreateServiceOrderTB" placeholder="Ship-to Name"
                             ref={refShiptoName}
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Customer_Name : ""}
+                            defaultValue=""
                         />
                     </div>
                 </Col>
@@ -1536,7 +1700,7 @@ const MainComponent = () => {
                         <input type="text" name="ShiptoCity" id="ShiptoCity"
                             className="required CreateServiceOrderTB" placeholder="Ship-to City"
                             ref={refShiptoCity}
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].City : ""}
+                            defaultValue=""
                         />
                     </div>
                 </Col>
@@ -1551,7 +1715,7 @@ const MainComponent = () => {
                             ref={refShiptoAddress}
                             id="ShiptoAddress"
                             className="required CreateServiceOrderTB" placeholder="Ship-to Address"
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Address : ""}
+                            defaultValue=""
                         />
                     </div>
                 </Col>
@@ -1564,7 +1728,7 @@ const MainComponent = () => {
                             id="ShiptoPostCode" className="required CreateServiceOrderTB"
                             ref={refShiptoPostCode}
                             placeholder="Ship-to Post Code"
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Post_Code : ""}
+                            defaultValue=""
                         />
                     </div>
                 </Col>
@@ -1578,7 +1742,7 @@ const MainComponent = () => {
                         <input type="text" name="ShiptoAddress2"
                             id="ShiptoAddress2" className="required CreateServiceOrderTB"
                             ref={refShiptoAddress2}
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Address_2 : ""}
+                            defaultValue=""
                             placeholder="Ship-to Address 2"
                         />
                     </div>
@@ -1593,7 +1757,7 @@ const MainComponent = () => {
                             className="required CreateServiceOrderTB"
                             placeholder="Ship-to Phone No"
                             ref={refShiptoPhoneNo}
-                            defaultValue={CustsInfoFromSearch.length > 0 ? CustsInfoFromSearch[0].Phone_No : ""}
+                            defaultValue=""
                         />
                     </div>
                 </Col>
@@ -1660,52 +1824,51 @@ const MainComponent = () => {
             </Modal.Footer>
         </Modal>
         {/* Attach File */}
-        <Modal show={show} onHide={handleClose} centered size="lg">
-            <Modal.Body style={{ height: "20rem" }}>
-                <Container fluid style={{ width: "100%" }}>
-                    <Row className="service_order_rowForm" style={{ marginTop: "2%" }}>
-                        <Col sm={8}>
-                            <div className="form-group">
-                                <input type="file" name="file" placeholder="Attachments" />&nbsp;
-                            </div>
+        <Modal show={show} onHide={handleClose} centered size="ms">
+            <Modal.Body style={{ height: "18rem" }}>
+                <Container fluid style={{ width: "180%" }}>
+                    <Row className="service_order_rowForm" style={{ height: "2rem" }}>
+                        <Col sm={5} className="CreateServiceOrderColItem CreateServiceOrderColItemleft"
+                            style={{ paddingTop: "0.2rem", backgroundColor: "#e9ecef" }}>
+                            <h5>Add Image Link</h5>
                         </Col>
-                        <Col sm={2}>
-                            <Button variant="primary" style={{ width: '3rem' }} className='CreateServiceOrder_buttun'
-                                onClick={GetCustInfo}>Delete
-                            </Button>
-                        </Col>
-                        <Col sm={2}>
-                            <Button variant="primary" style={{ width: '3rem' }} className='CreateServiceOrder_buttun'
-                                onClick={GetCustInfo}>Add
-                            </Button>
+                        <Col sm={1} className="CreateServiceOrderColItem CreateServiceOrderColItemleft"
+                            style={{ paddingTop: "0.2rem", backgroundColor: "#e9ecef", marginLeft: "0rem", paddingLeft: "0.3rem" }}>
+                            <Button className='CreateServiceOrder_buttun CreateServiceOrderbtn-secondary' 
+                            style={{ width: "3.5rem" }} 
+                            onClick={validateFormImageLink}
+                            >Save</Button>
                         </Col>
                     </Row>
-                    <Row className="service_order_rowForm">
-                        <Col sm={12} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
-                            <Table responsive>
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: '5%' }}></th>
-                                        <th style={{ width: '50%' }}>Attach File Name</th>
-                                        <th style={{ width: '45%' }}>Attach Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        dataAttachFiles.map((element) => {
-                                            return (
-                                                <tr key={uuid()}>
-                                                    <td></td>
-                                                    <td>{element.FileName}</td>
-                                                    <td>{element.AttachDate}</td>
-                                                </tr>
-                                            )
-                                        }
-                                        )
-                                    }
-                                </tbody>
-                            </Table>
+                    <Row className="service_order_rowForm" style={{ paddingTop: "1rem" }}>
+                        <Col sm={2} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
+                            <label htmlFor="Image_Link" className="required CreateServiceOrder_label">Image Link</label>
                         </Col>
+                        <Col sm={8} className="CreateServiceOrderColItem CreateServiceOrderColItemright">
+                            <div className="form-group-CreateCust">
+                                <input type="text" name="Image_Link" id="Image_Link"
+                                    className="required CreateServiceOrderTB_Small" 
+                                    ref={refImage_Link} 
+                                    onChange={(e)=>setImage_Link(e.target.value)} style={{borderColor:Color_Image_Link}}
+                                     placeholder="Image Link" />                                
+                            </div>
+                            <small style={{color:Color_Image_Link}}>{Error_Image_Link}</small>
+                        </Col>                       
+                    </Row>
+                    <Row className="service_order_rowForm" style={{ paddingTop: "1rem" }}>
+                        <Col sm={2} className="CreateServiceOrderColItem CreateServiceOrderColItemleft">
+                            <label htmlFor="Image_Description" className="required CreateServiceOrder_label">Image Description</label>
+                        </Col>
+                        <Col sm={8} className="CreateServiceOrderColItem CreateServiceOrderColItemright">
+                            <div className="form-group-CreateCust">
+                                <input type="text" name="Image_Description" id="Image_Description" 
+                                    ref={refImage_Description}
+                                    className="required CreateServiceOrderTB_Small"
+                                    onChange={(e)=>setImage_Description(e.target.value)} style={{borderColor:Color_Image_Description}}
+                                     placeholder="Image Description" />                                
+                            </div>
+                            <small style={{color:Color_Image_Description}}>{Error_Image_Description}</small>
+                        </Col>                       
                     </Row>
                 </Container>
             </Modal.Body>
